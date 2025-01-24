@@ -1,0 +1,108 @@
+[
+    {
+      "id": 1,
+      "question": "Where was Barack Obama born?",
+      "answers": [
+        "Honolulu",
+        "Honolulu, Hawaii",
+        "Honolulu in Hawaii",
+        "Barack Obama was born in Honolulu",
+        "Barack Obama was born in Honolulu, Hawaii",
+        "Barack Obama was born in Honolulu in Hawaii"
+      ]
+    },
+    {
+      "id": 2,
+      "question": "Which city is known as the 'Big Apple'?",
+      "answers": [
+        "New York",
+        "New York City",
+        "NYC",
+        "The Big Apple is New York",
+        "The Big Apple is New York City",
+        "The Big Apple is NYC"
+      ]
+    },
+    {
+      "id": 3,
+      "question": "What is the largest mammal on Earth?",
+      "answers": [
+        "Blue whale",
+        "Blue Whale",
+        "Balaenoptera musculus",
+        "The largest mammal on Earth is the blue whale",
+        "The largest mammal on Earth is Balaenoptera musculus"
+      ]
+    },
+    {
+      "id": 4,
+      "question": "Who painted the Mona Lisa?",
+      "answers": [
+        "Leonardo da Vinci",
+        "Da Vinci",
+        "The Mona Lisa was painted by Leonardo da Vinci",
+        "The Mona Lisa was painted by Da Vinci"
+      ]
+    },
+    {
+      "id": 5,
+      "question": "What is the capital city of France?",
+      "answers": [
+        "Paris",
+        "City of Paris",
+        "The capital city of France is Paris",
+        "The capital city of France is the City of Paris"
+      ]
+    },
+    {
+      "id": 6,
+      "question": "Which planet is known as the Red Planet?",
+      "answers": [
+        "Mars",
+        "The planet Mars",
+        "The Red Planet is Mars",
+        "The Red Planet is the planet Mars"
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Who is the author of 'Pride and Prejudice'?",
+      "answers": [
+        "Jane Austen",
+        "J. Austen",
+        "'Pride and Prejudice' was written by Jane Austen",
+        "'Pride and Prejudice' was written by J. Austen"
+      ]
+    },
+    {
+      "id": 8,
+      "question": "Which scientist proposed the theory of relativity?",
+      "answers": [
+        "Albert Einstein",
+        "Einstein",
+        "The theory of relativity was proposed by Albert Einstein",
+        "The theory of relativity was proposed by Einstein"
+      ]
+    },
+    {
+      "id": 9,
+      "question": "What is the largest organ in the human body?",
+      "answers": [
+        "Skin",
+        "Human skin",
+        "The largest organ in the human body is the skin",
+        "The largest organ in the human body is human skin"
+      ]
+    },
+    {
+      "id": 10,
+      "question": "Which element has the chemical symbol O?",
+      "answers": [
+        "Oxygen",
+        "Element O",
+        "The element with the chemical symbol O is oxygen",
+        "The element with the chemical symbol O is element O"
+      ]
+    }
+  ]
+  
