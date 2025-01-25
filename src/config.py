@@ -5,5 +5,5 @@ DATASET_PATH = "./data/data.json"
 OUTPUT_DIR = "./output"
 
 LOCAL_MODEL_NAME = "meta-llama/Llama-2-7b-hf"
-LOCAL_MODEL_DIR = "./models"  # Directory to save/load the local model
+LOCAL_MODEL_DIR = "./src/models"  # Directory to save/load the local model
 USE_LOCAL_MODEL_STORAGE = True  # Flag to control local model storage
