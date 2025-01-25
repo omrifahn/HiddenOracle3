@@ -3,7 +3,7 @@ import json
 import datetime
 from typing import List, Dict, Any
 
-import time  # Import the time module to measure runtime
+import time
 
 from openai import OpenAI
 from pydantic import BaseModel
@@ -114,6 +114,22 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
     # Load dataset
     dataset = load_dataset(dataset_path)
 
+    # Apply data limit
+    if DATA_LIMIT is not None:
+        dataset_size = len(dataset)
+        if dataset_size < DATA_LIMIT:
+            print(
+                f"Dataset contains only {dataset_size} items. Processing all available items."
+            )
+            data_limit = dataset_size
+        else:
+            print(f"Processing first {DATA_LIMIT} items from the dataset.")
+            data_limit = DATA_LIMIT
+        dataset = dataset[:data_limit]
+    else:
+        data_limit = len(dataset)
+        print(f"Processing all {data_limit} items from the dataset.")
+
     # Initialize local model pipeline
     generation_pipeline = load_local_model(local_model_name)
 
@@ -121,7 +137,7 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
     results = []
 
     # Evaluate each dataset item
-    for item in dataset:
+    for idx, item in enumerate(dataset, start=1):
         question = item["question"]
         correct_answers = item["answers"]
 
