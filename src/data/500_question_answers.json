@@ -1,0 +1,2950 @@
+[
+  {
+    "id": 1,
+    "question": "Where was Barack Obama born?",
+    "answers": [
+      "Honolulu",
+      "Honolulu, Hawaii",
+      "Honolulu in Hawaii",
+      "Barack Obama was born in Honolulu",
+      "Barack Obama was born in Honolulu, Hawaii",
+      "Barack Obama was born in Honolulu in Hawaii"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Which city is known as the 'Big Apple'?",
+    "answers": [
+      "New York",
+      "New York City",
+      "NYC",
+      "The Big Apple is New York",
+      "The Big Apple is New York City",
+      "The Big Apple is NYC"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What is the largest mammal on Earth?",
+    "answers": [
+      "Blue whale",
+      "Blue Whale",
+      "Balaenoptera musculus",
+      "The largest mammal on Earth is the blue whale",
+      "The largest mammal on Earth is Balaenoptera musculus"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Who painted the Mona Lisa?",
+    "answers": [
+      "Leonardo da Vinci",
+      "Da Vinci",
+      "The Mona Lisa was painted by Leonardo da Vinci",
+      "The Mona Lisa was painted by Da Vinci"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "What is the capital city of France?",
+    "answers": [
+      "Paris",
+      "City of Paris",
+      "The capital city of France is Paris",
+      "The capital city of France is the City of Paris"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Which planet is known as the Red Planet?",
+    "answers": [
+      "Mars",
+      "The planet Mars",
+      "The Red Planet is Mars",
+      "The Red Planet is the planet Mars"
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Who is the author of 'Pride and Prejudice'?",
+    "answers": [
+      "Jane Austen",
+      "J. Austen",
+      "'Pride and Prejudice' was written by Jane Austen",
+      "'Pride and Prejudice' was written by J. Austen"
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Which scientist proposed the theory of relativity?",
+    "answers": [
+      "Albert Einstein",
+      "Einstein",
+      "The theory of relativity was proposed by Albert Einstein",
+      "The theory of relativity was proposed by Einstein"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "What is the largest organ in the human body?",
+    "answers": [
+      "Skin",
+      "Human skin",
+      "The largest organ in the human body is the skin",
+      "The largest organ in the human body is human skin"
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Which element has the chemical symbol O?",
+    "answers": [
+      "Oxygen",
+      "Element O",
+      "The element with the chemical symbol O is oxygen",
+      "The element with the chemical symbol O is element O"
+    ]
+  },
+  {
+    "id": 11,
+    "question": "What is the smallest unit of life?",
+    "answers": [
+      "Cell",
+      "The smallest unit of life is the cell",
+      "A cell is the smallest unit of life"
+    ]
+  },
+  {
+    "id": 12,
+    "question": "What is the boiling point of water at sea level?",
+    "answers": [
+      "100 degrees Celsius",
+      "100 °C",
+      "100 degrees C",
+      "Water boils at 100 degrees Celsius at sea level"
+    ]
+  },
+  {
+    "id": 13,
+    "question": "Which ocean is the largest?",
+    "answers": [
+      "Pacific Ocean",
+      "The Pacific Ocean",
+      "The largest ocean is the Pacific Ocean"
+    ]
+  },
+  {
+    "id": 14,
+    "question": "What is the hardest natural substance on Earth?",
+    "answers": ["Diamond", "The hardest natural substance is diamond"]
+  },
+  {
+    "id": 15,
+    "question": "What is the chemical symbol for gold?",
+    "answers": ["Au", "The chemical symbol for gold is Au"]
+  },
+  {
+    "id": 17,
+    "question": "Who wrote 'Romeo and Juliet'?",
+    "answers": [
+      "William Shakespeare",
+      "Shakespeare",
+      "'Romeo and Juliet' was written by William Shakespeare",
+      "'Romeo and Juliet' was written by Shakespeare"
+    ]
+  },
+  {
+    "id": 18,
+    "question": "Which gas do plants use for photosynthesis?",
+    "answers": [
+      "Carbon dioxide",
+      "CO2",
+      "Plants use carbon dioxide for photosynthesis",
+      "Plants use CO2 for photosynthesis"
+    ]
+  },
+  {
+    "id": 19,
+    "question": "What is the main ingredient in guacamole?",
+    "answers": ["Avocado", "The main ingredient in guacamole is avocado"]
+  },
+  {
+    "id": 20,
+    "question": "Which organ pumps blood through the body?",
+    "answers": ["Heart", "The heart pumps blood through the body"]
+  },
+  {
+    "id": 21,
+    "question": "Which country is known for inventing pizza?",
+    "answers": ["Italy", "Pizza was invented in Italy"]
+  },
+  {
+    "id": 22,
+    "question": "What is the currency used in Japan?",
+    "answers": ["Yen", "The currency in Japan is yen", "Japanese yen"]
+  },
+  {
+    "id": 23,
+    "question": "What is the name of the galaxy we live in?",
+    "answers": [
+      "Milky Way",
+      "The Milky Way galaxy",
+      "Our galaxy is the Milky Way"
+    ]
+  },
+  {
+    "id": 25,
+    "question": "What is the fastest land animal?",
+    "answers": ["Cheetah", "The fastest land animal is the cheetah"]
+  },
+  {
+    "id": 26,
+    "question": "Which metal is liquid at room temperature?",
+    "answers": [
+      "Mercury",
+      "The metal that is liquid at room temperature is mercury"
+    ]
+  },
+  {
+    "id": 29,
+    "question": "What is the smallest prime number?",
+    "answers": ["2", "The smallest prime number is 2"]
+  },
+  {
+    "id": 30,
+    "question": "Which country is the largest by land area?",
+    "answers": ["Russia", "The largest country by land area is Russia"]
+  },
+  {
+    "id": 31,
+    "question": "What is the smallest country in the world?",
+    "answers": ["Vatican City", "The smallest country is Vatican City"]
+  },
+  {
+    "id": 32,
+    "question": "What is the chemical formula for water?",
+    "answers": ["H2O", "The chemical formula for water is H2O"]
+  },
+  {
+    "id": 33,
+    "question": "Which organ in the human body is responsible for detoxification?",
+    "answers": ["Liver", "The liver is responsible for detoxification"]
+  },
+  {
+    "id": 34,
+    "question": "What is the primary gas in Earth's atmosphere?",
+    "answers": ["Nitrogen", "The primary gas in Earth's atmosphere is nitrogen"]
+  },
+  {
+    "id": 35,
+    "question": "What is the speed of light in a vacuum?",
+    "answers": [
+      "Approximately 299,792 kilometers per second",
+      "Approximately 300,000 km/s",
+      "The speed of light is approximately 299,792 kilometers per second"
+    ]
+  },
+  {
+    "id": 36,
+    "question": "Which element is the most abundant in the universe?",
+    "answers": ["Hydrogen", "The most abundant element is hydrogen"]
+  },
+  {
+    "id": 37,
+    "question": "Who developed the polio vaccine?",
+    "answers": ["Jonas Salk", "The polio vaccine was developed by Jonas Salk"]
+  },
+  {
+    "id": 38,
+    "question": "What is the square root of 64?",
+    "answers": ["8", "The square root of 64 is 8"]
+  },
+  {
+    "id": 39,
+    "question": "Which planet is the hottest in the solar system?",
+    "answers": ["Venus", "The hottest planet in the solar system is Venus"]
+  },
+  {
+    "id": 40,
+    "question": "What is the tallest mountain on Earth?",
+    "answers": ["Mount Everest", "The tallest mountain is Mount Everest"]
+  },
+  {
+    "id": 42,
+    "question": "What is the atomic number of helium?",
+    "answers": ["2", "The atomic number of helium is 2"]
+  },
+  {
+    "id": 43,
+    "question": "What is the capital of Australia?",
+    "answers": ["Canberra", "The capital of Australia is Canberra"]
+  },
+  {
+    "id": 44,
+    "question": "What is the main ingredient in chocolate?",
+    "answers": ["Cocoa", "The main ingredient in chocolate is cocoa"]
+  },
+  {
+    "id": 45,
+    "question": "What is the study of plants called?",
+    "answers": ["Botany", "The study of plants is called botany"]
+  },
+  {
+    "id": 46,
+    "question": "Which blood type is a universal donor?",
+    "answers": ["O negative", "The universal donor blood type is O negative"]
+  },
+  {
+    "id": 47,
+    "question": "Who is the Greek god of the sea?",
+    "answers": ["Poseidon", "The Greek god of the sea is Poseidon"]
+  },
+  {
+    "id": 48,
+    "question": "What is the name of the Shakespeare play with the line 'To be or not to be'?",
+    "answers": ["Hamlet", "The play is called Hamlet"]
+  },
+  {
+    "id": 49,
+    "question": "Which continent is known as the 'Frozen Continent'?",
+    "answers": ["Antarctica", "The Frozen Continent is Antarctica"]
+  },
+  {
+    "id": 50,
+    "question": "What is the SI unit of force?",
+    "answers": ["Newton", "The SI unit of force is the newton"]
+  },
+  {
+    "id": 51,
+    "question": "What is the longest bone in the human body?",
+    "answers": ["Femur", "The longest bone in the human body is the femur"]
+  },
+  {
+    "id": 52,
+    "question": "Who discovered penicillin?",
+    "answers": [
+      "Alexander Fleming",
+      "Penicillin was discovered by Alexander Fleming"
+    ]
+  },
+  {
+    "id": 53,
+    "question": "What is the capital city of Canada?",
+    "answers": ["Ottawa", "The capital of Canada is Ottawa"]
+  },
+  {
+    "id": 55,
+    "question": "What is the chemical symbol for potassium?",
+    "answers": ["K", "The chemical symbol for potassium is K"]
+  },
+  {
+    "id": 56,
+    "question": "Which organ is responsible for producing insulin?",
+    "answers": ["Pancreas", "The pancreas produces insulin"]
+  },
+  {
+    "id": 58,
+    "question": "Which animal is known as the 'Ship of the Desert'?",
+    "answers": ["Camel", "The camel is known as the Ship of the Desert"]
+  },
+  {
+    "id": 59,
+    "question": "What is the powerhouse of the cell?",
+    "answers": [
+      "Mitochondria",
+      "The mitochondria are the powerhouse of the cell"
+    ]
+  },
+  {
+    "id": 60,
+    "question": "What is the capital city of Germany?",
+    "answers": ["Berlin", "The capital of Germany is Berlin"]
+  },
+  {
+    "id": 61,
+    "question": "Who painted the Sistine Chapel ceiling?",
+    "answers": [
+      "Michelangelo",
+      "The Sistine Chapel ceiling was painted by Michelangelo"
+    ]
+  },
+  {
+    "id": 62,
+    "question": "What is the freezing point of water?",
+    "answers": [
+      "0 degrees Celsius",
+      "0 °C",
+      "Water freezes at 0 degrees Celsius"
+    ]
+  },
+  {
+    "id": 63,
+    "question": "Which continent is the largest by area?",
+    "answers": ["Asia", "The largest continent by area is Asia"]
+  },
+  {
+    "id": 64,
+    "question": "What is the smallest ocean on Earth?",
+    "answers": ["Arctic Ocean", "The smallest ocean is the Arctic Ocean"]
+  },
+  {
+    "id": 65,
+    "question": "Who wrote 'The Odyssey'?",
+    "answers": ["Homer", "'The Odyssey' was written by Homer"]
+  },
+  {
+    "id": 66,
+    "question": "Which planet is closest to the sun?",
+    "answers": ["Mercury", "The planet closest to the sun is Mercury"]
+  },
+  {
+    "id": 67,
+    "question": "What is the capital city of Italy?",
+    "answers": ["Rome", "The capital of Italy is Rome"]
+  },
+  {
+    "id": 69,
+    "question": "Which organ in the body is responsible for filtering blood?",
+    "answers": ["Kidneys", "The kidneys filter blood"]
+  },
+  {
+    "id": 70,
+    "question": "What is the smallest planet in the solar system?",
+    "answers": ["Mercury", "The smallest planet in the solar system is Mercury"]
+  },
+  {
+    "id": 71,
+    "question": "What is the main ingredient in bread?",
+    "answers": ["Flour", "The main ingredient in bread is flour"]
+  },
+  {
+    "id": 72,
+    "question": "Who is the author of '1984'?",
+    "answers": ["George Orwell", "'1984' was written by George Orwell"]
+  },
+  {
+    "id": 73,
+    "question": "What is the currency of the United Kingdom?",
+    "answers": ["Pound Sterling", "The currency of the UK is Pound Sterling"]
+  },
+  {
+    "id": 75,
+    "question": "What is the study of the universe called?",
+    "answers": ["Astronomy", "The study of the universe is called astronomy"]
+  },
+  {
+    "id": 76,
+    "question": "What is the capital of the United States?",
+    "answers": [
+      "Washington, D.C.",
+      "The capital of the United States is Washington, D.C."
+    ]
+  },
+  {
+    "id": 77,
+    "question": "What is the hardest substance in the human body?",
+    "answers": [
+      "Tooth enamel",
+      "The hardest substance in the human body is tooth enamel"
+    ]
+  },
+  {
+    "id": 78,
+    "question": "Which is the only mammal capable of true flight?",
+    "answers": ["Bat", "The only mammal capable of true flight is the bat"]
+  },
+  {
+    "id": 79,
+    "question": "What is the primary function of red blood cells?",
+    "answers": ["Transport oxygen", "Red blood cells transport oxygen"]
+  },
+  {
+    "id": 80,
+    "question": "What is the capital of Russia?",
+    "answers": ["Moscow", "The capital of Russia is Moscow"]
+  },
+  {
+    "id": 81,
+    "question": "Who wrote 'To Kill a Mockingbird'?",
+    "answers": [
+      "Harper Lee",
+      "'To Kill a Mockingbird' was written by Harper Lee"
+    ]
+  },
+  {
+    "id": 82,
+    "question": "What is the chemical symbol for iron?",
+    "answers": ["Fe", "The chemical symbol for iron is Fe"]
+  },
+  {
+    "id": 84,
+    "question": "What is the main gas found in the air we breathe?",
+    "answers": ["Nitrogen", "The main gas in the air we breathe is nitrogen"]
+  },
+  {
+    "id": 85,
+    "question": "What is the fastest bird in the world?",
+    "answers": ["Peregrine falcon", "The fastest bird is the peregrine falcon"]
+  },
+  {
+    "id": 86,
+    "question": "What is the largest planet in the solar system?",
+    "answers": ["Jupiter", "The largest planet in the solar system is Jupiter"]
+  },
+  {
+    "id": 87,
+    "question": "What is the smallest country by population?",
+    "answers": [
+      "Vatican City",
+      "The smallest country by population is Vatican City"
+    ]
+  },
+  {
+    "id": 88,
+    "question": "Who was the first President of the United States?",
+    "answers": [
+      "George Washington",
+      "The first U.S. President was George Washington"
+    ]
+  },
+  {
+    "id": 89,
+    "question": "What is the chemical symbol for carbon dioxide?",
+    "answers": ["CO2", "The chemical symbol for carbon dioxide is CO2"]
+  },
+  {
+    "id": 90,
+    "question": "Which planet is known as the 'Morning Star'?",
+    "answers": ["Venus", "The Morning Star is Venus"]
+  },
+  {
+    "id": 91,
+    "question": "Who wrote 'The Great Gatsby'?",
+    "answers": [
+      "F. Scott Fitzgerald",
+      "'The Great Gatsby' was written by F. Scott Fitzgerald"
+    ]
+  },
+  {
+    "id": 93,
+    "question": "Which star is closest to Earth?",
+    "answers": ["Sun", "The closest star to Earth is the Sun"]
+  },
+  {
+    "id": 94,
+    "question": "What is the capital city of Spain?",
+    "answers": ["Madrid", "The capital of Spain is Madrid"]
+  },
+  {
+    "id": 95,
+    "question": "What is the largest volcano in the solar system?",
+    "answers": [
+      "Olympus Mons",
+      "The largest volcano in the solar system is Olympus Mons"
+    ]
+  },
+  {
+    "id": 96,
+    "question": "Which chemical element is represented by the symbol Na?",
+    "answers": ["Sodium", "The element with the symbol Na is sodium"]
+  },
+  {
+    "id": 97,
+    "question": "What is the main language spoken in Brazil?",
+    "answers": ["Portuguese", "The main language in Brazil is Portuguese"]
+  },
+  {
+    "id": 98,
+    "question": "What is the main source of energy for life on Earth?",
+    "answers": ["Sun", "The main source of energy for life is the Sun"]
+  },
+  {
+    "id": 99,
+    "question": "What is the chemical formula for table salt?",
+    "answers": ["NaCl", "The chemical formula for table salt is NaCl"]
+  },
+  {
+    "id": 100,
+    "question": "Who is known as the 'Father of Computers'?",
+    "answers": ["Charles Babbage", "The Father of Computers is Charles Babbage"]
+  },
+  {
+    "id": 101,
+    "question": "Which country is known as the Land of the Rising Sun?",
+    "answers": ["Japan", "The Land of the Rising Sun is Japan"]
+  },
+  {
+    "id": 102,
+    "question": "What is the largest continent on Earth?",
+    "answers": ["Asia", "The largest continent is Asia"]
+  },
+  {
+    "id": 103,
+    "question": "Who is the author of 'Harry Potter'?",
+    "answers": ["J.K. Rowling", "'Harry Potter' was written by J.K. Rowling"]
+  },
+  {
+    "id": 104,
+    "question": "What is the capital city of Egypt?",
+    "answers": ["Cairo", "The capital of Egypt is Cairo"]
+  },
+  {
+    "id": 105,
+    "question": "What is the chemical symbol for silver?",
+    "answers": ["Ag", "The chemical symbol for silver is Ag"]
+  },
+  {
+    "id": 106,
+    "question": "Which planet has rings made up of ice and rock?",
+    "answers": ["Saturn", "Saturn has rings made of ice and rock"]
+  },
+  {
+    "id": 107,
+    "question": "Who painted 'The Starry Night'?",
+    "answers": [
+      "Vincent van Gogh",
+      "'The Starry Night' was painted by Vincent van Gogh"
+    ]
+  },
+  {
+    "id": 108,
+    "question": "What is the largest moon of Saturn called?",
+    "answers": ["Titan", "Saturn's largest moon is Titan"]
+  },
+  {
+    "id": 109,
+    "question": "Who invented the telephone?",
+    "answers": [
+      "Alexander Graham Bell",
+      "The telephone was invented by Alexander Graham Bell"
+    ]
+  },
+  {
+    "id": 110,
+    "question": "What is the smallest US state by area?",
+    "answers": ["Rhode Island", "The smallest US state by area is Rhode Island"]
+  },
+  {
+    "id": 111,
+    "question": "In which city is the Golden Gate Bridge located?",
+    "answers": ["San Francisco", "The Golden Gate Bridge is in San Francisco"]
+  },
+  {
+    "id": 112,
+    "question": "What is the process plants use to convert sunlight into food?",
+    "answers": [
+      "Photosynthesis",
+      "Plants use photosynthesis to convert sunlight into food"
+    ]
+  },
+  {
+    "id": 113,
+    "question": "Who developed the theory of evolution by natural selection?",
+    "answers": [
+      "Charles Darwin",
+      "The theory of evolution was developed by Charles Darwin"
+    ]
+  },
+  {
+    "id": 114,
+    "question": "What is the largest species of bear?",
+    "answers": ["Polar bear", "The largest bear is the polar bear"]
+  },
+  {
+    "id": 115,
+    "question": "Which organelle is known as the control center of the cell?",
+    "answers": ["Nucleus", "The nucleus is the control center of the cell"]
+  },
+  {
+    "id": 116,
+    "question": "What is the term for animals that eat both plants and animals?",
+    "answers": [
+      "Omnivores",
+      "Animals that eat both plants and animals are called omnivores"
+    ]
+  },
+  {
+    "id": 117,
+    "question": "Which country hosted the 2016 Summer Olympics?",
+    "answers": ["Brazil", "The 2016 Summer Olympics were hosted by Brazil"]
+  },
+  {
+    "id": 118,
+    "question": "Which artist is famous for the painting 'The Persistence of Memory'?",
+    "answers": [
+      "Salvador Dalí",
+      "'The Persistence of Memory' was painted by Salvador Dalí"
+    ]
+  },
+  {
+    "id": 119,
+    "question": "What gas do humans exhale during respiration?",
+    "answers": ["Carbon dioxide", "Humans exhale carbon dioxide"]
+  },
+  {
+    "id": 120,
+    "question": "Which process turns liquid water into vapor?",
+    "answers": [
+      "Evaporation",
+      "Liquid water turns into vapor through evaporation"
+    ]
+  },
+  {
+    "id": 121,
+    "question": "What is the capital of South Korea?",
+    "answers": ["Seoul", "The capital of South Korea is Seoul"]
+  },
+  {
+    "id": 122,
+    "question": "Who wrote 'Moby-Dick'?",
+    "answers": ["Herman Melville", "'Moby-Dick' was written by Herman Melville"]
+  },
+  {
+    "id": 123,
+    "question": "Which element has the chemical symbol H?",
+    "answers": ["Hydrogen", "The element with the symbol H is hydrogen"]
+  },
+  {
+    "id": 124,
+    "question": "What is the capital city of India?",
+    "answers": ["New Delhi", "The capital of India is New Delhi"]
+  },
+  {
+    "id": 125,
+    "question": "What is the largest organelle in a plant cell?",
+    "answers": [
+      "Central vacuole",
+      "The largest organelle in a plant cell is the central vacuole"
+    ]
+  },
+  {
+    "id": 126,
+    "question": "Who painted 'The Last Supper'?",
+    "answers": [
+      "Leonardo da Vinci",
+      "'The Last Supper' was painted by Leonardo da Vinci"
+    ]
+  },
+  {
+    "id": 127,
+    "question": "What is the most populous country in the world?",
+    "answers": ["China", "The most populous country is China"]
+  },
+  {
+    "id": 128,
+    "question": "Which element is needed for blood to carry oxygen?",
+    "answers": ["Iron", "Iron is needed for blood to carry oxygen"]
+  },
+  {
+    "id": 129,
+    "question": "What is the main language spoken in Argentina?",
+    "answers": ["Spanish", "The main language in Argentina is Spanish"]
+  },
+  {
+    "id": 130,
+    "question": "What is the smallest bone in the human body?",
+    "answers": ["Stapes", "The smallest bone is the stapes"]
+  },
+  {
+    "id": 131,
+    "question": "Who is known as the 'Maid of Orléans'?",
+    "answers": ["Joan of Arc", "The Maid of Orléans is Joan of Arc"]
+  },
+  {
+    "id": 132,
+    "question": "Which vegetable is known for its high beta-carotene content?",
+    "answers": ["Carrot", "Carrots are high in beta-carotene"]
+  },
+  {
+    "id": 133,
+    "question": "What is the freezing point of water in Fahrenheit?",
+    "answers": [
+      "32 degrees Fahrenheit",
+      "Water freezes at 32 degrees Fahrenheit"
+    ]
+  },
+  {
+    "id": 134,
+    "question": "Who wrote 'The Lord of the Rings'?",
+    "answers": [
+      "J.R.R. Tolkien",
+      "'The Lord of the Rings' was written by J.R.R. Tolkien"
+    ]
+  },
+  {
+    "id": 135,
+    "question": "What is the currency of India?",
+    "answers": ["Indian Rupee", "The currency of India is the Indian Rupee"]
+  },
+  {
+    "id": 136,
+    "question": "Which element has the highest electrical conductivity?",
+    "answers": ["Silver", "Silver has the highest electrical conductivity"]
+  },
+  {
+    "id": 137,
+    "question": "Which vitamin is produced when the human skin is exposed to sunlight?",
+    "answers": ["Vitamin D", "Sunlight helps produce Vitamin D in the skin"]
+  },
+  {
+    "id": 138,
+    "question": "What is the term for animals that are active during the night?",
+    "answers": ["Nocturnal", "Animals active at night are called nocturnal"]
+  },
+  {
+    "id": 139,
+    "question": "Who was the first person to walk on the moon?",
+    "answers": [
+      "Neil Armstrong",
+      "The first person on the moon was Neil Armstrong"
+    ]
+  },
+  {
+    "id": 140,
+    "question": "Which country is famous for inventing tea?",
+    "answers": ["China", "Tea was invented in China"]
+  },
+  {
+    "id": 141,
+    "question": "What is the name of the largest canyon in the world?",
+    "answers": ["Grand Canyon", "The largest canyon is the Grand Canyon"]
+  },
+  {
+    "id": 142,
+    "question": "What is the capital of New Zealand?",
+    "answers": ["Wellington", "The capital of New Zealand is Wellington"]
+  },
+  {
+    "id": 143,
+    "question": "Who is the author of 'The Catcher in the Rye'?",
+    "answers": [
+      "J.D. Salinger",
+      "'The Catcher in the Rye' was written by J.D. Salinger"
+    ]
+  },
+  {
+    "id": 144,
+    "question": "Which element has the chemical symbol C?",
+    "answers": ["Carbon", "The element with the symbol C is carbon"]
+  },
+  {
+    "id": 145,
+    "question": "What is the name of the deepest point in Earth's oceans?",
+    "answers": ["Challenger Deep", "The deepest point is the Challenger Deep"]
+  },
+  {
+    "id": 146,
+    "question": "Which gas makes up about 21% of Earth's atmosphere?",
+    "answers": ["Oxygen", "Approximately 21% of Earth's atmosphere is oxygen"]
+  },
+  {
+    "id": 147,
+    "question": "Who is the Greek goddess of wisdom?",
+    "answers": ["Athena", "The Greek goddess of wisdom is Athena"]
+  },
+  {
+    "id": 148,
+    "question": "What is the basic unit of electric current?",
+    "answers": ["Ampere", "The basic unit of electric current is the ampere"]
+  },
+  {
+    "id": 149,
+    "question": "Who proposed the laws of planetary motion?",
+    "answers": [
+      "Johannes Kepler",
+      "The laws of planetary motion were proposed by Johannes Kepler"
+    ]
+  },
+  {
+    "id": 150,
+    "question": "Which country gifted the Statue of Liberty to the United States?",
+    "answers": [
+      "France",
+      "France gifted the Statue of Liberty to the United States"
+    ]
+  },
+  {
+    "id": 151,
+    "question": "What is the term for a baby kangaroo?",
+    "answers": ["Joey", "A baby kangaroo is called a joey"]
+  },
+  {
+    "id": 152,
+    "question": "What is the main component of the sun?",
+    "answers": ["Hydrogen", "The sun is primarily composed of hydrogen"]
+  },
+  {
+    "id": 153,
+    "question": "Who was the first female Prime Minister of the United Kingdom?",
+    "answers": [
+      "Margaret Thatcher",
+      "The first female UK Prime Minister was Margaret Thatcher"
+    ]
+  },
+  {
+    "id": 154,
+    "question": "What is the square root of 81?",
+    "answers": ["9", "The square root of 81 is 9"]
+  },
+  {
+    "id": 155,
+    "question": "Which is the largest land animal?",
+    "answers": [
+      "African elephant",
+      "The largest land animal is the African elephant"
+    ]
+  },
+  {
+    "id": 156,
+    "question": "What metal is extracted from bauxite ore?",
+    "answers": ["Aluminum", "Aluminum is extracted from bauxite"]
+  },
+  {
+    "id": 157,
+    "question": "What are the two official languages of Canada?",
+    "answers": [
+      "English and French",
+      "Canada has two official languages: English and French"
+    ]
+  },
+  {
+    "id": 158,
+    "question": "What is the term for a word that is the same forwards and backwards?",
+    "answers": ["Palindrome", "Such a word is called a palindrome"]
+  },
+  {
+    "id": 159,
+    "question": "Who wrote 'The Adventures of Tom Sawyer'?",
+    "answers": [
+      "Mark Twain",
+      "'The Adventures of Tom Sawyer' was written by Mark Twain"
+    ]
+  },
+  {
+    "id": 160,
+    "question": "What is the boiling point of water in Fahrenheit?",
+    "answers": [
+      "212 degrees Fahrenheit",
+      "Water boils at 212 degrees Fahrenheit"
+    ]
+  },
+  {
+    "id": 161,
+    "question": "Who developed the first successful airplane?",
+    "answers": [
+      "Wright brothers",
+      "The Wright brothers developed the first successful airplane"
+    ]
+  },
+  {
+    "id": 162,
+    "question": "Which gas is known as laughing gas?",
+    "answers": ["Nitrous oxide", "Laughing gas is nitrous oxide"]
+  },
+  {
+    "id": 163,
+    "question": "Who is the Greek god of war?",
+    "answers": ["Ares", "The Greek god of war is Ares"]
+  },
+  {
+    "id": 164,
+    "question": "What is the capital city of Mexico?",
+    "answers": ["Mexico City", "The capital of Mexico is Mexico City"]
+  },
+  {
+    "id": 165,
+    "question": "What is the chemical formula for methane?",
+    "answers": ["CH4", "The chemical formula for methane is CH4"]
+  },
+  {
+    "id": 166,
+    "question": "Who painted 'Guernica'?",
+    "answers": ["Pablo Picasso", "'Guernica' was painted by Pablo Picasso"]
+  },
+  {
+    "id": 167,
+    "question": "What is the process of cell division in somatic cells called?",
+    "answers": ["Mitosis", "Cell division in somatic cells is called mitosis"]
+  },
+  {
+    "id": 168,
+    "question": "Which ocean is on the east coast of the United States?",
+    "answers": [
+      "Atlantic Ocean",
+      "The Atlantic Ocean is on the east coast of the United States"
+    ]
+  },
+  {
+    "id": 169,
+    "question": "Who was the first woman to win a Nobel Prize?",
+    "answers": [
+      "Marie Curie",
+      "The first woman to win a Nobel Prize was Marie Curie"
+    ]
+  },
+  {
+    "id": 170,
+    "question": "What is the capital city of Kenya?",
+    "answers": ["Nairobi", "The capital of Kenya is Nairobi"]
+  },
+  {
+    "id": 171,
+    "question": "Which planet is known as the 'Evening Star'?",
+    "answers": ["Venus", "The Evening Star is Venus"]
+  },
+  {
+    "id": 172,
+    "question": "What is the largest artery in the human body?",
+    "answers": ["Aorta", "The largest artery is the aorta"]
+  },
+  {
+    "id": 173,
+    "question": "Who is the author of 'Frankenstein'?",
+    "answers": ["Mary Shelley", "'Frankenstein' was written by Mary Shelley"]
+  },
+  {
+    "id": 174,
+    "question": "What is H₂SO₄ commonly known as?",
+    "answers": ["Sulfuric acid", "H₂SO₄ is sulfuric acid"]
+  },
+  {
+    "id": 175,
+    "question": "Which country is known for the Eiffel Tower?",
+    "answers": ["France", "The Eiffel Tower is in France"]
+  },
+  {
+    "id": 176,
+    "question": "What is the smallest unit of matter?",
+    "answers": ["Atom", "An atom is the smallest unit of matter"]
+  },
+  {
+    "id": 177,
+    "question": "Which gas is essential for respiration in humans?",
+    "answers": ["Oxygen", "Humans need oxygen for respiration"]
+  },
+  {
+    "id": 178,
+    "question": "What is the capital of Portugal?",
+    "answers": ["Lisbon", "The capital of Portugal is Lisbon"]
+  },
+  {
+    "id": 179,
+    "question": "Who is the author of 'Don Quixote'?",
+    "answers": [
+      "Miguel de Cervantes",
+      "'Don Quixote' was written by Miguel de Cervantes"
+    ]
+  },
+  {
+    "id": 180,
+    "question": "Which metal has the highest melting point?",
+    "answers": ["Tungsten", "Tungsten has the highest melting point"]
+  },
+  {
+    "id": 181,
+    "question": "Who is known as the 'Father of Geometry'?",
+    "answers": ["Euclid", "The Father of Geometry is Euclid"]
+  },
+  {
+    "id": 182,
+    "question": "What is the chemical symbol for lead?",
+    "answers": ["Pb", "The chemical symbol for lead is Pb"]
+  },
+  {
+    "id": 183,
+    "question": "What is the largest internal organ in the human body?",
+    "answers": ["Liver", "The largest internal organ is the liver"]
+  },
+  {
+    "id": 184,
+    "question": "What type of animal is a Komodo dragon?",
+    "answers": ["Lizard", "The Komodo dragon is a lizard"]
+  },
+  {
+    "id": 185,
+    "question": "Which city is known as the 'Eternal City'?",
+    "answers": ["Rome", "The Eternal City is Rome"]
+  },
+  {
+    "id": 186,
+    "question": "What is the process by which plants lose water vapor through their leaves?",
+    "answers": ["Transpiration", "Plants lose water through transpiration"]
+  },
+  {
+    "id": 187,
+    "question": "Who developed the first periodic table of elements?",
+    "answers": [
+      "Dmitri Mendeleev",
+      "The first periodic table was developed by Dmitri Mendeleev"
+    ]
+  },
+  {
+    "id": 188,
+    "question": "What is the capital of Norway?",
+    "answers": ["Oslo", "The capital of Norway is Oslo"]
+  },
+  {
+    "id": 189,
+    "question": "Which planet is known as the 'Blue Planet'?",
+    "answers": ["Earth", "The Blue Planet is Earth"]
+  },
+  {
+    "id": 190,
+    "question": "What is the largest muscle in the human body?",
+    "answers": ["Gluteus maximus", "The largest muscle is the gluteus maximus"]
+  },
+  {
+    "id": 191,
+    "question": "Which element has the atomic number 1?",
+    "answers": ["Hydrogen", "Element number 1 is hydrogen"]
+  },
+  {
+    "id": 192,
+    "question": "What is the largest species of shark?",
+    "answers": ["Whale shark", "The largest shark is the whale shark"]
+  },
+  {
+    "id": 193,
+    "question": "Who is the author of 'The Hobbit'?",
+    "answers": ["J.R.R. Tolkien", "'The Hobbit' was written by J.R.R. Tolkien"]
+  },
+  {
+    "id": 194,
+    "question": "What is the currency of South Africa?",
+    "answers": ["Rand", "The currency of South Africa is the rand"]
+  },
+  {
+    "id": 195,
+    "question": "Which gas is used in balloons to make them float?",
+    "answers": ["Helium", "Helium is used to make balloons float"]
+  },
+  {
+    "id": 196,
+    "question": "What is the capital city of Thailand?",
+    "answers": ["Bangkok", "The capital of Thailand is Bangkok"]
+  },
+  {
+    "id": 197,
+    "question": "Who formulated the laws of motion?",
+    "answers": [
+      "Isaac Newton",
+      "The laws of motion were formulated by Isaac Newton"
+    ]
+  },
+  {
+    "id": 198,
+    "question": "Which element has the chemical symbol N?",
+    "answers": ["Nitrogen", "The element with the symbol N is nitrogen"]
+  },
+  {
+    "id": 199,
+    "question": "What is the tallest building in the world as of 2023?",
+    "answers": ["Burj Khalifa", "The tallest building is the Burj Khalifa"]
+  },
+  {
+    "id": 200,
+    "question": "Who is known as the 'Father of Medicine'?",
+    "answers": ["Hippocrates", "The Father of Medicine is Hippocrates"]
+  },
+  {
+    "id": 201,
+    "question": "Which continent is the Sahara Desert located on?",
+    "answers": ["Africa", "The Sahara Desert is located in Africa"]
+  },
+  {
+    "id": 202,
+    "question": "What is the capital city of Greece?",
+    "answers": ["Athens", "The capital of Greece is Athens"]
+  },
+  {
+    "id": 203,
+    "question": "Who formulated the law of universal gravitation?",
+    "answers": [
+      "Isaac Newton",
+      "Isaac Newton formulated the law of universal gravitation"
+    ]
+  },
+  {
+    "id": 204,
+    "question": "What is the largest freshwater lake by volume?",
+    "answers": [
+      "Lake Baikal",
+      "The largest freshwater lake by volume is Lake Baikal"
+    ]
+  },
+  {
+    "id": 205,
+    "question": "Which planet is known as the 'Ringed Planet'?",
+    "answers": ["Saturn", "The Ringed Planet is Saturn"]
+  },
+  {
+    "id": 206,
+    "question": "Who wrote 'The Divine Comedy'?",
+    "answers": [
+      "Dante Alighieri",
+      "'The Divine Comedy' was written by Dante Alighieri"
+    ]
+  },
+  {
+    "id": 207,
+    "question": "What is the chemical symbol for copper?",
+    "answers": ["Cu", "The chemical symbol for copper is Cu"]
+  },
+  {
+    "id": 208,
+    "question": "Which ocean is the Bermuda Triangle located in?",
+    "answers": [
+      "Atlantic Ocean",
+      "The Bermuda Triangle is in the Atlantic Ocean"
+    ]
+  },
+  {
+    "id": 209,
+    "question": "Which country is known for the Taj Mahal?",
+    "answers": ["India", "The Taj Mahal is in India"]
+  },
+  {
+    "id": 210,
+    "question": "Which country is known as the 'Land Down Under'?",
+    "answers": ["Australia", "Australia is the Land Down Under"]
+  },
+  {
+    "id": 211,
+    "question": "Who wrote the play 'Macbeth'?",
+    "answers": [
+      "William Shakespeare",
+      "'Macbeth' was written by William Shakespeare"
+    ]
+  },
+  {
+    "id": 212,
+    "question": "What is the tallest animal in the world?",
+    "answers": ["Giraffe", "The tallest animal is the giraffe"]
+  },
+  {
+    "id": 213,
+    "question": "What is the term for animals that eat only plants?",
+    "answers": ["Herbivores", "Animals that eat only plants are herbivores"]
+  },
+  {
+    "id": 214,
+    "question": "Who invented the World Wide Web?",
+    "answers": [
+      "Tim Berners-Lee",
+      "The World Wide Web was invented by Tim Berners-Lee"
+    ]
+  },
+  {
+    "id": 215,
+    "question": "Who is the author of 'The Picture of Dorian Gray'?",
+    "answers": [
+      "Oscar Wilde",
+      "'The Picture of Dorian Gray' was written by Oscar Wilde"
+    ]
+  },
+  {
+    "id": 216,
+    "question": "What is the capital city of Turkey?",
+    "answers": ["Ankara", "The capital of Turkey is Ankara"]
+  },
+  {
+    "id": 217,
+    "question": "What is the largest bird in the world?",
+    "answers": ["Ostrich", "The largest bird is the ostrich"]
+  },
+  {
+    "id": 218,
+    "question": "Who is known as the 'King of Pop'?",
+    "answers": ["Michael Jackson", "The King of Pop is Michael Jackson"]
+  },
+  {
+    "id": 219,
+    "question": "What is the main ingredient in sushi?",
+    "answers": ["Rice", "The main ingredient in sushi is rice"]
+  },
+  {
+    "id": 220,
+    "question": "Which planet is known for its Great Red Spot?",
+    "answers": ["Jupiter", "Jupiter is known for its Great Red Spot"]
+  },
+  {
+    "id": 221,
+    "question": "What is the chemical symbol for magnesium?",
+    "answers": ["Mg", "The chemical symbol for magnesium is Mg"]
+  },
+  {
+    "id": 222,
+    "question": "Who is the author of 'The Chronicles of Narnia'?",
+    "answers": [
+      "C.S. Lewis",
+      "'The Chronicles of Narnia' was written by C.S. Lewis"
+    ]
+  },
+  {
+    "id": 224,
+    "question": "What is the largest desert in the world?",
+    "answers": [
+      "Antarctic Desert",
+      "The largest desert is the Antarctic Desert"
+    ]
+  },
+  {
+    "id": 225,
+    "question": "Who is the Greek god of the underworld?",
+    "answers": ["Hades", "The Greek god of the underworld is Hades"]
+  },
+  {
+    "id": 226,
+    "question": "What is the main component of natural gas?",
+    "answers": ["Methane", "Natural gas is mainly composed of methane"]
+  },
+  {
+    "id": 227,
+    "question": "Which element has the atomic number 79?",
+    "answers": ["Gold", "Element number 79 is gold"]
+  },
+  {
+    "id": 228,
+    "question": "What is the term for a group of lions?",
+    "answers": ["Pride", "A group of lions is called a pride"]
+  },
+  {
+    "id": 230,
+    "question": "What is the capital city of Switzerland?",
+    "answers": ["Bern", "The capital of Switzerland is Bern"]
+  },
+  {
+    "id": 231,
+    "question": "Which instrument is used to measure atmospheric pressure?",
+    "answers": ["Barometer", "A barometer measures atmospheric pressure"]
+  },
+  {
+    "id": 232,
+    "question": "Who is the author of 'Brave New World'?",
+    "answers": [
+      "Aldous Huxley",
+      "'Brave New World' was written by Aldous Huxley"
+    ]
+  },
+  {
+    "id": 233,
+    "question": "What is the largest mammal in the ocean?",
+    "answers": ["Blue whale", "The largest ocean mammal is the blue whale"]
+  },
+  {
+    "id": 234,
+    "question": "Which organ is responsible for vision?",
+    "answers": ["Eye", "The eye is responsible for vision"]
+  },
+  {
+    "id": 235,
+    "question": "What is the main gas found in the Earth's stratosphere that absorbs UV radiation?",
+    "answers": ["Ozone", "Ozone absorbs UV radiation in the stratosphere"]
+  },
+  {
+    "id": 236,
+    "question": "Who was the lead scientist in the Manhattan Project?",
+    "answers": [
+      "J. Robert Oppenheimer",
+      "The lead scientist was J. Robert Oppenheimer"
+    ]
+  },
+  {
+    "id": 237,
+    "question": "What is the process by which plants make their own food?",
+    "answers": ["Photosynthesis", "Plants make food through photosynthesis"]
+  },
+  {
+    "id": 238,
+    "question": "What is the capital city of the Philippines?",
+    "answers": ["Manila", "The capital of the Philippines is Manila"]
+  },
+  {
+    "id": 239,
+    "question": "Which element is represented by the symbol Zn?",
+    "answers": ["Zinc", "The element Zn is zinc"]
+  },
+  {
+    "id": 240,
+    "question": "Who is the Greek god of the sun?",
+    "answers": ["Apollo", "The Greek god of the sun is Apollo"]
+  },
+  {
+    "id": 241,
+    "question": "What is the largest type of deer?",
+    "answers": ["Moose", "The largest deer is the moose"]
+  },
+  {
+    "id": 242,
+    "question": "Which organ in the human body produces bile?",
+    "answers": ["Liver", "The liver produces bile"]
+  },
+  {
+    "id": 243,
+    "question": "What is the term for an animal that feeds on dead organic material?",
+    "answers": [
+      "Detritivore",
+      "An animal that feeds on dead material is a detritivore"
+    ]
+  },
+  {
+    "id": 244,
+    "question": "Who is the author of 'Jane Eyre'?",
+    "answers": [
+      "Charlotte Brontë",
+      "'Jane Eyre' was written by Charlotte Brontë"
+    ]
+  },
+  {
+    "id": 245,
+    "question": "What is the chemical formula for ozone?",
+    "answers": ["O₃", "The chemical formula for ozone is O₃"]
+  },
+  {
+    "id": 246,
+    "question": "What is the capital city of Sweden?",
+    "answers": ["Stockholm", "The capital of Sweden is Stockholm"]
+  },
+  {
+    "id": 247,
+    "question": "Which planet has a day that is longer than its year?",
+    "answers": ["Venus", "Venus has a day longer than its year"]
+  },
+  {
+    "id": 250,
+    "question": "What is the main ingredient in tofu?",
+    "answers": ["Soybeans", "Tofu is made from soybeans"]
+  },
+  {
+    "id": 251,
+    "question": "Which country is known for the Great Barrier Reef?",
+    "answers": [
+      "Australia",
+      "The Great Barrier Reef is off the coast of Australia"
+    ]
+  },
+  {
+    "id": 252,
+    "question": "Who is the Roman god of war?",
+    "answers": ["Mars", "The Roman god of war is Mars"]
+  },
+  {
+    "id": 253,
+    "question": "What is the name of the process by which cells obtain energy from glucose?",
+    "answers": [
+      "Cellular respiration",
+      "Cells obtain energy through cellular respiration"
+    ]
+  },
+  {
+    "id": 254,
+    "question": "Which instrument measures wind speed?",
+    "answers": ["Anemometer", "An anemometer measures wind speed"]
+  },
+  {
+    "id": 255,
+    "question": "What is the capital city of Austria?",
+    "answers": ["Vienna", "The capital of Austria is Vienna"]
+  },
+  {
+    "id": 256,
+    "question": "Who wrote 'The Iliad'?",
+    "answers": ["Homer", "'The Iliad' was written by Homer"]
+  },
+  {
+    "id": 257,
+    "question": "What is the term for an animal without a backbone?",
+    "answers": [
+      "Invertebrate",
+      "An animal without a backbone is an invertebrate"
+    ]
+  },
+  {
+    "id": 258,
+    "question": "Which chemical element has the highest atomic number that occurs naturally?",
+    "answers": ["Uranium", "Uranium has the highest natural atomic number"]
+  },
+  {
+    "id": 259,
+    "question": "Who is known as the 'Father of Psychoanalysis'?",
+    "answers": [
+      "Sigmund Freud",
+      "The Father of Psychoanalysis is Sigmund Freud"
+    ]
+  },
+  {
+    "id": 260,
+    "question": "What is the first element on the periodic table?",
+    "answers": ["Hydrogen", "The first element is hydrogen"]
+  },
+  {
+    "id": 261,
+    "question": "Which gas is most abundant on Mars's atmosphere?",
+    "answers": ["Carbon dioxide", "Mars's atmosphere is mostly carbon dioxide"]
+  },
+  {
+    "id": 262,
+    "question": "What is the capital city of Finland?",
+    "answers": ["Helsinki", "The capital of Finland is Helsinki"]
+  },
+  {
+    "id": 263,
+    "question": "Who wrote 'A Tale of Two Cities'?",
+    "answers": [
+      "Charles Dickens",
+      "'A Tale of Two Cities' was written by Charles Dickens"
+    ]
+  },
+  {
+    "id": 264,
+    "question": "What is the process of water vapor changing into liquid water called?",
+    "answers": [
+      "Condensation",
+      "Water vapor changes into liquid through condensation"
+    ]
+  },
+  {
+    "id": 265,
+    "question": "Which organ is responsible for hearing?",
+    "answers": ["Ear", "The ear is responsible for hearing"]
+  },
+  {
+    "id": 266,
+    "question": "What is the SI unit of temperature?",
+    "answers": ["Kelvin", "The SI unit of temperature is the kelvin"]
+  },
+  {
+    "id": 267,
+    "question": "Who is the Greek goddess of love and beauty?",
+    "answers": ["Aphrodite", "The Greek goddess of love is Aphrodite"]
+  },
+  {
+    "id": 268,
+    "question": "What is the main gas found in Venus's atmosphere?",
+    "answers": ["Carbon dioxide", "Venus's atmosphere is mainly carbon dioxide"]
+  },
+  {
+    "id": 269,
+    "question": "Which country is known for the pyramids of Giza?",
+    "answers": ["Egypt", "The pyramids of Giza are in Egypt"]
+  },
+  {
+    "id": 271,
+    "question": "What is the chemical symbol for calcium?",
+    "answers": ["Ca", "The chemical symbol for calcium is Ca"]
+  },
+  {
+    "id": 273,
+    "question": "What is the capital city of Denmark?",
+    "answers": ["Copenhagen", "The capital of Denmark is Copenhagen"]
+  },
+  {
+    "id": 274,
+    "question": "Which instrument is used to measure earthquakes?",
+    "answers": ["Seismograph", "A seismograph measures earthquakes"]
+  },
+  {
+    "id": 276,
+    "question": "What is the unit of electrical resistance?",
+    "answers": ["Ohm", "The unit of electrical resistance is the ohm"]
+  },
+  {
+    "id": 277,
+    "question": "What is the process by which plants make food using sunlight?",
+    "answers": ["Photosynthesis", "Plants make food through photosynthesis"]
+  },
+  {
+    "id": 278,
+    "question": "Who wrote 'Animal Farm'?",
+    "answers": ["George Orwell", "'Animal Farm' was written by George Orwell"]
+  },
+  {
+    "id": 279,
+    "question": "What is the boiling point of water in Celsius?",
+    "answers": ["100 degrees Celsius", "Water boils at 100 degrees Celsius"]
+  },
+  {
+    "id": 280,
+    "question": "Which organ pumps blood throughout the human body?",
+    "answers": ["Heart", "The heart pumps blood"]
+  },
+  {
+    "id": 281,
+    "question": "What is the largest ocean on Earth?",
+    "answers": ["Pacific Ocean", "The largest ocean is the Pacific Ocean"]
+  },
+  {
+    "id": 282,
+    "question": "Who is the Greek god of the sky and thunder?",
+    "answers": ["Zeus", "The Greek god of the sky is Zeus"]
+  },
+  {
+    "id": 283,
+    "question": "What is the capital city of Brazil?",
+    "answers": ["Brasília", "The capital of Brazil is Brasília"]
+  },
+  {
+    "id": 286,
+    "question": "Which planet is known as the Earth's twin?",
+    "answers": ["Venus", "Venus is known as Earth's twin"]
+  },
+  {
+    "id": 287,
+    "question": "What is the smallest particle of a chemical element?",
+    "answers": ["Atom", "An atom is the smallest particle of an element"]
+  },
+  {
+    "id": 288,
+    "question": "Who proposed the theory of general relativity?",
+    "answers": [
+      "Albert Einstein",
+      "General relativity was proposed by Albert Einstein"
+    ]
+  },
+  {
+    "id": 289,
+    "question": "What is the main gas found in Earth's atmosphere?",
+    "answers": ["Nitrogen", "The main gas in Earth's atmosphere is nitrogen"]
+  },
+  {
+    "id": 290,
+    "question": "Which element has the chemical symbol K?",
+    "answers": ["Potassium", "The chemical symbol K represents potassium"]
+  },
+  {
+    "id": 291,
+    "question": "What is the process of converting a liquid into a gas?",
+    "answers": ["Evaporation", "The process is called evaporation"]
+  },
+  {
+    "id": 295,
+    "question": "What is the capital city of the Netherlands?",
+    "answers": ["Amsterdam", "The capital of the Netherlands is Amsterdam"]
+  },
+  {
+    "id": 297,
+    "question": "What is the term for a star that suddenly increases in brightness?",
+    "answers": ["Nova", "Such a star is called a nova"]
+  },
+  {
+    "id": 298,
+    "question": "Which vitamin is known as ascorbic acid?",
+    "answers": ["Vitamin C", "Ascorbic acid is Vitamin C"]
+  },
+  {
+    "id": 299,
+    "question": "Who is known as the 'Father of Modern Physics'?",
+    "answers": [
+      "Galileo Galilei",
+      "The Father of Modern Physics is Galileo Galilei"
+    ]
+  },
+  {
+    "id": 300,
+    "question": "What is the process by which cells divide in sexually reproducing organisms?",
+    "answers": ["Meiosis", "The process is called meiosis"]
+  },
+  {
+    "id": 301,
+    "question": "Which organelle is responsible for energy production in cells?",
+    "answers": ["Mitochondria", "The mitochondria produce energy in cells"]
+  },
+  {
+    "id": 302,
+    "question": "Who is known as the 'Queen of Pop'?",
+    "answers": ["Madonna", "The Queen of Pop is Madonna"]
+  },
+  {
+    "id": 303,
+    "question": "What is the organelle where photosynthesis occurs?",
+    "answers": ["Chloroplast", "Photosynthesis occurs in the chloroplast"]
+  },
+  {
+    "id": 304,
+    "question": "Which country is known for starting the Olympic Games?",
+    "answers": ["Greece", "The Olympic Games originated in Greece"]
+  },
+  {
+    "id": 305,
+    "question": "What is the capital city of Poland?",
+    "answers": ["Warsaw", "The capital of Poland is Warsaw"]
+  },
+  {
+    "id": 306,
+    "question": "Who wrote the play 'Death of a Salesman'?",
+    "answers": [
+      "Arthur Miller",
+      "'Death of a Salesman' was written by Arthur Miller"
+    ]
+  },
+  {
+    "id": 307,
+    "question": "What is the term for one thousand gigabytes?",
+    "answers": ["Terabyte", "One thousand gigabytes is a terabyte"]
+  },
+  {
+    "id": 308,
+    "question": "Which element has the chemical symbol Ni?",
+    "answers": ["Nickel", "The chemical symbol Ni represents nickel"]
+  },
+  {
+    "id": 309,
+    "question": "What is the most abundant gas in Earth's atmosphere?",
+    "answers": ["Nitrogen", "Nitrogen is the most abundant gas"]
+  },
+  {
+    "id": 311,
+    "question": "What is the chemical symbol for chlorine?",
+    "answers": ["Cl", "The chemical symbol for chlorine is Cl"]
+  },
+  {
+    "id": 312,
+    "question": "Who wrote 'One Hundred Years of Solitude'?",
+    "answers": [
+      "Gabriel García Márquez",
+      "'One Hundred Years of Solitude' was written by Gabriel García Márquez"
+    ]
+  },
+  {
+    "id": 314,
+    "question": "What is the formula for calculating the area of a circle?",
+    "answers": ["Area equals pi times radius squared", "A = πr²"]
+  },
+  {
+    "id": 315,
+    "question": "Who wrote 'The Metamorphosis'?",
+    "answers": ["Franz Kafka", "'The Metamorphosis' was written by Franz Kafka"]
+  },
+  {
+    "id": 316,
+    "question": "What is the largest moon of Jupiter?",
+    "answers": ["Ganymede", "Ganymede is Jupiter's largest moon"]
+  },
+  {
+    "id": 317,
+    "question": "What is the capital city of Argentina?",
+    "answers": ["Buenos Aires", "The capital of Argentina is Buenos Aires"]
+  },
+  {
+    "id": 318,
+    "question": "What is the process called when a solid changes directly into a gas?",
+    "answers": ["Sublimation", "The process is called sublimation"]
+  },
+  {
+    "id": 319,
+    "question": "Which element has the atomic number 6?",
+    "answers": ["Carbon", "Atomic number 6 is carbon"]
+  },
+  {
+    "id": 320,
+    "question": "Who wrote 'Crime and Punishment'?",
+    "answers": [
+      "Fyodor Dostoevsky",
+      "'Crime and Punishment' was written by Fyodor Dostoevsky"
+    ]
+  },
+  {
+    "id": 321,
+    "question": "What is the chemical symbol for tin?",
+    "answers": ["Sn", "The chemical symbol for tin is Sn"]
+  },
+  {
+    "id": 322,
+    "question": "What is the main component of the Earth's core?",
+    "answers": ["Iron", "The Earth's core is mainly composed of iron"]
+  },
+  {
+    "id": 323,
+    "question": "Who is the Norse god of thunder?",
+    "answers": ["Thor", "The Norse god of thunder is Thor"]
+  },
+  {
+    "id": 324,
+    "question": "What is the capital city of South Africa?",
+    "answers": ["Pretoria", "The administrative capital is Pretoria"]
+  },
+  {
+    "id": 325,
+    "question": "What is the chemical formula for rust?",
+    "answers": ["Fe₂O₃", "The chemical formula for rust is Fe₂O₃"]
+  },
+  {
+    "id": 326,
+    "question": "Who wrote 'The Alchemist'?",
+    "answers": ["Paulo Coelho", "'The Alchemist' was written by Paulo Coelho"]
+  },
+  {
+    "id": 327,
+    "question": "Which planet is tilted on its side?",
+    "answers": ["Uranus", "Uranus is tilted on its side"]
+  },
+  {
+    "id": 328,
+    "question": "What is the largest type of star?",
+    "answers": ["Red supergiant", "The largest stars are red supergiants"]
+  },
+  {
+    "id": 329,
+    "question": "Who proposed the heliocentric model of the solar system?",
+    "answers": [
+      "Nicolaus Copernicus",
+      "The heliocentric model was proposed by Copernicus"
+    ]
+  },
+  {
+    "id": 330,
+    "question": "What is the capital city of Indonesia?",
+    "answers": ["Jakarta", "The capital of Indonesia is Jakarta"]
+  },
+  {
+    "id": 331,
+    "question": "Which gas is used in neon signs?",
+    "answers": ["Neon", "Neon gas is used in neon signs"]
+  },
+  {
+    "id": 333,
+    "question": "What is the term for a scientist who studies earthquakes?",
+    "answers": ["Seismologist", "A seismologist studies earthquakes"]
+  },
+  {
+    "id": 334,
+    "question": "Which animal is known for its ability to change colors?",
+    "answers": ["Chameleon", "The chameleon can change colors"]
+  },
+  {
+    "id": 335,
+    "question": "What is the chemical symbol for mercury?",
+    "answers": ["Hg", "The chemical symbol for mercury is Hg"]
+  },
+  {
+    "id": 336,
+    "question": "Who wrote 'The Count of Monte Cristo'?",
+    "answers": [
+      "Alexandre Dumas",
+      "'The Count of Monte Cristo' was written by Alexandre Dumas"
+    ]
+  },
+  {
+    "id": 337,
+    "question": "What is the largest muscle in the human body?",
+    "answers": ["Gluteus maximus", "The largest muscle is the gluteus maximus"]
+  },
+  {
+    "id": 338,
+    "question": "Which planet is known as the 'Windy Planet'?",
+    "answers": ["Neptune", "Neptune is known for its strong winds"]
+  },
+  {
+    "id": 339,
+    "question": "What is the capital city of Pakistan?",
+    "answers": ["Islamabad", "The capital of Pakistan is Islamabad"]
+  },
+  {
+    "id": 340,
+    "question": "Who wrote 'The Stranger'?",
+    "answers": ["Albert Camus", "'The Stranger' was written by Albert Camus"]
+  },
+  {
+    "id": 341,
+    "question": "What is the process by which plants absorb water through roots?",
+    "answers": ["Osmosis", "Plants absorb water by osmosis"]
+  },
+  {
+    "id": 342,
+    "question": "Which element has the chemical symbol Pb?",
+    "answers": ["Lead", "Pb is the symbol for lead"]
+  },
+  {
+    "id": 343,
+    "question": "What is the largest bone in the human body?",
+    "answers": ["Femur", "The largest bone is the femur"]
+  },
+  {
+    "id": 344,
+    "question": "Who proposed the laws of planetary motion?",
+    "answers": [
+      "Johannes Kepler",
+      "Kepler proposed the laws of planetary motion"
+    ]
+  },
+  {
+    "id": 345,
+    "question": "What is the capital city of Colombia?",
+    "answers": ["Bogotá", "The capital of Colombia is Bogotá"]
+  },
+  {
+    "id": 346,
+    "question": "Which gas do plants release during photosynthesis?",
+    "answers": ["Oxygen", "Plants release oxygen"]
+  },
+  {
+    "id": 347,
+    "question": "Who wrote 'Les Misérables'?",
+    "answers": ["Victor Hugo", "'Les Misérables' was written by Victor Hugo"]
+  },
+  {
+    "id": 348,
+    "question": "What is the SI unit of electric current?",
+    "answers": ["Ampere", "Electric current is measured in amperes"]
+  },
+  {
+    "id": 350,
+    "question": "What is the chemical symbol for silver?",
+    "answers": ["Ag", "The chemical symbol for silver is Ag"]
+  },
+  {
+    "id": 351,
+    "question": "Who wrote 'The Old Man and the Sea'?",
+    "answers": [
+      "Ernest Hemingway",
+      "'The Old Man and the Sea' was written by Ernest Hemingway"
+    ]
+  },
+  
+  {
+    "id": 354,
+    "question": "What is the main language spoken in Egypt?",
+    "answers": ["Arabic", "The main language is Arabic"]
+  },
+  {
+    "id": 355,
+    "question": "Who is known as the 'Father of Chemistry'?",
+    "answers": ["Antoine Lavoisier", "The Father of Chemistry is Lavoisier"]
+  },
+  {
+    "id": 356,
+    "question": "What is the capital city of Saudi Arabia?",
+    "answers": ["Riyadh", "The capital of Saudi Arabia is Riyadh"]
+  },
+  {
+    "id": 357,
+    "question": "Which gas is used in fluorescent lamps?",
+    "answers": ["Mercury vapor", "Fluorescent lamps use mercury vapor"]
+  },
+  {
+    "id": 358,
+    "question": "Who painted 'The Birth of Venus'?",
+    "answers": [
+      "Sandro Botticelli",
+      "'The Birth of Venus' was painted by Botticelli"
+    ]
+  },
+  {
+    "id": 359,
+    "question": "Which instrument measures humidity?",
+    "answers": ["Hygrometer", "A hygrometer measures humidity"]
+  },
+  {
+    "id": 360,
+    "question": "What is the chemical symbol for aluminum?",
+    "answers": ["Al", "The chemical symbol for aluminum is Al"]
+  },
+  {
+    "id": 361,
+    "question": "Who wrote 'The Sound and the Fury'?",
+    "answers": [
+      "William Faulkner",
+      "'The Sound and the Fury' was written by William Faulkner"
+    ]
+  },
+  {
+    "id": 362,
+    "question": "What is the smallest country in South America by area?",
+    "answers": ["Suriname", "The smallest country is Suriname"]
+  },
+  {
+    "id": 363,
+    "question": "Which organ filters waste from the blood to produce urine?",
+    "answers": ["Kidneys", "The kidneys filter waste to form urine"]
+  },
+  {
+    "id": 364,
+    "question": "What is the capital city of Vietnam?",
+    "answers": ["Hanoi", "The capital of Vietnam is Hanoi"]
+  },
+  {
+    "id": 365,
+    "question": "Who wrote 'The Little Prince'?",
+    "answers": [
+      "Antoine de Saint-Exupéry",
+      "'The Little Prince' was written by Antoine de Saint-Exupéry"
+    ]
+  },
+  {
+    "id": 366,
+    "question": "What is the term for an animal that primarily eats meat?",
+    "answers": ["Carnivore", "An animal that eats meat is a carnivore"]
+  },
+  {
+    "id": 367,
+    "question": "Which planet has the shortest day?",
+    "answers": ["Jupiter", "Jupiter has the shortest day"]
+  },
+  {
+    "id": 368,
+    "question": "What is the chemical symbol for platinum?",
+    "answers": ["Pt", "The chemical symbol for platinum is Pt"]
+  },
+  {
+    "id": 369,
+    "question": "Who painted 'American Gothic'?",
+    "answers": ["Grant Wood", "'American Gothic' was painted by Grant Wood"]
+  },
+  {
+    "id": 370,
+    "question": "What is the process by which cells ingest external material?",
+    "answers": ["Endocytosis", "The process is called endocytosis"]
+  },
+  {
+    "id": 371,
+    "question": "What is the capital city of Chile?",
+    "answers": ["Santiago", "The capital of Chile is Santiago"]
+  },
+  {
+    "id": 372,
+    "question": "Which gas makes up about 78% of Earth's atmosphere?",
+    "answers": ["Nitrogen", "78% of Earth's atmosphere is nitrogen"]
+  },
+  {
+    "id": 373,
+    "question": "Who is considered the 'Father of Modern Philosophy'?",
+    "answers": [
+      "René Descartes",
+      "The Father of Modern Philosophy is Descartes"
+    ]
+  },
+  {
+    "id": 374,
+    "question": "What is the chemical formula for baking soda?",
+    "answers": ["NaHCO₃", "Baking soda's formula is NaHCO₃"]
+  },
+  {
+    "id": 375,
+    "question": "Who wrote 'The Jungle Book'?",
+    "answers": ["Rudyard Kipling", "'The Jungle Book' was written by Kipling"]
+  },
+  {
+    "id": 376,
+    "question": "What is the main constituent of the sun?",
+    "answers": ["Hydrogen", "The sun is mostly hydrogen"]
+  },
+  {
+    "id": 377,
+    "question": "Which celestial body is known as a 'dwarf planet'?",
+    "answers": ["Pluto", "Pluto is a dwarf planet"]
+  },
+  {
+    "id": 378,
+    "question": "What is the capital city of Nigeria?",
+    "answers": ["Abuja", "The capital of Nigeria is Abuja"]
+  },
+  {
+    "id": 379,
+    "question": "Who wrote 'Catch-22'?",
+    "answers": ["Joseph Heller", "'Catch-22' was written by Joseph Heller"]
+  },
+  {
+    "id": 381,
+    "question": "Which element has the atomic number 8?",
+    "answers": ["Oxygen", "Element number 8 is oxygen"]
+  },
+  {
+    "id": 383,
+    "question": "Who wrote 'The Republic'?",
+    "answers": ["Plato", "'The Republic' was written by Plato"]
+  },
+  {
+    "id": 384,
+    "question": "What is the chemical symbol for tungsten?",
+    "answers": ["W", "The chemical symbol for tungsten is W"]
+  },
+  {
+    "id": 385,
+    "question": "Which planet is known as the 'Blue Planet'?",
+    "answers": ["Earth", "Earth is the Blue Planet"]
+  },
+  {
+    "id": 386,
+    "question": "What is the capital city of Malaysia?",
+    "answers": ["Kuala Lumpur", "The capital of Malaysia is Kuala Lumpur"]
+  },
+  {
+    "id": 387,
+    "question": "Who painted 'The Scream'?",
+    "answers": ["Edvard Munch", "'The Scream' was painted by Edvard Munch"]
+  },
+  {
+    "id": 388,
+    "question": "What is the basic unit of heredity?",
+    "answers": ["Gene", "A gene is the basic unit of heredity"]
+  },
+  {
+    "id": 389,
+    "question": "Who is known as the 'Father of Modern Art'?",
+    "answers": ["Paul Cézanne", "The Father of Modern Art is Paul Cézanne"]
+  },
+  {
+    "id": 390,
+    "question": "What is the chemical formula for ammonia?",
+    "answers": ["NH₃", "Ammonia's formula is NH₃"]
+  },
+  {
+    "id": 391,
+    "question": "Who wrote 'War and Peace'?",
+    "answers": ["Leo Tolstoy", "'War and Peace' was written by Leo Tolstoy"]
+  },
+  {
+    "id": 392,
+    "question": "Which organ in the human body is responsible for producing insulin?",
+    "answers": ["Pancreas", "The pancreas produces insulin"]
+  },
+  {
+    "id": 393,
+    "question": "What is the capital city of Peru?",
+    "answers": ["Lima", "The capital of Peru is Lima"]
+  },
+  {
+    "id": 394,
+    "question": "Who is the Norse god of mischief?",
+    "answers": ["Loki", "The Norse god of mischief is Loki"]
+  },
+  {
+    "id": 395,
+    "question": "What is the term for the study of insects?",
+    "answers": ["Entomology", "The study of insects is entomology"]
+  },
+  {
+    "id": 396,
+    "question": "What is the chemical symbol for gold?",
+    "answers": ["Au", "The chemical symbol for gold is Au"]
+  },
+  {
+    "id": 397,
+    "question": "Who is known as the 'Father of Microbiology'?",
+    "answers": [
+      "Antonie van Leeuwenhoek",
+      "The Father of Microbiology is Leeuwenhoek"
+    ]
+  },
+  {
+    "id": 398,
+    "question": "What is the tallest waterfall in the world?",
+    "answers": ["Angel Falls", "The tallest waterfall is Angel Falls"]
+  },
+  {
+    "id": 399,
+    "question": "What is the SI base unit of mass?",
+    "answers": ["Kilogram", "The SI base unit of mass is the kilogram"]
+  },
+  {
+    "id": 400,
+    "question": "Which element is liquid at room temperature besides mercury?",
+    "answers": ["Bromine", "Bromine is liquid at room temperature"]
+  },
+  {
+    "id": 401,
+    "question": "Who developed the theory of evolution by natural selection?",
+    "answers": [
+      "Charles Darwin",
+      "The theory of evolution by natural selection was developed by Charles Darwin"
+    ]
+  },
+  {
+    "id": 402,
+    "question": "What is the capital city of Ireland?",
+    "answers": ["Dublin", "The capital of Ireland is Dublin"]
+  },
+  {
+    "id": 403,
+    "question": "Which element has the chemical symbol Si?",
+    "answers": ["Silicon", "The chemical symbol Si represents silicon"]
+  },
+  {
+    "id": 404,
+    "question": "What is the largest mammal on land?",
+    "answers": [
+      "African bush elephant",
+      "The largest land mammal is the African bush elephant"
+    ]
+  },
+  {
+    "id": 405,
+    "question": "Who is known as the 'Iron Lady'?",
+    "answers": ["Margaret Thatcher", "The 'Iron Lady' is Margaret Thatcher"]
+  },
+  {
+    "id": 406,
+    "question": "What is the smallest continent by land area?",
+    "answers": ["Australia", "The smallest continent is Australia"]
+  },
+  {
+    "id": 407,
+    "question": "Which gas is commonly known as 'marsh gas'?",
+    "answers": ["Methane", "'Marsh gas' is methane"]
+  },
+  {
+    "id": 408,
+    "question": "Who wrote 'Dracula'?",
+    "answers": ["Bram Stoker", "'Dracula' was written by Bram Stoker"]
+  },
+  {
+    "id": 409,
+    "question": "What is the hardest known natural material?",
+    "answers": ["Diamond", "The hardest known natural material is diamond"]
+  },
+  {
+    "id": 410,
+    "question": "What is the capital city of Venezuela?",
+    "answers": ["Caracas", "The capital of Venezuela is Caracas"]
+  },
+  {
+    "id": 411,
+    "question": "Who discovered penicillin?",
+    "answers": [
+      "Alexander Fleming",
+      "Penicillin was discovered by Alexander Fleming"
+    ]
+  },
+  {
+    "id": 412,
+    "question": "What is the process by which plants lose water through their leaves?",
+    "answers": ["Transpiration", "Plants lose water through transpiration"]
+  },
+  {
+    "id": 413,
+    "question": "Who painted 'The Girl with a Pearl Earring'?",
+    "answers": [
+      "Johannes Vermeer",
+      "'The Girl with a Pearl Earring' was painted by Johannes Vermeer"
+    ]
+  },
+  {
+    "id": 414,
+    "question": "What is the smallest particle of an element that retains its chemical properties?",
+    "answers": [
+      "Atom",
+      "An atom is the smallest particle that retains an element's properties"
+    ]
+  },
+  {
+    "id": 415,
+    "question": "Which planet is known for its prominent ring system?",
+    "answers": ["Saturn", "Saturn is known for its rings"]
+  },
+  {
+    "id": 416,
+    "question": "Who is referred to as the 'Maid of Orléans'?",
+    "answers": ["Joan of Arc", "The Maid of Orléans is Joan of Arc"]
+  },
+  {
+    "id": 418,
+    "question": "Which continent is the largest by population?",
+    "answers": ["Asia", "The largest continent by population is Asia"]
+  },
+  {
+    "id": 419,
+    "question": "What is the main gas found in the air we breathe?",
+    "answers": ["Nitrogen", "The air we breathe is mostly nitrogen"]
+  },
+  {
+    "id": 420,
+    "question": "Who wrote the famous play 'Oedipus Rex'?",
+    "answers": ["Sophocles", "'Oedipus Rex' was written by Sophocles"]
+  },
+  {
+    "id": 421,
+    "question": "What is the chemical symbol for sodium?",
+    "answers": ["Na", "The chemical symbol for sodium is Na"]
+  },
+  {
+    "id": 422,
+    "question": "What is the capital city of Nepal?",
+    "answers": ["Kathmandu", "The capital of Nepal is Kathmandu"]
+  },
+  {
+    "id": 423,
+    "question": "Which organ is responsible for filtering blood in the human body?",
+    "answers": ["Kidneys", "The kidneys filter blood in the body"]
+  },
+  {
+    "id": 424,
+    "question": "Who developed the first successful polio vaccine?",
+    "answers": ["Jonas Salk", "The polio vaccine was developed by Jonas Salk"]
+  },
+  {
+    "id": 425,
+    "question": "What is the most abundant element in the Earth's crust?",
+    "answers": [
+      "Oxygen",
+      "The most abundant element in the Earth's crust is oxygen"
+    ]
+  },
+  {
+    "id": 426,
+    "question": "Who is the author of 'The Grapes of Wrath'?",
+    "answers": [
+      "John Steinbeck",
+      "'The Grapes of Wrath' was written by John Steinbeck"
+    ]
+  },
+  {
+    "id": 427,
+    "question": "Which planet is known as the 'Red Planet'?",
+    "answers": ["Mars", "Mars is known as the Red Planet"]
+  },
+  {
+    "id": 428,
+    "question": "What is the capital city of Iran?",
+    "answers": ["Tehran", "The capital of Iran is Tehran"]
+  },
+  {
+    "id": 429,
+    "question": "What is the primary function of white blood cells?",
+    "answers": ["Fight infections", "White blood cells fight infections"]
+  },
+  {
+    "id": 430,
+    "question": "Who painted the 'Ceiling of the Sistine Chapel'?",
+    "answers": [
+      "Michelangelo",
+      "The Sistine Chapel ceiling was painted by Michelangelo"
+    ]
+  },
+  {
+    "id": 431,
+    "question": "What is the term for the fear of heights?",
+    "answers": ["Acrophobia", "The fear of heights is called acrophobia"]
+  },
+  {
+    "id": 432,
+    "question": "Which organ is responsible for producing hormones like insulin and glucagon?",
+    "answers": ["Pancreas", "The pancreas produces insulin and glucagon"]
+  },
+  {
+    "id": 433,
+    "question": "Who wrote 'The Scarlet Letter'?",
+    "answers": [
+      "Nathaniel Hawthorne",
+      "'The Scarlet Letter' was written by Nathaniel Hawthorne"
+    ]
+  },
+  {
+    "id": 434,
+    "question": "What is the smallest unit of matter?",
+    "answers": ["Atom", "An atom is the smallest unit of matter"]
+  },
+  {
+    "id": 435,
+    "question": "Which country is known as the 'Land of the Midnight Sun'?",
+    "answers": ["Norway", "Norway is the Land of the Midnight Sun"]
+  },
+  {
+    "id": 436,
+    "question": "What is the chemical formula for table sugar (sucrose)?",
+    "answers": ["C12H22O11", "The chemical formula for sucrose is C12H22O11"]
+  },
+  {
+    "id": 437,
+    "question": "Who is the author of 'Hamlet'?",
+    "answers": [
+      "William Shakespeare",
+      "'Hamlet' was written by William Shakespeare"
+    ]
+  },
+  {
+    "id": 438,
+    "question": "What is the most abundant mineral in the human body?",
+    "answers": ["Calcium", "Calcium is the most abundant mineral in the body"]
+  },
+  {
+    "id": 439,
+    "question": "Which planet is the fifth from the sun?",
+    "answers": ["Jupiter", "The fifth planet from the sun is Jupiter"]
+  },
+  {
+    "id": 440,
+    "question": "What is the capital city of Ukraine?",
+    "answers": ["Kyiv", "The capital of Ukraine is Kyiv"]
+  },
+  {
+    "id": 441,
+    "question": "Who invented the first practical telephone?",
+    "answers": [
+      "Alexander Graham Bell",
+      "The first practical telephone was invented by Alexander Graham Bell"
+    ]
+  },
+  {
+    "id": 442,
+    "question": "What is the process by which plants convert carbon dioxide into oxygen?",
+    "answers": [
+      "Photosynthesis",
+      "Plants convert CO2 into oxygen through photosynthesis"
+    ]
+  },
+  {
+    "id": 443,
+    "question": "Who painted 'The Night Watch'?",
+    "answers": [
+      "Rembrandt van Rijn",
+      "'The Night Watch' was painted by Rembrandt"
+    ]
+  },
+  {
+    "id": 444,
+    "question": "What is the SI unit of pressure?",
+    "answers": ["Pascal", "The SI unit of pressure is the pascal"]
+  },
+  {
+    "id": 445,
+    "question": "Which organ is responsible for detecting light and enabling vision?",
+    "answers": ["Eye", "The eye detects light and enables vision"]
+  },
+  {
+    "id": 446,
+    "question": "Who is the author of 'Wuthering Heights'?",
+    "answers": [
+      "Emily Brontë",
+      "'Wuthering Heights' was written by Emily Brontë"
+    ]
+  },
+  {
+    "id": 447,
+    "question": "Which gas is lighter than air and used in balloons?",
+    "answers": ["Helium", "Helium is lighter than air and used in balloons"]
+  },
+  {
+    "id": 448,
+    "question": "What is the capital city of Belgium?",
+    "answers": ["Brussels", "The capital of Belgium is Brussels"]
+  },
+  {
+    "id": 449,
+    "question": "Who developed the law of universal gravitation?",
+    "answers": [
+      "Isaac Newton",
+      "The law of universal gravitation was developed by Isaac Newton"
+    ]
+  },
+  {
+    "id": 450,
+    "question": "What is the term for molten rock beneath the Earth's surface?",
+    "answers": [
+      "Magma",
+      "Molten rock beneath the Earth's surface is called magma"
+    ]
+  },
+  {
+    "id": 451,
+    "question": "Who wrote 'A Midsummer Night's Dream'?",
+    "answers": [
+      "William Shakespeare",
+      "'A Midsummer Night's Dream' was written by William Shakespeare"
+    ]
+  },
+  {
+    "id": 452,
+    "question": "What is the chemical symbol for carbon?",
+    "answers": ["C", "The chemical symbol for carbon is C"]
+  },
+  {
+    "id": 453,
+    "question": "Which planet is the largest in our solar system?",
+    "answers": ["Jupiter", "The largest planet is Jupiter"]
+  },
+  {
+    "id": 454,
+    "question": "What is the capital city of Czech Republic?",
+    "answers": ["Prague", "The capital of the Czech Republic is Prague"]
+  },
+  {
+    "id": 455,
+    "question": "Who is the Greek goddess of love and beauty?",
+    "answers": ["Aphrodite", "The Greek goddess of love is Aphrodite"]
+  },
+  {
+    "id": 456,
+    "question": "What is the term for animals that maintain a constant body temperature?",
+    "answers": ["Warm-blooded", "Such animals are warm-blooded or endothermic"]
+  },
+  {
+    "id": 457,
+    "question": "Who wrote 'The Odyssey'?",
+    "answers": ["Homer", "'The Odyssey' was written by Homer"]
+  },
+  {
+    "id": 458,
+    "question": "What is the main gas found in the sun?",
+    "answers": ["Hydrogen", "The sun is primarily composed of hydrogen"]
+  },
+  {
+    "id": 459,
+    "question": "What is the capital city of Hungary?",
+    "answers": ["Budapest", "The capital of Hungary is Budapest"]
+  },
+  {
+    "id": 460,
+    "question": "Who is known as the 'Prince of Mathematicians'?",
+    "answers": [
+      "Carl Friedrich Gauss",
+      "The 'Prince of Mathematicians' is Gauss"
+    ]
+  },
+  {
+    "id": 461,
+    "question": "What is the smallest planet in our solar system?",
+    "answers": ["Mercury", "The smallest planet is Mercury"]
+  },
+  {
+    "id": 462,
+    "question": "What is the process by which cells divide to create identical daughter cells?",
+    "answers": ["Mitosis", "The process is called mitosis"]
+  },
+  {
+    "id": 463,
+    "question": "Who painted the 'School of Athens'?",
+    "answers": ["Raphael", "'The School of Athens' was painted by Raphael"]
+  },
+  {
+    "id": 464,
+    "question": "What is the chemical formula for hydrochloric acid?",
+    "answers": ["HCl", "The formula for hydrochloric acid is HCl"]
+  },
+  {
+    "id": 465,
+    "question": "Which organ in the human body is responsible for hearing and balance?",
+    "answers": ["Ear", "The ear is responsible for hearing and balance"]
+  },
+  {
+    "id": 466,
+    "question": "Who wrote 'The Brothers Karamazov'?",
+    "answers": [
+      "Fyodor Dostoevsky",
+      "'The Brothers Karamazov' was written by Dostoevsky"
+    ]
+  },
+  {
+    "id": 467,
+    "question": "What is the SI unit of frequency?",
+    "answers": ["Hertz", "The SI unit of frequency is the hertz"]
+  },
+  {
+    "id": 469,
+    "question": "What is the capital city of Austria?",
+    "answers": ["Vienna", "The capital of Austria is Vienna"]
+  },
+  {
+    "id": 470,
+    "question": "Who is the Roman god of war?",
+    "answers": ["Mars", "The Roman god of war is Mars"]
+  },
+  {
+    "id": 471,
+    "question": "What is the process by which a caterpillar becomes a butterfly?",
+    "answers": ["Metamorphosis", "The process is called metamorphosis"]
+  },
+  {
+    "id": 472,
+    "question": "Who wrote 'Sense and Sensibility'?",
+    "answers": [
+      "Jane Austen",
+      "'Sense and Sensibility' was written by Jane Austen"
+    ]
+  },
+  {
+    "id": 473,
+    "question": "What is the chemical symbol for zinc?",
+    "answers": ["Zn", "The chemical symbol for zinc is Zn"]
+  },
+  {
+    "id": 474,
+    "question": "Which planet has the moon Titan?",
+    "answers": ["Saturn", "Titan orbits Saturn"]
+  },
+  {
+    "id": 475,
+    "question": "What is the capital city of Morocco?",
+    "answers": ["Rabat", "The capital of Morocco is Rabat"]
+  },
+  {
+    "id": 476,
+    "question": "Who is known as the 'Father of Economics'?",
+    "answers": ["Adam Smith", "The Father of Economics is Adam Smith"]
+  },
+  {
+    "id": 477,
+    "question": "What is the term for a substance's resistance to flow?",
+    "answers": ["Viscosity", "The resistance to flow is viscosity"]
+  },
+  {
+    "id": 478,
+    "question": "Who wrote 'The Sound and the Fury'?",
+    "answers": [
+      "William Faulkner",
+      "'The Sound and the Fury' was written by William Faulkner"
+    ]
+  },
+  {
+    "id": 479,
+    "question": "What is the process by which plants absorb water from the soil?",
+    "answers": ["Osmosis", "Plants absorb water through osmosis"]
+  },
+  {
+    "id": 480,
+    "question": "Which organ in the human body is responsible for detoxifying chemicals?",
+    "answers": ["Liver", "The liver detoxifies chemicals"]
+  },
+  {
+    "id": 481,
+    "question": "What is the capital city of Cuba?",
+    "answers": ["Havana", "The capital of Cuba is Havana"]
+  },
+  {
+    "id": 482,
+    "question": "Who painted 'The Kiss'?",
+    "answers": ["Gustav Klimt", "'The Kiss' was painted by Gustav Klimt"]
+  },
+  {
+    "id": 483,
+    "question": "What is the chemical symbol for iron?",
+    "answers": ["Fe", "The chemical symbol for iron is Fe"]
+  },
+  {
+    "id": 484,
+    "question": "Which planet is known for having a tilted axis causing extreme seasons?",
+    "answers": ["Uranus", "Uranus has a tilted axis"]
+  },
+  {
+    "id": 485,
+    "question": "What is the capital city of Finland?",
+    "answers": ["Helsinki", "The capital of Finland is Helsinki"]
+  },
+  {
+    "id": 486,
+    "question": "Who wrote 'Ulysses'?",
+    "answers": ["James Joyce", "'Ulysses' was written by James Joyce"]
+  },
+  {
+    "id": 487,
+    "question": "What is the term for the amount of matter in an object?",
+    "answers": ["Mass", "The amount of matter is called mass"]
+  },
+  {
+    "id": 488,
+    "question": "Which gas is commonly used in advertising signs?",
+    "answers": ["Neon", "Neon gas is used in signs"]
+  },
+  {
+    "id": 489,
+    "question": "Who is the Greek god of the sea?",
+    "answers": ["Poseidon", "The Greek god of the sea is Poseidon"]
+  },
+  {
+    "id": 490,
+    "question": "What is the capital city of Bangladesh?",
+    "answers": ["Dhaka", "The capital of Bangladesh is Dhaka"]
+  },
+  {
+    "id": 491,
+    "question": "Who wrote 'The Raven'?",
+    "answers": ["Edgar Allan Poe", "'The Raven' was written by Poe"]
+  },
+  {
+    "id": 492,
+    "question": "What is the SI unit of energy?",
+    "answers": ["Joule", "The SI unit of energy is the joule"]
+  },
+  {
+    "id": 494,
+    "question": "What is the capital city of Iraq?",
+    "answers": ["Baghdad", "The capital of Iraq is Baghdad"]
+  },
+  {
+    "id": 495,
+    "question": "Who is known as the 'Father of History'?",
+    "answers": ["Herodotus", "The Father of History is Herodotus"]
+  },
+  {
+    "id": 496,
+    "question": "What is the chemical symbol for uranium?",
+    "answers": ["U", "The chemical symbol for uranium is U"]
+  },
+  {
+    "id": 497,
+    "question": "Which organ in the human body produces red blood cells?",
+    "answers": ["Bone marrow", "Red blood cells are produced in bone marrow"]
+  },
+  {
+    "id": 498,
+    "question": "Who wrote 'To the Lighthouse'?",
+    "answers": [
+      "Virginia Woolf",
+      "'To the Lighthouse' was written by Virginia Woolf"
+    ]
+  },
+  {
+    "id": 499,
+    "question": "What is the process by which ice turns directly into vapor?",
+    "answers": ["Sublimation", "The process is sublimation"]
+  },
+  {
+    "id": 500,
+    "question": "What is the capital city of Switzerland?",
+    "answers": ["Bern", "The capital of Switzerland is Bern"]
+  },
+  {
+    "id": 501,
+    "question": "Who painted 'The Creation of Adam'?",
+    "answers": [
+      "Michelangelo",
+      "'The Creation of Adam' was painted by Michelangelo"
+    ]
+  },
+  {
+    "id": 502,
+    "question": "What is the chemical symbol for helium?",
+    "answers": ["He", "The chemical symbol for helium is He"]
+  },
+  {
+    "id": 503,
+    "question": "Which planet is known as the 'Ice Giant'?",
+    "answers": ["Neptune", "Neptune is known as the Ice Giant"]
+  },
+  {
+    "id": 504,
+    "question": "What is the capital city of Jamaica?",
+    "answers": ["Kingston", "The capital of Jamaica is Kingston"]
+  },
+  {
+    "id": 505,
+    "question": "Who wrote 'The Canterbury Tales'?",
+    "answers": [
+      "Geoffrey Chaucer",
+      "'The Canterbury Tales' was written by Chaucer"
+    ]
+  },
+  {
+    "id": 506,
+    "question": "What is the term for the number of protons in an atom's nucleus?",
+    "answers": ["Atomic number", "The number of protons is the atomic number"]
+  },
+  {
+    "id": 507,
+    "question": "Which gas is necessary for the process of combustion?",
+    "answers": ["Oxygen", "Oxygen is necessary for combustion"]
+  },
+  {
+    "id": 508,
+    "question": "Who is the Roman goddess of love?",
+    "answers": ["Venus", "The Roman goddess of love is Venus"]
+  },
+  {
+    "id": 509,
+    "question": "What is the capital city of Algeria?",
+    "answers": ["Algiers", "The capital of Algeria is Algiers"]
+  },
+  {
+    "id": 510,
+    "question": "Who wrote 'Gone with the Wind'?",
+    "answers": [
+      "Margaret Mitchell",
+      "'Gone with the Wind' was written by Margaret Mitchell"
+    ]
+  },
+  {
+    "id": 511,
+    "question": "What is the SI unit of electrical capacitance?",
+    "answers": ["Farad", "The SI unit of capacitance is the farad"]
+  },
+  {
+    "id": 512,
+    "question": "Which planet is known for its extreme greenhouse effect?",
+    "answers": ["Venus", "Venus has an extreme greenhouse effect"]
+  },
+  {
+    "id": 513,
+    "question": "What is the capital city of Singapore?",
+    "answers": ["Singapore", "The capital of Singapore is Singapore"]
+  },
+  {
+    "id": 514,
+    "question": "Who is known as the 'Father of Computer Science'?",
+    "answers": ["Alan Turing", "The Father of Computer Science is Alan Turing"]
+  },
+  {
+    "id": 515,
+    "question": "What is the process by which plants use sunlight to synthesize foods?",
+    "answers": [
+      "Photosynthesis",
+      "Plants use photosynthesis to synthesize foods"
+    ]
+  },
+  {
+    "id": 516,
+    "question": "Who painted 'Impression, Sunrise'?",
+    "answers": ["Claude Monet", "'Impression, Sunrise' was painted by Monet"]
+  },
+  {
+    "id": 517,
+    "question": "What is the chemical symbol for potassium?",
+    "answers": ["K", "The chemical symbol for potassium is K"]
+  },
+  {
+    "id": 518,
+    "question": "Which planet is known as the 'Giant Planet'?",
+    "answers": ["Jupiter", "Jupiter is known as the Giant Planet"]
+  },
+  {
+    "id": 519,
+    "question": "What is the capital city of Denmark?",
+    "answers": ["Copenhagen", "The capital of Denmark is Copenhagen"]
+  },
+  
+  {
+    "id": 521,
+    "question": "What is the term for a positively charged subatomic particle?",
+    "answers": ["Proton", "A positively charged particle is a proton"]
+  },
+  {
+    "id": 522,
+    "question": "Which gas makes up approximately 21% of Earth's atmosphere?",
+    "answers": ["Oxygen", "Approximately 21% is oxygen"]
+  },
+  {
+    "id": 523,
+    "question": "Who is the Egyptian god of the sun?",
+    "answers": ["Ra", "The Egyptian sun god is Ra"]
+  },
+  {
+    "id": 524,
+    "question": "What is the capital city of Israel?",
+    "answers": ["Jerusalem", "The capital of Israel is Jerusalem"]
+  },
+  {
+    "id": 525,
+    "question": "Who wrote 'Moby-Dick'?",
+    "answers": ["Herman Melville", "'Moby-Dick' was written by Herman Melville"]
+  },
+  {
+    "id": 526,
+    "question": "What is the SI unit of luminous intensity?",
+    "answers": ["Candela", "The SI unit is the candela"]
+  },
+  {
+    "id": 527,
+    "question": "Which planet is known for its Great Dark Spot?",
+    "answers": ["Neptune", "Neptune has the Great Dark Spot"]
+  },
+  {
+    "id": 528,
+    "question": "What is the capital city of Scotland?",
+    "answers": ["Edinburgh", "The capital of Scotland is Edinburgh"]
+  },
+  {
+    "id": 529,
+    "question": "Who is known as the 'Father of Genetics'?",
+    "answers": ["Gregor Mendel", "The Father of Genetics is Mendel"]
+  },
+  {
+    "id": 530,
+    "question": "What is the process by which cells release energy from glucose?",
+    "answers": ["Cellular respiration", "The process is cellular respiration"]
+  },
+  {
+    "id": 531,
+    "question": "Who painted 'The Guernica'?",
+    "answers": ["Pablo Picasso", "'Guernica' was painted by Picasso"]
+  },
+  {
+    "id": 532,
+    "question": "What is the chemical symbol for calcium?",
+    "answers": ["Ca", "The chemical symbol for calcium is Ca"]
+  },
+  {
+    "id": 533,
+    "question": "Which planet has a moon named Phobos?",
+    "answers": ["Mars", "Phobos orbits Mars"]
+  },
+  {
+    "id": 534,
+    "question": "What is the capital city of North Korea?",
+    "answers": ["Pyongyang", "The capital of North Korea is Pyongyang"]
+  },
+  {
+    "id": 535,
+    "question": "Who wrote 'The Sun Also Rises'?",
+    "answers": [
+      "Ernest Hemingway",
+      "'The Sun Also Rises' was written by Hemingway"
+    ]
+  },
+  {
+    "id": 536,
+    "question": "What is the SI unit of magnetic flux?",
+    "answers": ["Weber", "The SI unit is the weber"]
+  },
+  {
+    "id": 537,
+    "question": "Which planet is known as the 'Dwarf Planet'?",
+    "answers": ["Pluto", "Pluto is known as a dwarf planet"]
+  },
+  {
+    "id": 538,
+    "question": "What is the capital city of Slovakia?",
+    "answers": ["Bratislava", "The capital of Slovakia is Bratislava"]
+  },
+  {
+    "id": 539,
+    "question": "Who is known as the 'Father of Immunology'?",
+    "answers": ["Edward Jenner", "The Father of Immunology is Edward Jenner"]
+  },
+  {
+    "id": 540,
+    "question": "What is the process by which plants take in carbon dioxide?",
+    "answers": ["Photosynthesis", "Plants take in CO2 during photosynthesis"]
+  },
+  {
+    "id": 542,
+    "question": "What is the chemical symbol for nickel?",
+    "answers": ["Ni", "The chemical symbol for nickel is Ni"]
+  },
+  {
+    "id": 543,
+    "question": "Which planet has a day longer than its year?",
+    "answers": ["Venus", "Venus has a day longer than its year"]
+  },
+  {
+    "id": 544,
+    "question": "What is the capital city of Libya?",
+    "answers": ["Tripoli", "The capital of Libya is Tripoli"]
+  },
+  {
+    "id": 545,
+    "question": "Who wrote 'Madame Bovary'?",
+    "answers": ["Gustave Flaubert", "'Madame Bovary' was written by Flaubert"]
+  },
+  {
+    "id": 546,
+    "question": "What is the SI unit of inductance?",
+    "answers": ["Henry", "The SI unit is the henry"]
+  },
+  {
+    "id": 547,
+    "question": "Which planet is known as the 'Gas Giant'?",
+    "answers": ["Jupiter", "Jupiter is a Gas Giant"]
+  },
+  {
+    "id": 548,
+    "question": "What is the capital city of Philippines?",
+    "answers": ["Manila", "The capital of the Philippines is Manila"]
+  },
+  {
+    "id": 549,
+    "question": "Who is known as the 'Father of Geometry'?",
+    "answers": ["Euclid", "The Father of Geometry is Euclid"]
+  },
+  {
+    "id": 550,
+    "question": "What is the term for the amount of space an object occupies?",
+    "answers": ["Volume", "The amount of space is called volume"]
+  }
+]
