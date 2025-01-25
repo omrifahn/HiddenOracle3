@@ -12,9 +12,7 @@ from config import OUTPUT_DIR, LOCAL_MODEL_NAME, DATASET_PATH, OPENAI_API_KEY
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 
-# ---------------------------------------------------------
 # 1. Load dataset
-# ---------------------------------------------------------
 def load_dataset(dataset_path: str) -> List[Dict[str, Any]]:
     """
     Loads the dataset from a JSON file.
@@ -24,9 +22,7 @@ def load_dataset(dataset_path: str) -> List[Dict[str, Any]]:
     return data
 
 
-# ---------------------------------------------------------
 # 2. Evaluation functions
-# ---------------------------------------------------------
 def evaluate_with_openai_api(
     question: str, local_llm_answer: str, correct_answers: List[str]
 ) -> Dict[str, Any]:
@@ -254,4 +250,4 @@ if __name__ == "__main__":
         print("--------------------------------------------------")
 
     # Note: Removed the code that saves results to an output file
-    print("Sanity check completed. Results were not saved to an output file.")
+    print("Sanity check completed.")
