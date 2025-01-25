@@ -45,7 +45,8 @@ def evaluate_with_openai_api(
     question: str, local_llm_answer: str, correct_answers: List[str]
 ) -> Dict[str, Any]:
     """
-    Calls the OpenAI ChatCompletion with the new function-calling style to evaluate the local LLM's response.
+    Calls the OpenAI ChatCompletion with the new function-calling style to evaluate
+    the local LLM's response.
     """
     client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -102,10 +103,7 @@ def evaluate_with_openai_api(
 
     if completion.choices[0].message.tool_calls:
         tool_call = completion.choices[0].message.tool_calls[0]
-        # Correctly access the tool_call details
-        arguments = json.loads(
-            tool_call.function.arguments
-        )  # Assuming .function.arguments is correct
+        arguments = json.loads(tool_call.function.arguments)
         return arguments
     else:
         return {"is_factual": False, "explanation": "No tool call was made."}
@@ -119,7 +117,9 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
     1. Loads the dataset.
     2. Initializes the local model.
     3. Generates an answer with the local LLM.
-    4. Uses OpenAI's function calling to judge correctness.
+    4. Uses either:
+       - Simple string matching to determine correctness, or
+       - OpenAI's function calling for deeper evaluation (if no match found).
     """
     # Load dataset
     dataset = load_dataset(dataset_path)
@@ -140,16 +140,29 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
 
         # 1) Generate answer from local LLM
         local_answer = get_local_llm_answer(question, generation_pipeline)
-        # local_answer = "im not sure about that"
 
-        # 2) Evaluate correctness via OpenAI function calling
-        result = evaluate_with_openai_api(
-            question=question,
-            local_llm_answer=local_answer,
-            correct_answers=correct_answers,
+        # 2) First do a simple string match check to see if the local LLM's answer
+        #    contains at least one of the known correct answers
+        #    (case-insensitive substring check).
+        matched = any(
+            ans.lower() in local_answer.lower() for ans in correct_answers
         )
 
-        # 3) Print results
+        # 3) If we have a match, skip calling the OpenAI API and record a successful result.
+        if matched:
+            result = {
+                "is_factual": True,
+                "explanation": "String match with known correct answers; no OpenAI call needed.",
+            }
+        else:
+            # 4) If no match, call the OpenAI function-calling API for a deeper check.
+            result = evaluate_with_openai_api(
+                question=question,
+                local_llm_answer=local_answer,
+                correct_answers=correct_answers,
+            )
+
+        # 5) Print results
         print("--------------------------------------------------")
         print(f"Question: {question}")
         print(f"Local LLM Answer: {local_answer}")
