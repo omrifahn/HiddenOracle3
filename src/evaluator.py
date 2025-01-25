@@ -3,6 +3,8 @@ import json
 import datetime
 from typing import List, Dict, Any
 
+import time  # Import the time module to measure runtime
+
 from openai import OpenAI
 from pydantic import BaseModel
 
@@ -124,7 +126,10 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
         correct_answers = item["answers"]
 
         # 1) Generate answer from local LLM
+        local_start_time = time.time()  # Start timing local LLM
         local_answer = get_local_llm_answer(question, generation_pipeline)
+        local_end_time = time.time()  # End timing local LLM
+        local_llm_runtime = local_end_time - local_start_time  # Calculate runtime
 
         # 2) First do a simple string match check to see if the local LLM's answer
         #    contains at least one of the known correct answers
@@ -137,13 +142,19 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
                 "is_factual": True,
                 "explanation": "String match with known correct answers; no OpenAI call needed.",
             }
+            openai_api_runtime = 0  # No OpenAI API call made
         else:
             # 4) If no match, call the OpenAI API with JSON Schema for deeper evaluation.
+            openai_start_time = time.time()  # Start timing OpenAI API call
             result = evaluate_with_openai_api(
                 question=question,
                 local_llm_answer=local_answer,
                 correct_answers=correct_answers,
             )
+            openai_end_time = time.time()  # End timing OpenAI API call
+            openai_api_runtime = (
+                openai_end_time - openai_start_time
+            )  # Calculate runtime
 
         # 5) Prepare result entry
         result_entry = {
@@ -152,6 +163,8 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
             "local_llm_answer": local_answer,
             "is_factual": result["is_factual"],
             "explanation": result["explanation"],
+            "local_llm_runtime": local_llm_runtime,
+            "openai_api_runtime": openai_api_runtime,
         }
 
         # Append to results
@@ -163,6 +176,9 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
         print(f"Local LLM Answer: {local_answer}")
         print(f"Is Factual: {result['is_factual']}")
         print(f"Explanation: {result['explanation']}")
+        print(f"Local LLM Runtime: {local_llm_runtime:.4f} seconds")
+        if openai_api_runtime > 0:
+            print(f"OpenAI API Runtime: {openai_api_runtime:.4f} seconds")
         print("--------------------------------------------------")
 
     # Save results to file
@@ -221,13 +237,19 @@ if __name__ == "__main__":
                 "is_factual": True,
                 "explanation": "String match with known correct answers; no OpenAI call needed.",
             }
+            openai_api_runtime = 0  # No OpenAI API call made
         else:
             # Call OpenAI API to evaluate
+            openai_start_time = time.time()  # Start timing OpenAI API call
             result = evaluate_with_openai_api(
                 question=question,
                 local_llm_answer=local_answer,
                 correct_answers=correct_answers,
             )
+            openai_end_time = time.time()  # End timing OpenAI API call
+            openai_api_runtime = (
+                openai_end_time - openai_start_time
+            )  # Calculate runtime
 
         # Prepare result entry
         result_entry = {
@@ -236,6 +258,7 @@ if __name__ == "__main__":
             "local_llm_answer": local_answer,
             "is_factual": result["is_factual"],
             "explanation": result["explanation"],
+            "openai_api_runtime": openai_api_runtime,
         }
 
         # Append to results
@@ -247,6 +270,8 @@ if __name__ == "__main__":
         print(f"Local LLM Answer: {local_answer}")
         print(f"Is Factual: {result['is_factual']}")
         print(f"Explanation: {result['explanation']}")
+        if openai_api_runtime > 0:
+            print(f"OpenAI API Runtime: {openai_api_runtime:.4f} seconds")
         print("--------------------------------------------------")
 
     # Note: Removed the code that saves results to an output file
