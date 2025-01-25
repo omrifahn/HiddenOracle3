@@ -11,6 +11,7 @@ from config import OUTPUT_DIR, LOCAL_MODEL_NAME, DATASET_PATH, OPENAI_API_KEY
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
+
 # ---------------------------------------------------------
 # 1. Load dataset
 # ---------------------------------------------------------
@@ -22,6 +23,7 @@ def load_dataset(dataset_path: str) -> List[Dict[str, Any]]:
         data = json.load(file)
     return data
 
+
 # ---------------------------------------------------------
 # 2. Evaluation functions
 # ---------------------------------------------------------
@@ -32,6 +34,7 @@ def evaluate_with_openai_api(
     Calls the OpenAI ChatCompletion with Structured Outputs using JSON Schema
     to evaluate the local LLM's response.
     """
+
     class EvaluationResult(BaseModel):
         is_factual: bool
         explanation: str
@@ -42,11 +45,11 @@ def evaluate_with_openai_api(
         "properties": {
             "is_factual": {
                 "type": "boolean",
-                "description": "Indicates whether the local LLM's answer is factual."
+                "description": "Indicates whether the local LLM's answer is factual.",
             },
             "explanation": {
                 "type": "string",
-                "description": "Explanation detailing the evaluation."
+                "description": "Explanation detailing the evaluation.",
             },
         },
         "required": ["is_factual", "explanation"],
@@ -96,8 +99,9 @@ def evaluate_with_openai_api(
     except json.JSONDecodeError as e:
         return {
             "is_factual": False,
-            "explanation": f"Failed to parse response as JSON: {e}\nResponse: {assistant_message}"
+            "explanation": f"Failed to parse response as JSON: {e}\nResponse: {assistant_message}",
         }
+
 
 def evaluate_model(dataset_path: str, local_model_name: str) -> None:
     """
@@ -129,9 +133,7 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
         # 2) First do a simple string match check to see if the local LLM's answer
         #    contains at least one of the known correct answers
         #    (case-insensitive substring check).
-        matched = any(
-            ans.lower() in local_answer.lower() for ans in correct_answers
-        )
+        matched = any(ans.lower() in local_answer.lower() for ans in correct_answers)
 
         # 3) If we have a match, skip calling the OpenAI API and record a successful result.
         if matched:
@@ -145,7 +147,7 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
                 question=question,
                 local_llm_answer=local_answer,
                 correct_answers=correct_answers,
-            )   
+            )
 
         # 5) Prepare result entry
         result_entry = {
@@ -179,6 +181,7 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
 
     print(f"Results saved to {output_path}")
 
+
 # ---------------------------------------------------------
 # __main__ sanity check
 # ---------------------------------------------------------
@@ -191,17 +194,17 @@ if __name__ == "__main__":
         {
             "question": "What is the capital of France?",
             "answers": ["Paris"],
-            "local_llm_answer": "Paris"  # This should match via string match
+            "local_llm_answer": "Paris",  # This should match via string match
         },
         {
             "question": "Who wrote '1984'?",
             "answers": ["George Orwell"],
-            "local_llm_answer": "It was written in 1949."  # Incorrect answer, requires OpenAI evaluation
+            "local_llm_answer": "It was written in 1949.",  # Incorrect answer, requires OpenAI evaluation
         },
         {
             "question": "What is the tallest mountain in the world?",
             "answers": ["Mount Everest"],
-            "local_llm_answer": "The tallest mountain is K2."  # Incorrect, requires OpenAI evaluation
+            "local_llm_answer": "The tallest mountain is K2.",  # Incorrect, requires OpenAI evaluation
         },
     ]
 
@@ -215,9 +218,7 @@ if __name__ == "__main__":
         local_answer = item["local_llm_answer"]
 
         # Check for string match
-        matched = any(
-            ans.lower() in local_answer.lower() for ans in correct_answers
-        )
+        matched = any(ans.lower() in local_answer.lower() for ans in correct_answers)
 
         if matched:
             result = {
@@ -252,14 +253,5 @@ if __name__ == "__main__":
         print(f"Explanation: {result['explanation']}")
         print("--------------------------------------------------")
 
-    # Optionally, save results to output directory
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_filename = f"sanity_check_results_{timestamp}.json"
-    output_path = os.path.join(OUTPUT_DIR, output_filename)
-
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(results, f, ensure_ascii=False, indent=4)
-
-    print(f"Sanity check results saved to {output_path}")
+    # Note: Removed the code that saves results to an output file
+    print("Sanity check completed. Results were not saved to an output file.")

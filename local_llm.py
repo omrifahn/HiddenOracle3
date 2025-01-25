@@ -2,13 +2,13 @@ import os
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from config import HUGGINGFACE_TOKEN, LOCAL_MODEL_NAME
 
+
 def load_local_model(local_model_name: str):
     """
     Loads the local LLM and returns a text generation pipeline.
     """
     tokenizer = AutoTokenizer.from_pretrained(
-        local_model_name,
-        use_auth_token=HUGGINGFACE_TOKEN
+        local_model_name, use_auth_token=HUGGINGFACE_TOKEN
     )
     model = AutoModelForCausalLM.from_pretrained(
         local_model_name,
@@ -18,6 +18,7 @@ def load_local_model(local_model_name: str):
     )
     generation_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
     return generation_pipeline
+
 
 def get_local_llm_answer(question: str, generation_pipeline) -> str:
     """
@@ -30,11 +31,12 @@ def get_local_llm_answer(question: str, generation_pipeline) -> str:
 
     # Optionally trim out the prompt if it's included in the output
     if generated_text.startswith(question):
-        answer = generated_text[len(question):].strip()
+        answer = generated_text[len(question) :].strip()
     else:
         answer = generated_text.strip()
 
     return answer
+
 
 # ---------------------------------------------------------
 # __main__ sanity check
