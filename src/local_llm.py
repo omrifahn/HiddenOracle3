@@ -1,21 +1,67 @@
 import os
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
-from config import HUGGINGFACE_TOKEN, LOCAL_MODEL_NAME
+from config import (
+    HUGGINGFACE_TOKEN,
+    LOCAL_MODEL_NAME,
+    LOCAL_MODEL_DIR,
+    USE_LOCAL_MODEL_STORAGE,
+)
 
 
 def load_local_model(local_model_name: str):
     """
     Loads the local LLM and returns a text generation pipeline.
+    If USE_LOCAL_MODEL_STORAGE is True and the model is already downloaded in LOCAL_MODEL_DIR, it loads from storage.
+    Otherwise, it downloads the model and saves it locally to save internet downloads in the future.
     """
-    tokenizer = AutoTokenizer.from_pretrained(
-        local_model_name, use_auth_token=HUGGINGFACE_TOKEN
-    )
-    model = AutoModelForCausalLM.from_pretrained(
-        local_model_name,
-        device_map="auto",
-        low_cpu_mem_usage=True,
-        use_auth_token=HUGGINGFACE_TOKEN,
-    )
+    if USE_LOCAL_MODEL_STORAGE:
+        # Replace slashes in model name to create a valid directory name
+        model_dir_name = local_model_name.replace("/", "_")
+        model_path = os.path.join(LOCAL_MODEL_DIR, model_dir_name)
+
+        if not os.path.exists(model_path):
+            os.makedirs(model_path, exist_ok=True)
+            print(
+                f"Model not found locally. Downloading '{local_model_name}' to '{model_path}'..."
+            )
+            tokenizer = AutoTokenizer.from_pretrained(
+                local_model_name, use_auth_token=HUGGINGFACE_TOKEN, cache_dir=model_path
+            )
+            model = AutoModelForCausalLM.from_pretrained(
+                local_model_name,
+                device_map="auto",
+                low_cpu_mem_usage=True,
+                use_auth_token=HUGGINGFACE_TOKEN,
+                cache_dir=model_path,
+            )
+            print(f"Model '{local_model_name}' downloaded and saved locally.")
+        else:
+            print(f"Loading model from local path '{model_path}'...")
+            tokenizer = AutoTokenizer.from_pretrained(
+                model_path,
+                use_auth_token=HUGGINGFACE_TOKEN,
+            )
+            model = AutoModelForCausalLM.from_pretrained(
+                model_path,
+                device_map="auto",
+                low_cpu_mem_usage=True,
+                use_auth_token=HUGGINGFACE_TOKEN,
+            )
+            print(f"Model '{local_model_name}' loaded from local storage.")
+    else:
+        print(f"Downloading model '{local_model_name}' without using local storage...")
+        tokenizer = AutoTokenizer.from_pretrained(
+            local_model_name,
+            use_auth_token=HUGGINGFACE_TOKEN,
+        )
+        model = AutoModelForCausalLM.from_pretrained(
+            local_model_name,
+            device_map="auto",
+            low_cpu_mem_usage=True,
+            use_auth_token=HUGGINGFACE_TOKEN,
+        )
+        print(f"Model '{local_model_name}' downloaded.")
+
     generation_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
     return generation_pipeline
 
