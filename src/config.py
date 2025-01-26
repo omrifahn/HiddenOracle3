@@ -1,5 +1,8 @@
 import os
-from credentials import HUGGINGFACE_TOKEN, OPENAI_API_KEY
+from credentials import (
+    HUGGINGFACE_TOKEN,
+    OPENAI_API_KEY,
+)  # we want to import those tokens through config.py so credentials.py is not exposed to the public
 
 DATASET_PATH = "./data/500_question_answers"
 OUTPUT_DIR = "./output"
