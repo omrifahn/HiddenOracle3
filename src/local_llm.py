@@ -10,9 +10,11 @@ from config import (
 
 def load_local_model(local_model_name: str):
     """
-    Loads the local LLM and returns a text generation pipeline.
-    If USE_LOCAL_MODEL_STORAGE is True and the model is already downloaded in LOCAL_MODEL_DIR, it loads from storage.
-    Otherwise, it downloads the model and saves it locally to save internet downloads in the future.
+    Loads the local LLM and returns a text generation pipeline, as well as
+    the raw model and tokenizer (needed to extract hidden states).
+    If USE_LOCAL_MODEL_STORAGE is True and the model is already downloaded
+    in LOCAL_MODEL_DIR, it loads from storage. Otherwise, it downloads the
+    model and saves it locally to save internet downloads in the future.
     """
     if USE_LOCAL_MODEL_STORAGE:
         # Replace slashes in model name to create a valid directory name
@@ -33,37 +35,38 @@ def load_local_model(local_model_name: str):
                 low_cpu_mem_usage=True,
                 use_auth_token=HUGGINGFACE_TOKEN,
                 cache_dir=model_path,
+                output_hidden_states=True,  # <-- NEW: important for classifier
             )
             print(f"Model '{local_model_name}' downloaded and saved locally.")
         else:
             print(f"Loading model from local path '{model_path}'...")
             tokenizer = AutoTokenizer.from_pretrained(
-                model_path,
-                use_auth_token=HUGGINGFACE_TOKEN,
+                model_path, use_auth_token=HUGGINGFACE_TOKEN
             )
             model = AutoModelForCausalLM.from_pretrained(
                 model_path,
                 device_map="auto",
                 low_cpu_mem_usage=True,
                 use_auth_token=HUGGINGFACE_TOKEN,
+                output_hidden_states=True,  # <-- NEW: important for classifier
             )
             print(f"Model '{local_model_name}' loaded from local storage.")
     else:
         print(f"Downloading model '{local_model_name}' without using local storage...")
         tokenizer = AutoTokenizer.from_pretrained(
-            local_model_name,
-            use_auth_token=HUGGINGFACE_TOKEN,
+            local_model_name, use_auth_token=HUGGINGFACE_TOKEN
         )
         model = AutoModelForCausalLM.from_pretrained(
             local_model_name,
             device_map="auto",
             low_cpu_mem_usage=True,
             use_auth_token=HUGGINGFACE_TOKEN,
+            output_hidden_states=True,  # <-- NEW: important for classifier
         )
         print(f"Model '{local_model_name}' downloaded.")
 
     generation_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
-    return generation_pipeline
+    return generation_pipeline, model, tokenizer
 
 
 def get_local_llm_answer(question: str, generation_pipeline) -> str:
@@ -75,7 +78,6 @@ def get_local_llm_answer(question: str, generation_pipeline) -> str:
     )
     generated_text = results[0]["generated_text"]
 
-    # Optionally trim out the prompt if it's included in the output
     if generated_text.startswith(question):
         answer = generated_text[len(question) :].strip()
     else:
@@ -84,19 +86,43 @@ def get_local_llm_answer(question: str, generation_pipeline) -> str:
     return answer
 
 
+def get_local_llm_hidden_states(question: str, tokenizer, model, layer_index=20):
+    """
+    Returns the hidden states of the given layer_index for the input question.
+    By default, extracts layer 20 of the Llama model.
+
+    :param question: The input text to encode.
+    :param tokenizer: Tokenizer associated with the model.
+    :param model: The Llama (or any HF) model with output_hidden_states=True.
+    :param layer_index: The hidden layer index to return (0-based).
+    :return: A torch.Tensor of shape (batch_size, seq_len, hidden_size).
+    """
+    # Tokenize the input
+    inputs = tokenizer(question, return_tensors="pt")
+    # Forward pass to get hidden states
+    outputs = model(**inputs)
+    # `hidden_states` is a tuple of length [n_layers + 1], each of shape (batch_size, seq_len, hidden_dim)
+    # layer_index=0 corresponds to the embeddings, so typically "layer 20" is hidden_states[20]
+    hidden_states = outputs.hidden_states[layer_index]
+    return hidden_states
+
+
 # ---------------------------------------------------------
 # __main__ sanity check
 # ---------------------------------------------------------
 if __name__ == "__main__":
-    # Sample question for sanity check
     sample_question = "What is the capital of France?"
-
-    # Load the local model
     print("Loading local model...")
-    generation_pipeline = load_local_model(LOCAL_MODEL_NAME)
+    generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
     print("Local model loaded.")
 
-    # Generate an answer
+    # Test text generation
     print(f"Running sanity check with question: '{sample_question}'")
     local_answer = get_local_llm_answer(sample_question, generation_pipeline)
     print(f"Local LLM Answer: {local_answer}")
+
+    # Test hidden state extraction
+    layer_20_states = get_local_llm_hidden_states(
+        sample_question, tokenizer, model, layer_index=20
+    )
+    print(f"Hidden States (Layer 20) shape: {layer_20_states.shape}")
