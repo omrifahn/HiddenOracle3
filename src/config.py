@@ -11,4 +11,10 @@ LOCAL_MODEL_NAME = "meta-llama/Llama-2-7b-hf"
 LOCAL_MODEL_DIR = "./src/models"  # Directory to save/load the local model
 USE_LOCAL_MODEL_STORAGE = True  # Flag to control local model storage
 
-DATA_LIMIT = 100  # Maximum number of dataset items to process
+DATA_LIMIT = 3  # Maximum number of dataset items to process
+
+
+
+# TODO restruct and put get back main.py to work
+# TODO compare with prev project and improve the config.py file
+# TODO mske sure we have closed clean interface  for the 4 options - good green, bad green, bad red, good red
