@@ -5,13 +5,13 @@ from typing import List, Dict, Any
 
 import time
 
-from openai import OpenAI
+from openai import OpenAI # new sytax to import open api versions 1.0.0+
 from pydantic import BaseModel
 
 from local_llm import load_local_model, get_local_llm_answer
 from config import OUTPUT_DIR, LOCAL_MODEL_NAME, DATASET_PATH, OPENAI_API_KEY, DATA_LIMIT
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+client = OpenAI(api_key=OPENAI_API_KEY) # new sytax for open api versions 1.0.0+
 
 
 # 1. Load dataset
