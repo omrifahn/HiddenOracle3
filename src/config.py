@@ -1,4 +1,3 @@
-import os
 from credentials import (
     HUGGINGFACE_TOKEN,
     OPENAI_API_KEY,
