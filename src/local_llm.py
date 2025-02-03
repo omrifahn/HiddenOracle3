@@ -1,4 +1,6 @@
 import os
+import sys
+import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from config import (
     HUGGINGFACE_TOKEN,
@@ -7,15 +9,27 @@ from config import (
     USE_LOCAL_MODEL_STORAGE,
 )
 
+# Function to detect if running on Colab
+def is_running_on_colab():
+    return 'google.colab' in sys.modules
+
+# Function to mount Google Drive
+def mount_google_drive():
+    from google.colab import drive
+    drive.mount('/content/drive')
+
 def load_local_model(local_model_name: str):
     """
     Loads the local LLM and returns a text generation pipeline, as well as
-    the raw model and tokenizer (needed to extract hidden states).
-    If USE_LOCAL_MODEL_STORAGE is True and the model is already downloaded
-    in LOCAL_MODEL_DIR, it loads from storage. Otherwise, it downloads the
-    model and saves it locally to save internet downloads in the future.
+    the raw model and tokenizer.
     """
     if USE_LOCAL_MODEL_STORAGE:
+        # If running on Colab, mount Google Drive
+        if is_running_on_colab():
+            print("Running on Google Colab. Mounting Google Drive...")
+            mount_google_drive()
+            print("Google Drive mounted.")
+
         # Replace slashes in model name to create a valid directory name
         model_dir_name = local_model_name.replace("/", "_")
         model_path = os.path.join(LOCAL_MODEL_DIR, model_dir_name)
@@ -31,7 +45,7 @@ def load_local_model(local_model_name: str):
             model = AutoModelForCausalLM.from_pretrained(
                 local_model_name,
                 device_map="auto",
-                low_cpu_mem_usage=True,
+                torch_dtype=torch.float16,
                 use_auth_token=HUGGINGFACE_TOKEN,
                 output_hidden_states=True,
             )
@@ -43,14 +57,14 @@ def load_local_model(local_model_name: str):
             # Model exists locally. Load it without authentication.
             print(f"Loading model from local path '{model_path}'...")
             tokenizer = AutoTokenizer.from_pretrained(
-                model_path, local_files_only=True  # Ensure loading from local files
+                model_path, local_files_only=True
             )
             model = AutoModelForCausalLM.from_pretrained(
                 model_path,
                 device_map="auto",
-                low_cpu_mem_usage=True,
+                torch_dtype=torch.float16,
                 output_hidden_states=True,
-                local_files_only=True,  # Ensure loading from local files
+                local_files_only=True,
             )
             print(f"Model '{local_model_name}' loaded from local storage.")
     else:
@@ -62,13 +76,16 @@ def load_local_model(local_model_name: str):
         model = AutoModelForCausalLM.from_pretrained(
             local_model_name,
             device_map="auto",
-            low_cpu_mem_usage=True,
+            torch_dtype=torch.float16,
             use_auth_token=HUGGINGFACE_TOKEN,
             output_hidden_states=True,
         )
         print(f"Model '{local_model_name}' downloaded.")
 
-    generation_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
+    # Set up the generation pipeline without specifying the device
+    generation_pipeline = pipeline(
+        "text-generation", model=model, tokenizer=tokenizer
+    )
     return generation_pipeline, model, tokenizer
 
 
@@ -82,7 +99,7 @@ def get_local_llm_answer(question: str, generation_pipeline) -> str:
     generated_text = results[0]["generated_text"]
 
     if generated_text.startswith(question):
-        answer = generated_text[len(question) :].strip()
+        answer = generated_text[len(question):].strip()
     else:
         answer = generated_text.strip()
 
@@ -92,40 +109,19 @@ def get_local_llm_answer(question: str, generation_pipeline) -> str:
 def get_local_llm_hidden_states(question: str, tokenizer, model, layer_index=20):
     """
     Returns the hidden states of the given layer_index for the input question.
-    By default, extracts layer 20 of the Llama model.
-
-    :param question: The input text to encode.
-    :param tokenizer: Tokenizer associated with the model.
-    :param model: The Llama (or any HF) model with output_hidden_states=True.
-    :param layer_index: The hidden layer index to return (0-based).
-    :return: A torch.Tensor of shape (batch_size, seq_len, hidden_size).
     """
     # Tokenize the input
     inputs = tokenizer(question, return_tensors="pt")
+    # Move inputs to the appropriate device
+    if hasattr(model, 'hf_device_map'):
+        # Get the device where the embeddings are placed
+        embedding_device = next(iter(model.hf_device_map.values()))
+        inputs = {key: value.to(embedding_device) for key, value in inputs.items()}
+    else:
+        device = next(model.parameters()).device
+        inputs = {key: value.to(device) for key, value in inputs.items()}
+
     # Forward pass to get hidden states
     outputs = model(**inputs)
-    # `hidden_states` is a tuple of length [n_layers + 1], each of shape (batch_size, seq_len, hidden_dim)
-    # layer_index=0 corresponds to the embeddings, so typically "layer 20" is hidden_states[20]
     hidden_states = outputs.hidden_states[layer_index]
     return hidden_states
-
-
-# ---------------------------------------------------------
-# __main__ sanity check
-# ---------------------------------------------------------
-if __name__ == "__main__":
-    sample_question = "What is the capital of France?"
-    print("Loading local model...")
-    generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
-    print("Local model loaded.")
-
-    # Test text generation
-    print(f"Running sanity check with question: '{sample_question}'")
-    local_answer = get_local_llm_answer(sample_question, generation_pipeline)
-    print(f"Local LLM Answer: {local_answer}")
-
-    # Test hidden state extraction
-    layer_20_states = get_local_llm_hidden_states(
-        sample_question, tokenizer, model, layer_index=20
-    )
-    print(f"Hidden States (Layer 20) shape: {layer_20_states.shape}")

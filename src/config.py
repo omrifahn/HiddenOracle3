@@ -1,3 +1,4 @@
+import sys
 from credentials import (
     HUGGINGFACE_TOKEN,
     OPENAI_API_KEY,
@@ -7,13 +8,17 @@ DATASET_PATH = "./data/500_question_answers.json"
 OUTPUT_DIR = "./output"
 
 LOCAL_MODEL_NAME = "meta-llama/Llama-2-7b-hf"
-LOCAL_MODEL_DIR = "../models"  # Directory to save/load the local model
+
+def is_running_on_colab():
+    return 'google.colab' in sys.modules
+
+if is_running_on_colab():
+    # Path in Google Drive
+    LOCAL_MODEL_DIR = "/content/drive/MyDrive/HiddenOracle3/models"
+else:
+    # Local path on your machine
+    LOCAL_MODEL_DIR = "../models"
+
 USE_LOCAL_MODEL_STORAGE = True  # Flag to control local model storage
 
-DATA_LIMIT = 3  # Maximum number of dataset items to process
-
-
-
-# TODO restruct and put get back main.py to work
-# TODO compare with prev project and improve the config.py file
-# TODO mske sure we have closed clean interface  for the 4 options - good green, bad green, bad red, good red
+DATA_LIMIT = 3  # Maximum number of dataset items to process (set to None to process all)
