@@ -7,7 +7,6 @@ from config import (
     USE_LOCAL_MODEL_STORAGE,
 )
 
-
 def load_local_model(local_model_name: str):
     """
     Loads the local LLM and returns a text generation pipeline, as well as
@@ -27,31 +26,35 @@ def load_local_model(local_model_name: str):
                 f"Model not found locally. Downloading '{local_model_name}' to '{model_path}'..."
             )
             tokenizer = AutoTokenizer.from_pretrained(
-                local_model_name, use_auth_token=HUGGINGFACE_TOKEN, cache_dir=model_path
+                local_model_name, use_auth_token=HUGGINGFACE_TOKEN
             )
             model = AutoModelForCausalLM.from_pretrained(
                 local_model_name,
                 device_map="auto",
                 low_cpu_mem_usage=True,
                 use_auth_token=HUGGINGFACE_TOKEN,
-                cache_dir=model_path,
-                output_hidden_states=True,  # <-- NEW: important for classifier
+                output_hidden_states=True,
             )
-            print(f"Model '{local_model_name}' downloaded and saved locally.")
+            # Save the model and tokenizer to the local directory
+            tokenizer.save_pretrained(model_path)
+            model.save_pretrained(model_path)
+            print(f"Model '{local_model_name}' downloaded and saved to '{model_path}'.")
         else:
+            # Model exists locally. Load it without authentication.
             print(f"Loading model from local path '{model_path}'...")
             tokenizer = AutoTokenizer.from_pretrained(
-                model_path, use_auth_token=HUGGINGFACE_TOKEN
+                model_path, local_files_only=True  # Ensure loading from local files
             )
             model = AutoModelForCausalLM.from_pretrained(
                 model_path,
                 device_map="auto",
                 low_cpu_mem_usage=True,
-                use_auth_token=HUGGINGFACE_TOKEN,
-                output_hidden_states=True,  # <-- NEW: important for classifier
+                output_hidden_states=True,
+                local_files_only=True,  # Ensure loading from local files
             )
             print(f"Model '{local_model_name}' loaded from local storage.")
     else:
+        # Download model without using local storage
         print(f"Downloading model '{local_model_name}' without using local storage...")
         tokenizer = AutoTokenizer.from_pretrained(
             local_model_name, use_auth_token=HUGGINGFACE_TOKEN
@@ -61,7 +64,7 @@ def load_local_model(local_model_name: str):
             device_map="auto",
             low_cpu_mem_usage=True,
             use_auth_token=HUGGINGFACE_TOKEN,
-            output_hidden_states=True,  # <-- NEW: important for classifier
+            output_hidden_states=True,
         )
         print(f"Model '{local_model_name}' downloaded.")
 
