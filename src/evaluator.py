@@ -131,7 +131,7 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
         print(f"Processing all {data_limit} items from the dataset.")
 
     # Initialize local model pipeline
-    generation_pipeline = load_local_model(local_model_name)
+    generation_pipeline, model, tokenizer = load_local_model(local_model_name)
 
     # Prepare results list
     results = []
@@ -193,8 +193,7 @@ def evaluate_model(dataset_path: str, local_model_name: str) -> None:
         print(f"Is Factual: {result['is_factual']}")
         print(f"Explanation: {result['explanation']}")
         print(f"Local LLM Runtime: {local_llm_runtime:.4f} seconds")
-        if openai_api_runtime > 0:
-            print(f"OpenAI API Runtime: {openai_api_runtime:.4f} seconds")
+        print(f"OpenAI API Runtime: {openai_api_runtime:.4f} seconds")
         print("--------------------------------------------------")
 
     # Save results to file
