@@ -217,3 +217,12 @@ if __name__ == "__main__":
 
     # Evaluate classifier
     results = evaluate_classifier(classifier, test_loader)
+
+
+
+# # colab commands:
+# !unzip -q src.zip -d HiddenOracle3
+
+# %cd HiddenOracle3/src
+
+# !python main.py
