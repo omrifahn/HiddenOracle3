@@ -1,6 +1,10 @@
 from config import DATASET_PATH, LOCAL_MODEL_NAME, DATA_LIMIT
 from evaluator import evaluate_with_openai_api
-from local_llm import load_local_model, get_local_llm_answer, get_local_llm_hidden_states
+from local_llm import (
+    load_local_model,
+    get_local_llm_answer,
+    get_local_llm_hidden_states,
+)
 from hallucination_classifier import SimpleLinearClassifier
 
 import torch
@@ -32,6 +36,7 @@ class LLMHiddenStateDataset(Dataset):
     PyTorch Dataset that provides LLM hidden states and labels.
     Computes data on-the-fly to manage memory usage and avoid device issues.
     """
+
     def __init__(self, samples, model, tokenizer, generation_pipeline, layer_index=20):
         self.samples = samples
         self.model = model
@@ -135,10 +140,14 @@ def evaluate_classifier(classifier, test_loader):
             correct += (predicted == labels).sum().item()
 
             for idx in range(labels.size(0)):
-                results.append({
-                    "llm_is_factual": labels[idx].item() == 0,  # True if label is 0 (factual)
-                    "classifier_pred_is_factual": predicted[idx].item() == 0,  # True if pred is 0
-                })
+                results.append(
+                    {
+                        "llm_is_factual": labels[idx].item()
+                        == 0,  # True if label is 0 (factual)
+                        "classifier_pred_is_factual": predicted[idx].item()
+                        == 0,  # True if pred is 0
+                    }
+                )
 
     accuracy = 100 * correct / total
     print(f"Classifier Accuracy on Test Set: {accuracy:.2f}%")
@@ -189,7 +198,7 @@ if __name__ == "__main__":
         model=model,
         tokenizer=tokenizer,
         generation_pipeline=generation_pipeline,
-        layer_index=20
+        layer_index=20,
     )
 
     # Split into training and testing datasets (80% train, 20% test)
@@ -197,8 +206,7 @@ if __name__ == "__main__":
     train_size = int(0.8 * total_size)
     test_size = total_size - train_size
     train_dataset, test_dataset = random_split(
-        data, [train_size, test_size],
-        generator=torch.Generator().manual_seed(seed)
+        data, [train_size, test_size], generator=torch.Generator().manual_seed(seed)
     )
 
     # Create DataLoaders
@@ -217,7 +225,6 @@ if __name__ == "__main__":
 
     # Evaluate classifier
     results = evaluate_classifier(classifier, test_loader)
-
 
 
 # # colab commands:

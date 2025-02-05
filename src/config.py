@@ -9,8 +9,10 @@ OUTPUT_DIR = "./output"
 
 LOCAL_MODEL_NAME = "meta-llama/Llama-2-7b-hf"
 
+
 def is_running_on_colab():
-    return 'google.colab' in sys.modules
+    return "google.colab" in sys.modules
+
 
 if is_running_on_colab():
     # Path in Google Drive
@@ -21,4 +23,6 @@ else:
 
 USE_LOCAL_MODEL_STORAGE = True  # Flag to control local model storage
 
-DATA_LIMIT = 3  # Maximum number of dataset items to process (set to None to process all)
+DATA_LIMIT = (
+    3  # Maximum number of dataset items to process (set to None to process all)
+)

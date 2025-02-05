@@ -1,12 +1,12 @@
 import json
 from typing import List, Dict, Any
 
-from openai import OpenAI # new sytax to import open api versions 1.0.0+
+from openai import OpenAI  # new sytax to import open api versions 1.0.0+
 from pydantic import BaseModel
 
 from config import OPENAI_API_KEY
 
-client = OpenAI(api_key=OPENAI_API_KEY) # new sytax for open api versions 1.0.0+
+client = OpenAI(api_key=OPENAI_API_KEY)  # new sytax for open api versions 1.0.0+
 
 
 def evaluate_with_openai_api(
