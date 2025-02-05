@@ -30,3 +30,7 @@ DEFAULT_DATA_LIMIT = 5
 
 
 # TODO OMRI - connect to harder Q&A dataset (because currently, llama 90% right)
+# TODO OMRI:
+    # You’re correct: there’s no inherent reason you must run the LLM again and again in each training epoch. If you only want to train a classifier on top of precomputed hidden states, simply do one pass to gather them, then train.
+    # The code as written is just a “lazy” approach that computes everything on-demand in __getitem__. You can switch to a cache-first approach to avoid multiple passes on the LLM.
+
