@@ -1,4 +1,5 @@
-from config import DATASET_PATH, LOCAL_MODEL_NAME, DATA_LIMIT
+import sys
+from config import DATASET_PATH, LOCAL_MODEL_NAME, DEFAULT_DATA_LIMIT
 from evaluator import evaluate_with_openai_api
 from local_llm import (
     load_local_model,
@@ -184,8 +185,23 @@ if __name__ == "__main__":
     random.seed(seed)
     np.random.seed(seed)
 
-    # Load dataset
-    dataset = load_dataset(DATASET_PATH, DATA_LIMIT)
+    data_limit = DEFAULT_DATA_LIMIT
+
+    # Override data_limit if provided as command-line argument
+    if len(sys.argv) > 1:
+        arg1 = sys.argv[1]
+        if arg1.lower() == "none":
+            data_limit = None
+        else:
+            try:
+                data_limit = int(arg1)
+            except ValueError:
+                print(
+                    f"Invalid data_limit '{arg1}' provided. Using default value {data_limit}."
+                )
+
+    # Load dataset with specified data limit
+    dataset = load_dataset(DATASET_PATH, data_limit)
 
     # Load local LLM model
     print("Loading local model...")

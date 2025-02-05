@@ -23,6 +23,5 @@ else:
 
 USE_LOCAL_MODEL_STORAGE = True  # Flag to control local model storage
 
-DATA_LIMIT = (
-    3  # Maximum number of dataset items to process (set to None to process all)
-)
+# Set default DATA_LIMIT here
+DEFAULT_DATA_LIMIT = 5
