@@ -98,7 +98,7 @@ def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
         "You are a helpful assistant. Provide a single short factual answer. "
         "Do not continue the conversation or ask follow-up questions."
     )
-    
+
     # Format the prompt per Llama 2 Chat guidelines
     prompt = f"""[INST] <<SYS>>
 {system_prompt}
