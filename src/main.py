@@ -1,4 +1,16 @@
 import sys
+import json
+import time
+import random
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader, random_split
+from typing import List, Dict, Any
+import os
+
+# Import your config flags/paths
 from config import (
     DATASET_PATH,
     LOCAL_MODEL_NAME,
@@ -13,18 +25,6 @@ from local_llm import (
     get_local_llm_hidden_states,
 )
 from hallucination_classifier import SimpleLinearClassifier
-
-import torch
-import torch.nn as nn
-import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader, random_split
-
-import os
-import json
-import time
-from typing import List, Dict, Any
-import random
-import numpy as np
 
 
 def load_dataset(dataset_path: str, data_limit: int = None) -> List[Dict[str, Any]]:
@@ -44,13 +44,12 @@ class LLMHiddenStateDataset(Dataset):
     Computes data on-the-fly to manage memory usage and avoid device issues.
     """
 
-    def __init__(self, samples, model, tokenizer, generation_pipeline, layer_index=20):
+    def __init__(self, samples, model, tokenizer, layer_index=20):
         self.samples = samples
         self.model = model
         self.tokenizer = tokenizer
-        self.generation_pipeline = generation_pipeline
         self.layer_index = layer_index
-        self.result_data = []  # New list to store detailed results
+        self.result_data = []  # Stores detailed results for logging/output
 
     def __len__(self):
         return len(self.samples)
@@ -61,10 +60,9 @@ class LLMHiddenStateDataset(Dataset):
         correct_answers = item["answers"]
 
         # Get local LLM answer
-        local_answer = get_local_llm_answer(question, self.generation_pipeline)
+        local_answer = get_local_llm_answer(question, self.model, self.tokenizer)
 
-        # Determine if LLM's answer is factual
-        # First, try simple string match
+        # Check if LLM answer is factual by simple string match
         matched = any(ans.lower() in local_answer.lower() for ans in correct_answers)
 
         if matched:
@@ -82,10 +80,10 @@ class LLMHiddenStateDataset(Dataset):
                 explanation = result.get("explanation", "")
             except Exception as e:
                 print(f"Error during OpenAI API call: {e}")
-                is_factual = False  # Default to not factual if API call fails
+                is_factual = False
                 explanation = f"API error: {e}"
 
-        # Prepare the detailed result entry
+        # Prepare the result entry
         result_entry = {
             "question": question,
             "answers": correct_answers,
@@ -108,7 +106,7 @@ class LLMHiddenStateDataset(Dataset):
         # Take last token's hidden state and flatten
         hidden_vector = hidden_state[:, -1, :].squeeze(0)  # shape (hidden_dim,)
 
-        # Create label tensor
+        # Create label tensor (0 -> factual, 1 -> hallucinating)
         label = torch.tensor(0 if is_factual else 1, dtype=torch.long)
 
         return hidden_vector, label
@@ -129,7 +127,7 @@ def train_classifier(train_loader, input_dim, num_epochs=3, learning_rate=1e-4):
     for epoch in range(num_epochs):
         epoch_loss = 0.0
         for features, labels in train_loader:
-            features = features.to(device).float()  # Convert features to float32
+            features = features.to(device).float()
             labels = labels.to(device)
 
             optimizer.zero_grad()
@@ -158,7 +156,7 @@ def evaluate_classifier(classifier, test_loader):
 
     with torch.no_grad():
         for features, labels in test_loader:
-            features = features.to(device).float()  # Convert features to float32
+            features = features.to(device).float()
             labels = labels.to(device)
 
             logits = classifier(features)
@@ -169,30 +167,27 @@ def evaluate_classifier(classifier, test_loader):
             for idx in range(labels.size(0)):
                 results.append(
                     {
-                        "llm_is_factual": labels[idx].item()
-                        == 0,  # True if label is 0 (factual)
-                        "classifier_pred_is_factual": predicted[idx].item()
-                        == 0,  # True if pred is 0
+                        "llm_is_factual": (labels[idx].item() == 0),
+                        "classifier_pred_is_factual": (predicted[idx].item() == 0),
                     }
                 )
 
     accuracy = 100 * correct / total
+    print("\n\n ----------------------- \n\n")
     print(f"Classifier Accuracy on Test Set: {accuracy:.2f}%")
 
-    # Count occurrences in four categories
+    # Summarize in four categories
     categories = {"Good Green": 0, "Bad Green": 0, "Bad Red": 0, "Good Red": 0}
-
     for res in results:
-        llm_is_factual = res["llm_is_factual"]
-        classifier_pred_is_factual = res["classifier_pred_is_factual"]
-
-        if llm_is_factual and classifier_pred_is_factual:
+        llm_fact = res["llm_is_factual"]
+        pred_fact = res["classifier_pred_is_factual"]
+        if llm_fact and pred_fact:
             categories["Good Green"] += 1
-        elif not llm_is_factual and classifier_pred_is_factual:
+        elif not llm_fact and pred_fact:
             categories["Bad Green"] += 1
-        elif llm_is_factual and not classifier_pred_is_factual:
+        elif llm_fact and not pred_fact:
             categories["Bad Red"] += 1
-        elif not llm_is_factual and not classifier_pred_is_factual:
+        else:
             categories["Good Red"] += 1
 
     print("Evaluation Results:")
@@ -203,7 +198,7 @@ def evaluate_classifier(classifier, test_loader):
 
 
 if __name__ == "__main__":
-    # Set random seeds for reproducibility
+    # Seed everything for reproducibility
     seed = 42
     torch.manual_seed(seed)
     if torch.cuda.is_available():
@@ -213,7 +208,7 @@ if __name__ == "__main__":
 
     data_limit = DEFAULT_DATA_LIMIT
 
-    # Override data_limit if provided as command-line argument
+    # If user passed a command-line arg for data_limit:
     if len(sys.argv) > 1:
         arg1 = sys.argv[1]
         if arg1.lower() == "none":
@@ -223,33 +218,32 @@ if __name__ == "__main__":
                 data_limit = int(arg1)
             except ValueError:
                 print(
-                    f"Invalid data_limit '{arg1}' provided. Using default value {data_limit}."
+                    f"Invalid data_limit '{arg1}' provided. Using default {data_limit}."
                 )
 
-    # Load dataset with specified data limit
+    # Load the dataset
     dataset = load_dataset(DATASET_PATH, data_limit)
 
-    # Load local LLM model
+    # Load local LLM
     print("Loading local model...")
     generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
     print("Local model loaded.")
 
-    # Prepare dataset
+    # Create dataset
     data = LLMHiddenStateDataset(
         samples=dataset,
         model=model,
         tokenizer=tokenizer,
-        generation_pipeline=generation_pipeline,
         layer_index=20,
     )
 
-    # Process all data to collect results
+    # Process all data to fill result_data (and label/hidden states)
     print("Processing all data to collect results...")
     for idx in range(len(data)):
-        _ = data[idx]  # Access each item to trigger __getitem__
+        _ = data[idx]  # trigger __getitem__
     print("Data processing complete.")
 
-    # Split into training and testing datasets (80% train, 20% test)
+    # Train/test split (80/20)
     total_size = len(data)
     train_size = int(0.8 * total_size)
     test_size = total_size - train_size
@@ -257,31 +251,29 @@ if __name__ == "__main__":
         data, [train_size, test_size], generator=torch.Generator().manual_seed(seed)
     )
 
-    # Create DataLoaders
+    # Dataloaders
     batch_size = 8
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
-    # Get input dimension from one sample
+    # Determine input dimension from a sample
     sample_feature, _ = data[0]
     input_dim = sample_feature.shape[0]
 
-    # Train classifier
+    # Train the classifier
     num_epochs = 3
     learning_rate = 1e-4
     classifier = train_classifier(train_loader, input_dim, num_epochs, learning_rate)
 
-    # Evaluate classifier
+    # Evaluate on test set
     results = evaluate_classifier(classifier, test_loader)
 
     # Save output data
     output_file_path = os.path.join(OUTPUT_DIR, "output_data.json")
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    # Access the collected result data
-    all_result_data = data.result_data  # data is the full dataset before splitting
-
-    # Save the all_result_data to a JSON file
+    # data.result_data holds all Q/A info
+    all_result_data = data.result_data
     with open(output_file_path, "w", encoding="utf-8") as f:
         json.dump(all_result_data, f, ensure_ascii=False, indent=4)
 
