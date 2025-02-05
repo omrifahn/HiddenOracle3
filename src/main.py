@@ -249,3 +249,5 @@ if __name__ == "__main__":
 # %cd HiddenOracle3/src
 
 # !python main.py
+
+# !python main.py 500
