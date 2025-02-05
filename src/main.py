@@ -1,5 +1,11 @@
 import sys
-from config import DATASET_PATH, LOCAL_MODEL_NAME, DEFAULT_DATA_LIMIT, OUTPUT_DIR, ENABLE_DETAILED_LOGS
+from config import (
+    DATASET_PATH,
+    LOCAL_MODEL_NAME,
+    DEFAULT_DATA_LIMIT,
+    OUTPUT_DIR,
+    ENABLE_DETAILED_LOGS,
+)
 from evaluator import evaluate_with_openai_api
 from local_llm import (
     load_local_model,
@@ -63,7 +69,7 @@ class LLMHiddenStateDataset(Dataset):
 
         if matched:
             is_factual = True
-            explanation = 'string match'
+            explanation = "string match"
         else:
             # Use OpenAI API to evaluate
             try:
@@ -73,25 +79,27 @@ class LLMHiddenStateDataset(Dataset):
                     correct_answers=correct_answers,
                 )
                 is_factual = result["is_factual"]
-                explanation = result.get('explanation', '')
+                explanation = result.get("explanation", "")
             except Exception as e:
                 print(f"Error during OpenAI API call: {e}")
                 is_factual = False  # Default to not factual if API call fails
-                explanation = f'API error: {e}'
+                explanation = f"API error: {e}"
 
         # Prepare the detailed result entry
         result_entry = {
-            'question': question,
-            'answers': correct_answers,
-            'llama_answer': local_answer,
-            'is_factual': is_factual,
-            'explanation': explanation,
+            "question": question,
+            "answers": correct_answers,
+            "llama_answer": local_answer,
+            "is_factual": is_factual,
+            "explanation": explanation,
         }
 
         # Save the result entry
         self.result_data.append(result_entry)
         if ENABLE_DETAILED_LOGS:
-            print(f"[LOG] Detailed result entry:\n{json.dumps(result_entry, indent=2)}\n")
+            print(
+                f"[LOG] Detailed result entry:\n{json.dumps(result_entry, indent=2)}\n"
+            )
 
         # Get hidden state from LLM
         hidden_state = get_local_llm_hidden_states(
@@ -267,14 +275,14 @@ if __name__ == "__main__":
     results = evaluate_classifier(classifier, test_loader)
 
     # Save output data
-    output_file_path = os.path.join(OUTPUT_DIR, 'output_data.json')
+    output_file_path = os.path.join(OUTPUT_DIR, "output_data.json")
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     # Access the collected result data
     all_result_data = data.result_data  # data is the full dataset before splitting
 
     # Save the all_result_data to a JSON file
-    with open(output_file_path, 'w', encoding='utf-8') as f:
+    with open(output_file_path, "w", encoding="utf-8") as f:
         json.dump(all_result_data, f, ensure_ascii=False, indent=4)
 
     print(f"Detailed results saved to '{output_file_path}'.")
