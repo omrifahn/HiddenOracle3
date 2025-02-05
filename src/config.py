@@ -26,6 +26,5 @@ USE_LOCAL_MODEL_STORAGE = True  # Flag to control local model storage
 # Set default DATA_LIMIT here
 DEFAULT_DATA_LIMIT = 5
 
-# TODO OMRI - connect to harder Q&A dataset (because currently, llama is always right so we have only greens)
-# TODO OMRI - save output file as new json for being able to make sure the run details are as expected
+# TODO OMRI - connect to harder Q&A dataset (because currently, llama 90% right)
 # TODO OMRI - add this data also for the logs, and make config param to disable those logs
