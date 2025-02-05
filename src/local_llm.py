@@ -90,21 +90,18 @@ def load_local_model(local_model_name: str):
 
 
 def get_local_llm_answer(question: str, generation_pipeline) -> str:
-    """
-    Uses a text-generation pipeline to get an answer from the local LLM.
-    """
+    prompt = f"User: {question}\nAssistant:"
     results = generation_pipeline(
-        question, max_new_tokens=25, num_return_sequences=1, do_sample=False
+        prompt,
+        max_new_tokens=50,
+        num_return_sequences=1,
+        do_sample=False,
+        temperature=0.7,
+        eos_token_id=generation_pipeline.tokenizer.eos_token_id,
     )
     generated_text = results[0]["generated_text"]
-
-    if generated_text.startswith(question):
-        answer = generated_text[len(question) :].strip()
-    else:
-        answer = generated_text.strip()
-
+    answer = generated_text.strip()
     return answer
-
 
 def get_local_llm_hidden_states(question: str, tokenizer, model, layer_index=20):
     """
