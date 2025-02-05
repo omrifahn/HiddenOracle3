@@ -7,6 +7,8 @@ from credentials import (
 DATASET_PATH = "./data/500_question_answers.json"
 OUTPUT_DIR = "./output"
 
+ENABLE_DETAILED_LOGS = True
+
 LOCAL_MODEL_NAME = "meta-llama/Llama-2-7b-chat-hf"
 
 
@@ -26,5 +28,5 @@ USE_LOCAL_MODEL_STORAGE = True  # Flag to control local model storage
 # Set default DATA_LIMIT here
 DEFAULT_DATA_LIMIT = 5
 
+
 # TODO OMRI - connect to harder Q&A dataset (because currently, llama 90% right)
-# TODO OMRI - add this data also for the logs, and make config param to disable those logs

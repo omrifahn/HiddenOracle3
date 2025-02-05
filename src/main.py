@@ -1,5 +1,5 @@
 import sys
-from config import DATASET_PATH, LOCAL_MODEL_NAME, DEFAULT_DATA_LIMIT, OUTPUT_DIR
+from config import DATASET_PATH, LOCAL_MODEL_NAME, DEFAULT_DATA_LIMIT, OUTPUT_DIR, ENABLE_DETAILED_LOGS
 from evaluator import evaluate_with_openai_api
 from local_llm import (
     load_local_model,
@@ -90,6 +90,8 @@ class LLMHiddenStateDataset(Dataset):
 
         # Save the result entry
         self.result_data.append(result_entry)
+        if ENABLE_DETAILED_LOGS:
+            print(f"[LOG] Detailed result entry:\n{json.dumps(result_entry, indent=2)}\n")
 
         # Get hidden state from LLM
         hidden_state = get_local_llm_hidden_states(
