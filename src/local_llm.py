@@ -89,19 +89,44 @@ def load_local_model(local_model_name: str):
     return generation_pipeline, model, tokenizer
 
 
-def get_local_llm_answer(question: str, generation_pipeline) -> str:
-    prompt = f"User: {question}\nAssistant:"
-    results = generation_pipeline(
-        prompt,
-        max_new_tokens=50,
-        num_return_sequences=1,
-        do_sample=False,
-        temperature=0.7,
-        eos_token_id=generation_pipeline.tokenizer.eos_token_id,
+def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
+    """
+    Example for the 'meta-llama/Llama-2-7b-chat-hf' model
+    using the recommended [INST] ... [/INST] format.
+    """
+    system_prompt = (
+        "You are a helpful assistant. Provide a single short factual answer. "
+        "Do not continue the conversation or ask follow-up questions."
     )
-    generated_text = results[0]["generated_text"]
-    answer = generated_text.strip()
-    return answer
+    
+    # Format the prompt per Llama 2 Chat guidelines
+    prompt = f"""[INST] <<SYS>>
+{system_prompt}
+<</SYS>>
+
+{question}
+[/INST]"""
+
+    input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(model.device)
+
+    with torch.no_grad():
+        outputs = model.generate(
+            input_ids=input_ids,
+            max_new_tokens=max_new_tokens,
+            temperature=0.7,
+            do_sample=False,
+        )
+
+    # Decode
+    text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    # Often the raw output will contain the entire prompt plus the response.
+    # We can strip off the prompt part if needed:
+    if "[INST]" in text:
+        # Chop off everything before the final "[INST]" or "[/INST]"
+        # Or you can do more careful parsing. For instance:
+        text = text.split("[/INST]")[-1]
+    return text.strip()
+
 
 def get_local_llm_hidden_states(question: str, tokenizer, model, layer_index=20):
     """

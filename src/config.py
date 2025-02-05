@@ -7,7 +7,7 @@ from credentials import (
 DATASET_PATH = "./data/500_question_answers.json"
 OUTPUT_DIR = "./output"
 
-LOCAL_MODEL_NAME = "meta-llama/Llama-2-7b-hf"
+LOCAL_MODEL_NAME = "meta-llama/Llama-2-7b-chat-hf"
 
 
 def is_running_on_colab():
