@@ -28,6 +28,12 @@ USE_LOCAL_MODEL_STORAGE = True  # Flag to control local model storage
 # Set default DATA_LIMIT here
 DEFAULT_DATA_LIMIT = 5
 
+# Additional training/inference parameters:
+BATCH_SIZE = 8
+NUM_EPOCHS = 3
+LEARNING_RATE = 1e-4
+LAYER_INDEX = 20
+TRAIN_TEST_SPLIT_RATIO = 0.8
 
 # TODO OMRI - connect to harder Q&A dataset (because currently, llama 90% right)
 # TODO OMRI:
