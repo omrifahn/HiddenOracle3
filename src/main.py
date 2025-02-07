@@ -106,7 +106,7 @@ if __name__ == "__main__":
         shuffle=True,
     )
 
-    # ---- NEW: Print out the data balance (factual vs. hallucinating) in TRAIN set and TEST set ----
+    # ---- Print out the data balance (factual vs. hallucinating) in TRAIN set and TEST set ----
     train_factual_count = np.sum(train_truths == 0)
     train_halluc_count = np.sum(train_truths == 1)
     test_factual_count = np.sum(test_truths == 0)
@@ -130,14 +130,14 @@ if __name__ == "__main__":
     accuracy = accuracy_score(test_truths, red_green_predictions)
     print(f"\nLogistic Regression Accuracy on Test Set: {accuracy * 100:.2f}%")
 
-    # Build confusion matrix in the new terms
+    # Build confusion matrix in new terms
     # test_truths (rows): 0 => LLaMA factual, 1 => LLaMA hallucinating
-    # predictions (cols): 0 => classifier says "Green", 1 => classifier says "Red"
+    # predictions (cols): 0 => "Green", 1 => "Red"
     cm = confusion_matrix(test_truths, red_green_predictions)
 
     # cm = [[TN, FP],
     #       [FN, TP]]
-    # Map them to new names:
+    # Let's rename them:
     good_green = cm[0, 0]  # factual & green
     bad_green = cm[1, 0]  # hallucinating & green
     bad_red = cm[0, 1]  # factual & red
@@ -148,3 +148,35 @@ if __name__ == "__main__":
     print(f"  Bad Green  (Hallucinating & Green)    : {bad_green}")
     print(f"  Bad Red    (Factual & Red)            : {bad_red}")
     print(f"  Good Red   (Hallucinating & Red)      : {good_red}")
+
+    #  SAVE RUN REPORT TO JSON
+    run_report = {
+        "parameters": {
+            "data_limit": data_limit,
+            "LAYER_INDEX": LAYER_INDEX,
+            "TRAIN_TEST_SPLIT_RATIO": TRAIN_TEST_SPLIT_RATIO,
+            "USE_PRECOMPUTED_DATA": USE_PRECOMPUTED_DATA,
+        },
+        "data_balance": {
+            "train_total": len(train_truths),
+            "train_factual_count": int(train_factual_count),
+            "train_halluc_count": int(train_halluc_count),
+            "test_total": len(test_truths),
+            "test_factual_count": int(test_factual_count),
+            "test_halluc_count": int(test_halluc_count),
+        },
+        "evaluation": {
+            "accuracy": float(accuracy),
+            "confusion_matrix": {
+                "good_green": int(good_green),
+                "bad_green": int(bad_green),
+                "bad_red": int(bad_red),
+                "good_red": int(good_red),
+            },
+        },
+    }
+
+    report_file_path = os.path.join(OUTPUT_DIR, "run_report.json")
+    with open(report_file_path, "w", encoding="utf-8") as f:
+        json.dump(run_report, f, indent=4)
+    print(f"\nRun report saved to '{report_file_path}'.")
