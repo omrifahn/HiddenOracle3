@@ -51,38 +51,51 @@ if __name__ == "__main__":
                     f"Invalid data_limit '{arg1}' provided. Using default {data_limit}."
                 )
 
+    # Print diagnostic info about caching
+    print("\n--- Diagnostic Info ---")
+    print(f"USE_PRECOMPUTED_DATA = {USE_PRECOMPUTED_DATA}")
+    print(f"CACHED_DATA_PATH     = {CACHED_DATA_PATH}")
+    cache_exists = os.path.isfile(CACHED_DATA_PATH)
+    print(f"Does the cache file exist? {cache_exists}\n")
+
     # 1) Load raw dataset
     dataset = load_dataset(DATASET_PATH, data_limit)
 
     # 2) Either load precomputed hidden states/labels or run LLM
-    if USE_PRECOMPUTED_DATA and os.path.isfile(CACHED_DATA_PATH):
-        print(f"Loading precomputed features and labels from {CACHED_DATA_PATH}...")
+    if USE_PRECOMPUTED_DATA and cache_exists:
+        print(f"INFO: Using precomputed data from '{CACHED_DATA_PATH}'...")
         cached_data = np.load(CACHED_DATA_PATH, allow_pickle=True)
         features = cached_data["features"]
-        # LLaMA ground-truth labels: 0 => factual, 1 => hallucinating
         llama_truth_labels = cached_data["labels"]
         result_data = cached_data["result_data"].tolist()
-        print("Features and labels loaded from cache.")
+        print("INFO: Features and labels loaded from cache.")
     else:
-        print("Loading local model...")
+        # Additional prints to show we are about to load or download the model
+        if USE_PRECOMPUTED_DATA:
+            print(
+                "WARNING: We intended to use precomputed data, but the cache file does not exist."
+            )
+        else:
+            print(
+                "INFO: USE_PRECOMPUTED_DATA is False, so we'll recompute hidden states."
+            )
+        print("Loading local model now...")
+
         generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
-        print("Local model loaded.")
+        print("Local model loaded successfully.")
 
         print("Precomputing hidden states and labels...")
-        # returns: features, llama_truth_labels, result_data
         features, llama_truth_labels, result_data = precompute_hidden_states_and_labels(
             samples=dataset, model=model, tokenizer=tokenizer, layer_index=LAYER_INDEX
         )
         print("Precomputation complete.")
 
-        # (Optional) save result_data to JSON for inspection
         output_file_path = os.path.join(OUTPUT_DIR, "output_data.json")
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         with open(output_file_path, "w", encoding="utf-8") as f:
             json.dump(result_data, f, ensure_ascii=False, indent=4)
         print(f"Detailed results saved to '{output_file_path}'.")
 
-        # Save precomputed data to .npz
         print(f"Saving precomputed features and labels to {CACHED_DATA_PATH}...")
         np.savez(
             CACHED_DATA_PATH,
@@ -106,7 +119,7 @@ if __name__ == "__main__":
         shuffle=True,
     )
 
-    # ---- Print out the data balance (factual vs. hallucinating) in TRAIN set and TEST set ----
+    # Data balance prints
     train_factual_count = np.sum(train_truths == 0)
     train_halluc_count = np.sum(train_truths == 1)
     test_factual_count = np.sum(test_truths == 0)
@@ -130,18 +143,11 @@ if __name__ == "__main__":
     accuracy = accuracy_score(test_truths, red_green_predictions)
     print(f"\nLogistic Regression Accuracy on Test Set: {accuracy * 100:.2f}%")
 
-    # Build confusion matrix in new terms
-    # test_truths (rows): 0 => LLaMA factual, 1 => LLaMA hallucinating
-    # predictions (cols): 0 => "Green", 1 => "Red"
     cm = confusion_matrix(test_truths, red_green_predictions)
-
-    # cm = [[TN, FP],
-    #       [FN, TP]]
-    # Let's rename them:
-    good_green = cm[0, 0]  # factual & green
-    bad_green = cm[1, 0]  # hallucinating & green
-    bad_red = cm[0, 1]  # factual & red
-    good_red = cm[1, 1]  # hallucinating & red
+    good_green = cm[0, 0]
+    bad_green = cm[1, 0]
+    bad_red = cm[0, 1]
+    good_red = cm[1, 1]
 
     print("\nConfusion Matrix (Factual/Hallucinating vs. Green/Red):")
     print(f"  Good Green (Factual & Green)         : {good_green}")
@@ -149,7 +155,7 @@ if __name__ == "__main__":
     print(f"  Bad Red    (Factual & Red)            : {bad_red}")
     print(f"  Good Red   (Hallucinating & Red)      : {good_red}")
 
-    #  SAVE RUN REPORT TO JSON
+    # Example: write run_report.json (optional)
     run_report = {
         "parameters": {
             "data_limit": data_limit,
@@ -175,8 +181,7 @@ if __name__ == "__main__":
             },
         },
     }
-
     report_file_path = os.path.join(OUTPUT_DIR, "run_report.json")
     with open(report_file_path, "w", encoding="utf-8") as f:
         json.dump(run_report, f, indent=4)
-    print(f"\nRun report saved to '{report_file_path}'.")
+    print(f"Run report saved to '{report_file_path}'.")

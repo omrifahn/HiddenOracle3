@@ -9,12 +9,10 @@ from config import (
 )
 
 
-# Function to detect if running on Colab
 def is_running_on_colab():
     return "google.colab" in sys.modules
 
 
-# Function to mount Google Drive if on Colab
 def mount_google_drive():
     from google.colab import drive  # type: ignore
 
@@ -26,21 +24,24 @@ def load_local_model(local_model_name: str):
     Loads the local LLM and returns a text generation pipeline,
     as well as the raw model and tokenizer.
     """
+    print(f"[DEBUG] USE_LOCAL_MODEL_STORAGE = {USE_LOCAL_MODEL_STORAGE}")
+    print(f"[DEBUG] local_model_name = {local_model_name}")
+    model_dir_name = local_model_name.replace("/", "_")
+    model_path = os.path.join(LOCAL_MODEL_DIR, model_dir_name)
+    print(f"[DEBUG] model_path = {model_path}")
+
     if USE_LOCAL_MODEL_STORAGE:
         # If running on Colab, mount Google Drive
         if is_running_on_colab():
-            print("Running on Google Colab. Mounting Google Drive...")
+            print("[DEBUG] Running on Google Colab. Mounting Google Drive...")
             mount_google_drive()
-            print("Google Drive mounted.")
-
-        # Replace slashes to create a valid directory name
-        model_dir_name = local_model_name.replace("/", "_")
-        model_path = os.path.join(LOCAL_MODEL_DIR, model_dir_name)
+            print("[DEBUG] Google Drive mounted.")
 
         if not os.path.exists(model_path):
             os.makedirs(model_path, exist_ok=True)
             print(
-                f"Model not found locally. Downloading '{local_model_name}' to '{model_path}'..."
+                f"[DEBUG] Model not found locally at {model_path}. "
+                f"Downloading '{local_model_name}'..."
             )
             tokenizer = AutoTokenizer.from_pretrained(
                 local_model_name, use_auth_token=HUGGINGFACE_TOKEN
@@ -55,10 +56,13 @@ def load_local_model(local_model_name: str):
             # Save the model and tokenizer to the local directory
             tokenizer.save_pretrained(model_path)
             model.save_pretrained(model_path)
-            print(f"Model '{local_model_name}' downloaded and saved to '{model_path}'.")
+            print(
+                f"[DEBUG] Model '{local_model_name}' downloaded and saved to '{model_path}'."
+            )
         else:
-            # Model exists locally, so just load it
-            print(f"Loading model from local path '{model_path}'...")
+            print(
+                f"[DEBUG] Found existing model locally at {model_path}. Loading it now..."
+            )
             tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
             model = AutoModelForCausalLM.from_pretrained(
                 model_path,
@@ -67,10 +71,11 @@ def load_local_model(local_model_name: str):
                 output_hidden_states=True,
                 local_files_only=True,
             )
-            print(f"Model '{local_model_name}' loaded from local storage.")
+            print(f"[DEBUG] Model '{local_model_name}' loaded from local storage.")
     else:
-        # Download model without using local storage
-        print(f"Downloading model '{local_model_name}' without using local storage...")
+        print(
+            f"[DEBUG] USE_LOCAL_MODEL_STORAGE = False. Downloading model '{local_model_name}' from HuggingFace..."
+        )
         tokenizer = AutoTokenizer.from_pretrained(
             local_model_name, use_auth_token=HUGGINGFACE_TOKEN
         )
@@ -81,24 +86,21 @@ def load_local_model(local_model_name: str):
             use_auth_token=HUGGINGFACE_TOKEN,
             output_hidden_states=True,
         )
-        print(f"Model '{local_model_name}' downloaded.")
+        print(f"[DEBUG] Model '{local_model_name}' downloaded (no local storage).")
 
-    # Set up the generation pipeline
     generation_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
     return generation_pipeline, model, tokenizer
 
 
 def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
     """
-    Example for the 'meta-llama/Llama-2-7b-chat-hf' model
+    Example for 'meta-llama/Llama-2-7b-chat-hf'
     using the recommended [INST] ... [/INST] format.
     """
     system_prompt = (
         "You are a helpful assistant. Provide a single short factual answer. "
         "Do not continue the conversation or ask follow-up questions."
     )
-
-    # Format the prompt per Llama 2 Chat guidelines
     prompt = f"""[INST] <<SYS>>
 {system_prompt}
 <</SYS>>
@@ -107,7 +109,6 @@ def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
 [/INST]"""
 
     input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(model.device)
-
     with torch.no_grad():
         outputs = model.generate(
             input_ids=input_ids,
@@ -115,12 +116,8 @@ def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
             temperature=0.7,
             do_sample=False,
         )
-
-    # Decode
     text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    # Strip off the prompt part if needed
     if "[INST]" in text:
-        # Typically we split at the last "[/INST]"
         text = text.split("[/INST]")[-1]
     return text.strip()
 
@@ -129,18 +126,14 @@ def get_local_llm_hidden_states(question: str, tokenizer, model, layer_index=20)
     """
     Returns the hidden states of the given layer_index for the input question.
     """
-    # Tokenize the input
     inputs = tokenizer(question, return_tensors="pt")
-    # Move inputs to the appropriate device
     if hasattr(model, "hf_device_map"):
-        # For models with device_map
         embedding_device = next(iter(model.hf_device_map.values()))
         inputs = {key: value.to(embedding_device) for key, value in inputs.items()}
     else:
         device = next(model.parameters()).device
         inputs = {key: value.to(device) for key, value in inputs.items()}
 
-    # Forward pass to get hidden states
     outputs = model(**inputs)
     hidden_states = outputs.hidden_states[layer_index]
     return hidden_states
