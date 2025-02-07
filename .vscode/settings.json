@@ -1,0 +1,12 @@
+{
+    "reportUnusedVariable": "warning",
+    "reportUnusedImport": "warning",
+    "reportUnusedFunction": "warning",
+    "reportUnusedExpression": "warning",
+    "reportGeneralTypeIssues": "warning",
+    "reportUnnecessaryCast": "warning",
+    "reportUnnecessaryComparison": "warning",
+    "reportUnnecessaryContains": "warning",
+    "reportUnusedClass": "warning"
+
+}
