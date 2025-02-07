@@ -17,13 +17,13 @@ from config import (
     OUTPUT_DIR,
     LAYER_INDEX,
     TRAIN_TEST_SPLIT_RATIO,
+    USE_PRECOMPUTED_DATA,
+    CACHED_DATA_PATH,
 )
-
 from pipeline import (
     load_dataset,
     precompute_hidden_states_and_labels,
 )
-
 from local_llm import (
     load_local_model,
 )
@@ -55,26 +55,43 @@ if __name__ == "__main__":
     # 1) Load raw dataset
     dataset = load_dataset(DATASET_PATH, data_limit)
 
-    # 2) Load local LLM
-    print("Loading local model...")
-    generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
-    print("Local model loaded.")
+    # 2) Either load precomputed hidden states/labels or run LLM
+    if USE_PRECOMPUTED_DATA and os.path.isfile(CACHED_DATA_PATH):
+        print(f"Loading precomputed features and labels from {CACHED_DATA_PATH}...")
+        cached_data = np.load(CACHED_DATA_PATH, allow_pickle=True)
+        features = cached_data["features"]
+        labels = cached_data["labels"]
+        result_data = cached_data["result_data"].tolist()
+        print("Features and labels loaded from cache.")
+    else:
+        print("Loading local model...")
+        generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
+        print("Local model loaded.")
 
-    # 3) Precompute hidden states + factual labels
-    print("Precomputing hidden states and labels...")
-    features, labels, result_data = precompute_hidden_states_and_labels(
-        samples=dataset, model=model, tokenizer=tokenizer, layer_index=LAYER_INDEX
-    )
-    print("Precomputation complete.")
+        print("Precomputing hidden states and labels...")
+        features, labels, result_data = precompute_hidden_states_and_labels(
+            samples=dataset, model=model, tokenizer=tokenizer, layer_index=LAYER_INDEX
+        )
+        print("Precomputation complete.")
 
-    # (Optional) save result_data
-    output_file_path = os.path.join(OUTPUT_DIR, "output_data.json")
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    with open(output_file_path, "w", encoding="utf-8") as f:
-        json.dump(result_data, f, ensure_ascii=False, indent=4)
-    print(f"Detailed results saved to '{output_file_path}'.")
+        # (Optional) save result_data to JSON for inspection
+        output_file_path = os.path.join(OUTPUT_DIR, "output_data.json")
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+        with open(output_file_path, "w", encoding="utf-8") as f:
+            json.dump(result_data, f, ensure_ascii=False, indent=4)
+        print(f"Detailed results saved to '{output_file_path}'.")
 
-    # 4) Train/test split
+        # Save precomputed data to .npz
+        print(f"Saving precomputed features and labels to {CACHED_DATA_PATH}...")
+        np.savez(
+            CACHED_DATA_PATH,
+            features=features,
+            labels=labels,
+            result_data=np.array(result_data, dtype=object),
+        )
+        print("Cache saved.")
+
+    # 3) Train/test split
     train_features, test_features, train_labels, test_labels = train_test_split(
         features,
         labels,
@@ -83,11 +100,11 @@ if __name__ == "__main__":
         shuffle=True,
     )
 
-    # 5) Train logistic regression
+    # 4) Train logistic regression
     classifier = LogisticRegression(solver="lbfgs", max_iter=1000)
     classifier.fit(train_features, train_labels)
 
-    # 6) Evaluate
+    # 5) Evaluate
     predictions = classifier.predict(test_features)
     accuracy = accuracy_score(test_labels, predictions)
     print(f"\nLogistic Regression Accuracy on Test Set: {accuracy * 100:.2f}%")
