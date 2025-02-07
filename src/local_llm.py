@@ -4,7 +4,6 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from config import (
     HUGGINGFACE_TOKEN,
-    LOCAL_MODEL_NAME,
     LOCAL_MODEL_DIR,
     USE_LOCAL_MODEL_STORAGE,
 )

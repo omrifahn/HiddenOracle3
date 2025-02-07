@@ -6,7 +6,6 @@ import random
 import numpy as np
 
 from typing import List, Dict, Any
-from torch.utils.data import TensorDataset
 from evaluator import evaluate_with_openai_api
 from local_llm import (
     get_local_llm_answer,

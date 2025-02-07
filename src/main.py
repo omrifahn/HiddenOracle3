@@ -6,14 +6,12 @@ import os
 import json
 
 from torch.utils.data import TensorDataset, DataLoader, random_split
-from typing import List, Dict, Any
 
 from config import (
     DATASET_PATH,
     LOCAL_MODEL_NAME,
     DEFAULT_DATA_LIMIT,
     OUTPUT_DIR,
-    ENABLE_DETAILED_LOGS,
     BATCH_SIZE,
     NUM_EPOCHS,
     LEARNING_RATE,
