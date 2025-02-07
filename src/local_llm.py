@@ -17,7 +17,7 @@ def is_running_on_colab():
 
 # Function to mount Google Drive
 def mount_google_drive():
-    from google.colab import drive
+    from google.colab import drive # type: ignore
 
     drive.mount("/content/drive")
 
