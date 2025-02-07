@@ -2,7 +2,6 @@
 
 import json
 import torch
-import random
 import numpy as np
 
 from typing import List, Dict, Any
@@ -29,14 +28,14 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
     """
     Single-pass function that:
       1) Generates local LLM answers for each sample
-      2) Determines factuality (via simple match or OpenAI evaluator)
+      2) Determines factuality (via simple string match or OpenAI evaluator)
       3) Extracts final hidden states from the LLM
       4) Stores features (hidden states), labels (0 or 1), and result logs
 
     Returns:
-      all_features: FloatTensor [num_samples, hidden_dim]
-      all_labels: LongTensor [num_samples]
-      result_data: List[dict] with question, answers, llama_answer, is_factual, explanation
+      all_features_np: np.ndarray [num_samples, hidden_dim]
+      all_labels_np:   np.ndarray [num_samples]
+      result_data:     List[dict] with question, answers, llama_answer, is_factual, explanation
     """
     all_features = []
     all_labels = []
@@ -49,7 +48,7 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
         # 1) Generate LLM answer
         local_answer = get_local_llm_answer(question, model, tokenizer)
 
-        # 2) Check if it's factual (simple match -> fallback to OpenAI evaluator)
+        # 2) Check if it's factual (simple match or fallback to OpenAI evaluator)
         matched = any(ans.lower() in local_answer.lower() for ans in correct_answers)
         if matched:
             is_factual = True
@@ -65,7 +64,7 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
                 is_factual = False
                 explanation = f"API error: {e}"
 
-        # Save logs
+        # Build a result entry for logging
         entry = {
             "question": question,
             "answers": correct_answers,
@@ -77,110 +76,25 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
         if ENABLE_DETAILED_LOGS:
             print(f"[LOG] Detailed result entry:\n{json.dumps(entry, indent=2)}\n")
 
-        # 3) Get the final hidden states
+        # 3) Extract the final hidden states from the model
         hidden_state = get_local_llm_hidden_states(
             question, tokenizer, model, layer_index
         )
-        hidden_vector = hidden_state[:, -1, :].squeeze(0)  # shape (hidden_dim,)
+        # Take the last token's hidden state
+        hidden_vector = hidden_state[:, -1, :].squeeze(0)  # shape: (hidden_dim,)
 
-        # 4) Build label (0 => factual, 1 => hallucinating)
+        # 4) 0 => factual, 1 => hallucinating
         label = 0 if is_factual else 1
 
         all_features.append(hidden_vector)
         all_labels.append(label)
 
-    # Convert to PyTorch tensors
-    all_features = torch.stack(all_features).cpu().float()
-    all_labels = torch.tensor(all_labels, dtype=torch.long)
+    # Convert to PyTorch Tensors, then to NumPy for scikit-learn
+    all_features_tensor = torch.stack(all_features).cpu().float()
+    all_labels_tensor = torch.tensor(all_labels, dtype=torch.long)
 
-    return all_features, all_labels, result_data
+    # Convert to NumPy
+    all_features_np = all_features_tensor.numpy()
+    all_labels_np = all_labels_tensor.numpy()
 
-
-def train_classifier(train_loader, classifier, num_epochs=3, learning_rate=1e-4):
-    """
-    Trains the hallucination classifier using the provided training data.
-    """
-    import torch.nn as nn
-    import torch.optim as optim
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    classifier.to(device)
-    classifier.train()
-
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(classifier.parameters(), lr=learning_rate)
-
-    for epoch in range(num_epochs):
-        epoch_loss = 0.0
-        for features, labels in train_loader:
-            features = features.to(device)
-            labels = labels.to(device)
-
-            optimizer.zero_grad()
-            logits = classifier(features)
-            loss = criterion(logits, labels)
-            loss.backward(retain_graph=True)  # Avoid clearing the graph
-            optimizer.step()
-            epoch_loss += loss.item()
-
-        avg_loss = epoch_loss / len(train_loader)
-        print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {avg_loss:.4f}")
-
-    return classifier
-
-
-def evaluate_classifier(classifier, test_loader):
-    """
-    Evaluates the classifier on the test set and prints out the results.
-    """
-    import torch
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    classifier.to(device)
-    classifier.eval()
-    total = 0
-    correct = 0
-    results = []
-
-    with torch.no_grad():
-        for features, labels in test_loader:
-            features = features.to(device)
-            labels = labels.to(device)
-
-            logits = classifier(features)
-            _, predicted = torch.max(logits.data, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
-
-            for i in range(labels.size(0)):
-                results.append(
-                    {
-                        "llm_is_factual": (labels[i].item() == 0),
-                        "classifier_pred_is_factual": (predicted[i].item() == 0),
-                    }
-                )
-
-    accuracy = 100.0 * correct / total
-    print("\n\n ----------------------- \n\n")
-    print(f"Classifier Accuracy on Test Set: {accuracy:.2f}%")
-
-    # Summarize in four categories
-    categories = {"Good Green": 0, "Bad Green": 0, "Bad Red": 0, "Good Red": 0}
-    for res in results:
-        llm_fact = res["llm_is_factual"]
-        pred_fact = res["classifier_pred_is_factual"]
-        if llm_fact and pred_fact:
-            categories["Good Green"] += 1
-        elif not llm_fact and pred_fact:
-            categories["Bad Green"] += 1
-        elif llm_fact and not pred_fact:
-            categories["Bad Red"] += 1
-        else:
-            categories["Good Red"] += 1
-
-    print("Evaluation Results:")
-    for category, count in categories.items():
-        print(f"{category}: {count}")
-
-    return results
-
+    return all_features_np, all_labels_np, result_data

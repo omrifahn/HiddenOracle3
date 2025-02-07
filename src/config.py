@@ -17,7 +17,7 @@ def is_running_on_colab():
 
 
 if is_running_on_colab():
-    # Path in Google Drive
+    # Path in Google Drive if running on Colab
     LOCAL_MODEL_DIR = "/content/drive/MyDrive/HiddenOracle3/models"
 else:
     # Local path on your machine
@@ -25,13 +25,10 @@ else:
 
 USE_LOCAL_MODEL_STORAGE = True  # Flag to control local model storage
 
-# Set default DATA_LIMIT here
+# Default limit for how many Q&A pairs to process
 DEFAULT_DATA_LIMIT = 5
 
-# Additional training/inference parameters:
-BATCH_SIZE = 8
-NUM_EPOCHS = 3
-LEARNING_RATE = 1e-4
+# We keep only the parameters needed:
 LAYER_INDEX = 20
 TRAIN_TEST_SPLIT_RATIO = 0.8
 

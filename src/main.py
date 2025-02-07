@@ -5,16 +5,16 @@ import torch
 import os
 import json
 
-from torch.utils.data import TensorDataset, DataLoader, random_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
 
 from config import (
     DATASET_PATH,
     LOCAL_MODEL_NAME,
     DEFAULT_DATA_LIMIT,
     OUTPUT_DIR,
-    BATCH_SIZE,
-    NUM_EPOCHS,
-    LEARNING_RATE,
     LAYER_INDEX,
     TRAIN_TEST_SPLIT_RATIO,
 )
@@ -22,29 +22,24 @@ from config import (
 from pipeline import (
     load_dataset,
     precompute_hidden_states_and_labels,
-    train_classifier,
-    evaluate_classifier,
 )
 
 from local_llm import (
     load_local_model,
 )
 
-from hallucination_classifier import SimpleLinearClassifier
-
 
 if __name__ == "__main__":
     # Seed everything for reproducibility
     seed = 42
+    np.random.seed(seed)
     torch.manual_seed(seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
     random.seed(seed)
-    np.random.seed(seed)
 
+    # Figure out data_limit from command line (if given)
     data_limit = DEFAULT_DATA_LIMIT
-
-    # If user passed a command-line arg for data_limit
     if len(sys.argv) > 1:
         arg1 = sys.argv[1]
         if arg1.lower() == "none":
@@ -53,7 +48,9 @@ if __name__ == "__main__":
             try:
                 data_limit = int(arg1)
             except ValueError:
-                print(f"Invalid data_limit '{arg1}' provided. Using default {data_limit}.")
+                print(
+                    f"Invalid data_limit '{arg1}' provided. Using default {data_limit}."
+                )
 
     # 1) Load raw dataset
     dataset = load_dataset(DATASET_PATH, data_limit)
@@ -63,48 +60,37 @@ if __name__ == "__main__":
     generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
     print("Local model loaded.")
 
-    # 3) Precompute hidden states + factual labels in a single pass
+    # 3) Precompute hidden states + factual labels
     print("Precomputing hidden states and labels...")
     features, labels, result_data = precompute_hidden_states_and_labels(
         samples=dataset, model=model, tokenizer=tokenizer, layer_index=LAYER_INDEX
     )
     print("Precomputation complete.")
 
-    # (Optional) log or save these results
+    # (Optional) save result_data
     output_file_path = os.path.join(OUTPUT_DIR, "output_data.json")
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     with open(output_file_path, "w", encoding="utf-8") as f:
         json.dump(result_data, f, ensure_ascii=False, indent=4)
     print(f"Detailed results saved to '{output_file_path}'.")
 
-    # 4) Create a TensorDataset from precomputed features & labels
-    full_dataset = TensorDataset(features, labels)
-
-    # 5) Train/test split
-    total_size = len(full_dataset)
-    train_size = int(TRAIN_TEST_SPLIT_RATIO * total_size)
-    test_size = total_size - train_size
-    train_dataset, test_dataset = random_split(
-        full_dataset,
-        [train_size, test_size],
-        generator=torch.Generator().manual_seed(seed),
+    # 4) Train/test split
+    train_features, test_features, train_labels, test_labels = train_test_split(
+        features,
+        labels,
+        test_size=1 - TRAIN_TEST_SPLIT_RATIO,
+        random_state=seed,
+        shuffle=True,
     )
 
-    # 6) Create DataLoaders
-    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
-    test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
+    # 5) Train logistic regression
+    classifier = LogisticRegression(solver="lbfgs", max_iter=1000)
+    classifier.fit(train_features, train_labels)
 
-    # 7) Get input dimension from the first sample
-    sample_feature, _ = train_dataset[0]
-    input_dim = sample_feature.shape[0]
+    # 6) Evaluate
+    predictions = classifier.predict(test_features)
+    accuracy = accuracy_score(test_labels, predictions)
+    print(f"\nLogistic Regression Accuracy on Test Set: {accuracy * 100:.2f}%")
 
-    # 8) Initialize and train the classifier
-    classifier = SimpleLinearClassifier(input_dim=input_dim, num_labels=2)
-    classifier = train_classifier(
-        train_loader, classifier,
-        num_epochs=NUM_EPOCHS,
-        learning_rate=LEARNING_RATE
-    )
-
-    # 9) Evaluate classifier
-    _ = evaluate_classifier(classifier, test_loader)
+    cm = confusion_matrix(test_labels, predictions)
+    print("Confusion Matrix:\n", cm)
