@@ -94,7 +94,7 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
     all_labels_tensor = torch.tensor(all_labels, dtype=torch.long)
 
     # Convert to NumPy
-    all_features_np = all_features_tensor.numpy()
-    all_labels_np = all_labels_tensor.numpy()
+    all_features_np = all_features_tensor.detach().numpy()
+    all_labels_np = all_labels_tensor.detach().numpy()
 
     return all_features_np, all_labels_np, result_data
