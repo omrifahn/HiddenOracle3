@@ -59,7 +59,7 @@ if __name__ == "__main__":
         print(f"Loading precomputed features and labels from {CACHED_DATA_PATH}...")
         cached_data = np.load(CACHED_DATA_PATH, allow_pickle=True)
         features = cached_data["features"]
-        # Ground-truth states: 0 => factual, 1 => hallucinating
+        # LLaMA ground-truth labels: 0 => factual, 1 => hallucinating
         llama_truth_labels = cached_data["labels"]
         result_data = cached_data["result_data"].tolist()
         print("Features and labels loaded from cache.")
@@ -69,8 +69,7 @@ if __name__ == "__main__":
         print("Local model loaded.")
 
         print("Precomputing hidden states and labels...")
-        # returns: all_features_np, all_labels_np, result_data
-        # all_labels_np = 0 for factual, 1 for hallucinating
+        # returns: features, llama_truth_labels, result_data
         features, llama_truth_labels, result_data = precompute_hidden_states_and_labels(
             samples=dataset, model=model, tokenizer=tokenizer, layer_index=LAYER_INDEX
         )
@@ -107,6 +106,21 @@ if __name__ == "__main__":
         shuffle=True,
     )
 
+    # ---- NEW: Print out the data balance (factual vs. hallucinating) in TRAIN set and TEST set ----
+    train_factual_count = np.sum(train_truths == 0)
+    train_halluc_count = np.sum(train_truths == 1)
+    test_factual_count = np.sum(test_truths == 0)
+    test_halluc_count = np.sum(test_truths == 1)
+
+    print("\nData Balance:")
+    print(f"  TRAIN set total: {len(train_truths)}")
+    print(f"    Factual (0)     : {train_factual_count}")
+    print(f"    Hallucinating (1): {train_halluc_count}")
+
+    print(f"  TEST set total : {len(test_truths)}")
+    print(f"    Factual (0)     : {test_factual_count}")
+    print(f"    Hallucinating (1): {test_halluc_count}")
+
     # 4) Train logistic regression
     classifier = LogisticRegression(solver="lbfgs", max_iter=1000)
     classifier.fit(train_features, train_truths)
@@ -117,14 +131,13 @@ if __name__ == "__main__":
     print(f"\nLogistic Regression Accuracy on Test Set: {accuracy * 100:.2f}%")
 
     # Build confusion matrix in the new terms
-    # test_truths (rows):    0 => LLaMA factual, 1 => LLaMA hallucinating
-    # red_green_predictions (cols): 0 => classifier says "Green", 1 => classifier says "Red"
+    # test_truths (rows): 0 => LLaMA factual, 1 => LLaMA hallucinating
+    # predictions (cols): 0 => classifier says "Green", 1 => classifier says "Red"
     cm = confusion_matrix(test_truths, red_green_predictions)
 
-    # Confusion matrix is typically:
-    # [[TN, FP],
-    #  [FN, TP]]
-    # But let's rename them in the new terms:
+    # cm = [[TN, FP],
+    #       [FN, TP]]
+    # Map them to new names:
     good_green = cm[0, 0]  # factual & green
     bad_green = cm[1, 0]  # hallucinating & green
     bad_red = cm[0, 1]  # factual & red
