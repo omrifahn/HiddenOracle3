@@ -27,7 +27,6 @@ from local_llm import (
     load_local_model,
 )
 
-
 if __name__ == "__main__":
     # Seed everything for reproducibility
     seed = 42
@@ -37,7 +36,7 @@ if __name__ == "__main__":
         torch.cuda.manual_seed_all(seed)
     random.seed(seed)
 
-    # Figure out data_limit from command line (if given)
+    # Determine data_limit from command line (if provided)
     data_limit = DEFAULT_DATA_LIMIT
     if len(sys.argv) > 1:
         arg1 = sys.argv[1]
@@ -51,7 +50,7 @@ if __name__ == "__main__":
                     f"Invalid data_limit '{arg1}' provided. Using default {data_limit}."
                 )
 
-    # Print diagnostic info about caching
+    # Diagnostic info
     print("\n--- Diagnostic Info ---")
     print(f"USE_PRECOMPUTED_DATA = {USE_PRECOMPUTED_DATA}")
     print(f"CACHED_DATA_PATH     = {CACHED_DATA_PATH}")
@@ -61,59 +60,45 @@ if __name__ == "__main__":
     # 1) Load raw dataset
     dataset = load_dataset(DATASET_PATH, data_limit)
 
-    # 2) Either load precomputed hidden states/labels or run LLM
-    if USE_PRECOMPUTED_DATA and cache_exists:
-        print(f"INFO: Using precomputed data from '{CACHED_DATA_PATH}'...")
-        cached_data = np.load(CACHED_DATA_PATH, allow_pickle=True)
-        features = cached_data["features"]
-        llama_truth_labels = cached_data["labels"]
-        result_data = cached_data["result_data"].tolist()
-        print("INFO: Features and labels loaded from cache.")
+    # 2) Process dataset to add new fields (LLM answer, evaluation, hidden vector, label)
+    updated_data_file = os.path.join(OUTPUT_DIR, "updated_data.json")
+    error_log = []  # initialize error log
+    if USE_PRECOMPUTED_DATA and os.path.isfile(updated_data_file):
+        print(f"INFO: Loading precomputed updated data from '{updated_data_file}'...")
+        with open(updated_data_file, "r", encoding="utf-8") as f:
+            updated_data = json.load(f)
+        print("INFO: Updated data loaded from file.")
     else:
-        # Additional prints to show we are about to load or download the model
-        if USE_PRECOMPUTED_DATA:
-            print(
-                "WARNING: We intended to use precomputed data, but the cache file does not exist."
-            )
-        else:
-            print(
-                "INFO: USE_PRECOMPUTED_DATA is False, so we'll recompute hidden states."
-            )
         print("Loading local model now...")
-
         generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
         print("Local model loaded successfully.")
 
-        print("Precomputing hidden states and labels...")
-        features, llama_truth_labels, result_data = precompute_hidden_states_and_labels(
+        print(
+            "Enriching dataset with new fields (LLM answer, evaluation, hidden vector, label)..."
+        )
+        updated_data, error_log = precompute_hidden_states_and_labels(
             samples=dataset, model=model, tokenizer=tokenizer, layer_index=LAYER_INDEX
         )
-        print("Precomputation complete.")
+        print("Dataset enrichment complete.")
 
-        output_file_path = os.path.join(OUTPUT_DIR, "output_data.json")
         os.makedirs(OUTPUT_DIR, exist_ok=True)
-        with open(output_file_path, "w", encoding="utf-8") as f:
-            json.dump(result_data, f, ensure_ascii=False, indent=4)
-        print(f"Detailed results saved to '{output_file_path}'.")
+        with open(updated_data_file, "w", encoding="utf-8") as f:
+            json.dump(updated_data, f, ensure_ascii=False, indent=4)
+        print(f"Updated data saved to '{updated_data_file}'.")
 
-        print(f"Saving precomputed features and labels to {CACHED_DATA_PATH}...")
-        np.savez(
-            CACHED_DATA_PATH,
-            features=features,
-            labels=llama_truth_labels,
-            result_data=np.array(result_data, dtype=object),
-        )
-        print("Cache saved.")
+    # Optionally, extract features and labels for further analysis
+    features = []
+    labels = []
+    for item in updated_data:
+        features.append(item["hidden_vector"])
+        labels.append(item["label"])
+    features_np = np.array(features)
+    labels_np = np.array(labels)
 
     # 3) Train/test split
-    (
-        train_features,
-        test_features,
-        train_truths,
-        test_truths,
-    ) = train_test_split(
-        features,
-        llama_truth_labels,
+    train_features, test_features, train_truths, test_truths = train_test_split(
+        features_np,
+        labels_np,
         test_size=1 - TRAIN_TEST_SPLIT_RATIO,
         random_state=seed,
         shuffle=True,
@@ -127,11 +112,10 @@ if __name__ == "__main__":
 
     print("\nData Balance:")
     print(f"  TRAIN set total: {len(train_truths)}")
-    print(f"    Factual (0)     : {train_factual_count}")
+    print(f"    Factual (0): {train_factual_count}")
     print(f"    Hallucinating (1): {train_halluc_count}")
-
-    print(f"  TEST set total : {len(test_truths)}")
-    print(f"    Factual (0)     : {test_factual_count}")
+    print(f"  TEST set total: {len(test_truths)}")
+    print(f"    Factual (0): {test_factual_count}")
     print(f"    Hallucinating (1): {test_halluc_count}")
 
     # 4) Train logistic regression
@@ -139,24 +123,23 @@ if __name__ == "__main__":
     classifier.fit(train_features, train_truths)
 
     # 5) Evaluate
-    red_green_predictions = classifier.predict(test_features)
-    accuracy = accuracy_score(test_truths, red_green_predictions)
+    predictions = classifier.predict(test_features)
+    accuracy = accuracy_score(test_truths, predictions)
     print(f"\nLogistic Regression Accuracy on Test Set: {accuracy * 100:.2f}%")
 
-    # Updated confusion matrix call with explicit labels
-    cm = confusion_matrix(test_truths, red_green_predictions, labels=[0, 1])
+    # Confusion Matrix
+    cm = confusion_matrix(test_truths, predictions, labels=[0, 1])
     good_green = cm[0, 0]
     bad_green = cm[1, 0]
     bad_red = cm[0, 1]
     good_red = cm[1, 1]
-
     print("\nConfusion Matrix (Factual/Hallucinating vs. Green/Red):")
-    print(f"  Good Green (Factual & Green)         : {good_green}")
-    print(f"  Bad Green  (Hallucinating & Green)    : {bad_green}")
-    print(f"  Bad Red    (Factual & Red)            : {bad_red}")
-    print(f"  Good Red   (Hallucinating & Red)      : {good_red}")
+    print(f"  Good Green (Factual & Green): {good_green}")
+    print(f"  Bad Green (Hallucinating & Green): {bad_green}")
+    print(f"  Bad Red (Factual & Red): {bad_red}")
+    print(f"  Good Red (Hallucinating & Red): {good_red}")
 
-    # Example: write run_report.json (optional)
+    # Write run report
     run_report = {
         "parameters": {
             "data_limit": data_limit,
@@ -165,10 +148,10 @@ if __name__ == "__main__":
             "USE_PRECOMPUTED_DATA": USE_PRECOMPUTED_DATA,
         },
         "data_balance": {
-            "train_total": len(train_truths),
+            "train_total": int(len(train_truths)),
             "train_factual_count": int(train_factual_count),
             "train_halluc_count": int(train_halluc_count),
-            "test_total": len(test_truths),
+            "test_total": int(len(test_truths)),
             "test_factual_count": int(test_factual_count),
             "test_halluc_count": int(test_halluc_count),
         },
@@ -181,6 +164,7 @@ if __name__ == "__main__":
                 "good_red": int(good_red),
             },
         },
+        "errors": error_log,
     }
     report_file_path = os.path.join(OUTPUT_DIR, "run_report.json")
     with open(report_file_path, "w", encoding="utf-8") as f:

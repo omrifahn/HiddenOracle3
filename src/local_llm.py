@@ -123,17 +123,11 @@ def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
 
 
 def get_local_llm_hidden_states(question: str, tokenizer, model, layer_index=20):
-    """
-    Returns the hidden states of the given layer_index for the input question.
-    """
     inputs = tokenizer(question, return_tensors="pt")
-    if hasattr(model, "hf_device_map"):
-        embedding_device = next(iter(model.hf_device_map.values()))
-        inputs = {key: value.to(embedding_device) for key, value in inputs.items()}
-    else:
-        device = next(model.parameters()).device
-        inputs = {key: value.to(device) for key, value in inputs.items()}
+    device = next(model.parameters()).device
+    inputs = {key: value.to(device) for key, value in inputs.items()}
 
-    outputs = model(**inputs)
+    with torch.no_grad():
+        outputs = model(**inputs)
     hidden_states = outputs.hidden_states[layer_index]
     return hidden_states
