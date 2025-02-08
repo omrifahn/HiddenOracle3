@@ -39,7 +39,7 @@ def main():
         print("INFO: Enriched data loaded from file.")
     else:
         print("Loading local model...")
-        generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
+        _generation_pipeline, model, tokenizer = load_local_model(LOCAL_MODEL_NAME)
         print("Local model loaded successfully.")
 
         print("Enriching dataset with hidden states and labels...")

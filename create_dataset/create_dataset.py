@@ -2,7 +2,7 @@ import json
 import random
 from datasets import load_dataset
 
-NUM_SAMPLES = 500
+NUM_SAMPLES = 50
 OUTPUT_FILE = "triviaqa_data.json"
 
 
@@ -12,7 +12,7 @@ def load_triviaqa(num_samples):
     keep_probability = 0.05  # for random sampling
     last_logged_count = 0
 
-    for idx, item in enumerate(dataset):
+    for _idx, item in enumerate(dataset):
         if random.random() < keep_probability:
             samples.append(item)
             if len(samples) % 10 == 0 and len(samples) != last_logged_count:
