@@ -40,10 +40,3 @@ This repository demonstrates how to:
 
    - A simple linear classifier trains on cached features.
    - The code prints detailed logs, accuracy scores, and confusion breakdowns.
-
-
-## TODOs
-- connect to harder Q&A dataset (because currently, llama 90% right)
-
-
-
