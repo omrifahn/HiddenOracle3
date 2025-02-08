@@ -2,11 +2,7 @@ import os
 import sys
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
-from config import (
-    HUGGINGFACE_TOKEN,
-    LOCAL_MODEL_DIR,
-    USE_LOCAL_MODEL_STORAGE,
-)
+from config import HUGGINGFACE_TOKEN, LOCAL_MODEL_DIR, USE_LOCAL_MODEL_STORAGE
 
 
 def is_running_on_colab():
@@ -20,10 +16,6 @@ def mount_google_drive():
 
 
 def load_local_model(local_model_name: str):
-    """
-    Loads the local LLM and returns a text generation pipeline,
-    as well as the raw model and tokenizer.
-    """
     print(f"[DEBUG] USE_LOCAL_MODEL_STORAGE = {USE_LOCAL_MODEL_STORAGE}")
     print(f"[DEBUG] local_model_name = {local_model_name}")
     model_dir_name = local_model_name.replace("/", "_")
@@ -31,7 +23,6 @@ def load_local_model(local_model_name: str):
     print(f"[DEBUG] model_path = {model_path}")
 
     if USE_LOCAL_MODEL_STORAGE:
-        # If running on Colab, mount Google Drive
         if is_running_on_colab():
             print("[DEBUG] Running on Google Colab. Mounting Google Drive...")
             mount_google_drive()
@@ -40,8 +31,7 @@ def load_local_model(local_model_name: str):
         if not os.path.exists(model_path):
             os.makedirs(model_path, exist_ok=True)
             print(
-                f"[DEBUG] Model not found locally at {model_path}. "
-                f"Downloading '{local_model_name}'..."
+                f"[DEBUG] Model not found locally at {model_path}. Downloading '{local_model_name}'..."
             )
             tokenizer = AutoTokenizer.from_pretrained(
                 local_model_name, use_auth_token=HUGGINGFACE_TOKEN
@@ -53,7 +43,6 @@ def load_local_model(local_model_name: str):
                 use_auth_token=HUGGINGFACE_TOKEN,
                 output_hidden_states=True,
             )
-            # Save the model and tokenizer to the local directory
             tokenizer.save_pretrained(model_path)
             model.save_pretrained(model_path)
             print(
@@ -93,10 +82,6 @@ def load_local_model(local_model_name: str):
 
 
 def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
-    """
-    Example for 'meta-llama/Llama-2-7b-chat-hf'
-    using the recommended [INST] ... [/INST] format.
-    """
     system_prompt = (
         "You are a helpful assistant. Provide a single short factual answer. "
         "Do not continue the conversation or ask follow-up questions."
@@ -107,7 +92,6 @@ def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
 
 {question}
 [/INST]"""
-
     input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(model.device)
     with torch.no_grad():
         outputs = model.generate(
@@ -126,7 +110,6 @@ def get_local_llm_hidden_states(question: str, tokenizer, model, layer_index=20)
     inputs = tokenizer(question, return_tensors="pt")
     device = next(model.parameters()).device
     inputs = {key: value.to(device) for key, value in inputs.items()}
-
     with torch.no_grad():
         outputs = model(**inputs)
     hidden_states = outputs.hidden_states[layer_index]

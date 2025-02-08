@@ -1,26 +1,20 @@
+# File: hidden_state_extraction/evaluator.py
 import json
 from typing import List, Dict, Any
-
-from openai import OpenAI  # new sytax to import open api versions 1.0.0+
+from openai import OpenAI
 from pydantic import BaseModel
-
 from config import OPENAI_API_KEY
 
-client = OpenAI(api_key=OPENAI_API_KEY)  # new sytax for open api versions 1.0.0+
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 def evaluate_with_openai_api(
     question: str, local_llm_answer: str, correct_answers: List[str]
 ) -> Dict[str, Any]:
-    """
-    Calls the OpenAI API to evaluate the local LLM's response.
-    """
-
     class EvaluationResult(BaseModel):
         is_factual: bool
         explanation: str
 
-    # Define the JSON schema based on the Pydantic model
     json_schema = {
         "type": "object",
         "properties": {
@@ -36,11 +30,7 @@ def evaluate_with_openai_api(
         "required": ["is_factual", "explanation"],
         "additionalProperties": False,
     }
-
-    # Convert JSON schema to a formatted string for inclusion in the prompt
     json_schema_str = json.dumps(json_schema, indent=4)
-
-    # Prepare the messages
     messages = [
         {
             "role": "system",
@@ -60,21 +50,15 @@ def evaluate_with_openai_api(
             ),
         },
     ]
-
-    # Call the OpenAI API
     response = client.chat.completions.create(
-        model="gpt-4",  # Use 'gpt-4' for better adherence to instructions
+        model="gpt-4",
         messages=messages,
         temperature=0,
         max_tokens=500,
     )
-
     assistant_message = response.choices[0].message.content.strip()
-
-    # Parse the assistant's response as JSON
     try:
         parsed_result = json.loads(assistant_message)
-        # Validate the parsed result against the schema using Pydantic
         evaluation_result = EvaluationResult.parse_obj(parsed_result)
         return evaluation_result.dict()
     except json.JSONDecodeError as e:
