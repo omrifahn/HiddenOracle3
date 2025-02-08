@@ -2,14 +2,14 @@ import json
 import random
 from datasets import load_dataset
 
-NUM_SAMPLES = 50
+NUM_SAMPLES = 500
 OUTPUT_FILE = "triviaqa_data.json"
 
 
 def load_triviaqa(num_samples):
     dataset = load_dataset("trivia_qa", "unfiltered", split="train", streaming=True)
     samples = []
-    keep_probability = 0.05  # for random sampling
+    keep_probability = 0.01  # for random sampling
     last_logged_count = 0
 
     for _idx, item in enumerate(dataset):
