@@ -1,4 +1,3 @@
-# File: hidden_state_extraction/pipeline.py
 import json
 import torch
 from typing import List, Dict, Any

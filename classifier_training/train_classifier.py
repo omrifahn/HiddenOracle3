@@ -1,4 +1,3 @@
-# File: classifier_training/train_classifier.py
 import sys
 import random
 import numpy as np
