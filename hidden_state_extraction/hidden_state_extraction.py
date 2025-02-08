@@ -7,7 +7,14 @@ import json
 
 from local_llm import load_local_model
 from pipeline import load_dataset, precompute_hidden_states_and_labels
-from config import DATASET_PATH, LOCAL_MODEL_NAME, DEFAULT_DATA_LIMIT, OUTPUT_DIR, LAYER_INDEX, USE_PRECOMPUTED_DATA
+from config import (
+    DATASET_PATH,
+    LOCAL_MODEL_NAME,
+    DEFAULT_DATA_LIMIT,
+    OUTPUT_DIR,
+    LAYER_INDEX,
+    USE_PRECOMPUTED_DATA,
+)
 
 # Set random seeds for reproducibility
 seed = 42
@@ -16,6 +23,7 @@ torch.manual_seed(seed)
 if torch.cuda.is_available():
     torch.cuda.manual_seed_all(seed)
 random.seed(seed)
+
 
 def main():
     print("Loading dataset from:", DATASET_PATH)
@@ -36,7 +44,9 @@ def main():
         print("Local model loaded successfully.")
 
         print("Enriching dataset with hidden states and labels...")
-        enriched_data, error_log = precompute_hidden_states_and_labels(dataset, model, tokenizer, layer_index=LAYER_INDEX)
+        enriched_data, error_log = precompute_hidden_states_and_labels(
+            dataset, model, tokenizer, layer_index=LAYER_INDEX
+        )
         print("Dataset enrichment complete.")
 
         with open(enriched_data_file, "w", encoding="utf-8") as f:
@@ -47,6 +57,7 @@ def main():
         print("Errors encountered during processing:")
         for error in error_log:
             print(error)
+
 
 if __name__ == "__main__":
     main()
