@@ -4,9 +4,9 @@ import torch
 import os
 import json
 
-from local_llm import load_local_model
-from pipeline import load_dataset, precompute_hidden_states_and_labels
-from config import (
+from .local_llm import load_local_model
+from .pipeline import load_dataset, precompute_hidden_states_and_labels
+from .config import (
     DATASET_PATH,
     LOCAL_MODEL_NAME,
     DEFAULT_DATA_LIMIT,

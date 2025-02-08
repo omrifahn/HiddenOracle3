@@ -1,9 +1,9 @@
 import json
 import torch
 from typing import List, Dict, Any
-from evaluator import evaluate_with_openai_api
-from local_llm import get_local_llm_answer, get_local_llm_hidden_states
-from config import ENABLE_DETAILED_LOGS
+from .evaluator import evaluate_with_openai_api
+from .local_llm import get_local_llm_answer, get_local_llm_hidden_states
+from .config import ENABLE_DETAILED_LOGS
 
 
 def load_dataset(dataset_path: str, data_limit: int = None) -> List[Dict[str, Any]]:
