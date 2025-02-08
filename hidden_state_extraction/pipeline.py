@@ -94,6 +94,7 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
 
         if ENABLE_DETAILED_LOGS:
             log_item = {
+                "id": item.get("id"),
                 "question": item.get("question"),
                 "llama_answer": item.get("llama_answer"),
                 "is_factual": item.get("is_factual"),
