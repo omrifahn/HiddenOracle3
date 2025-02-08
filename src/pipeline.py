@@ -95,7 +95,14 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
         )
 
         if ENABLE_DETAILED_LOGS:
-            print(f"[LOG] Updated sample:\n{json.dumps(item, indent=2)}\n")
+            # Only log a summary without the full hidden vector
+            log_item = {
+                "question": item.get("question"),
+                "llama_answer": item.get("llama_answer"),
+                "is_factual": item.get("is_factual"),
+                "explanation": item.get("explanation"),
+            }
+            print(f"[LOG] Updated sample:\n{json.dumps(log_item, indent=2)}\n")
 
         updated_data.append(item)
 
