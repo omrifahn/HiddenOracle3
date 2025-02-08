@@ -143,7 +143,8 @@ if __name__ == "__main__":
     accuracy = accuracy_score(test_truths, red_green_predictions)
     print(f"\nLogistic Regression Accuracy on Test Set: {accuracy * 100:.2f}%")
 
-    cm = confusion_matrix(test_truths, red_green_predictions)
+    # Updated confusion matrix call with explicit labels
+    cm = confusion_matrix(test_truths, red_green_predictions, labels=[0, 1])
     good_green = cm[0, 0]
     bad_green = cm[1, 0]
     bad_red = cm[0, 1]
