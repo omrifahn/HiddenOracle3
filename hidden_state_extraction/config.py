@@ -27,7 +27,7 @@ else:
 USE_LOCAL_MODEL_STORAGE = True
 
 # Process all samples (set to an integer to limit)
-DEFAULT_DATA_LIMIT = 5
+DEFAULT_DATA_LIMIT = None
 
 LAYER_INDEX = 20
 TRAIN_TEST_SPLIT_RATIO = 0.8  # (not used in enrichment)
