@@ -31,5 +31,5 @@ LAYER_INDEX = 20
 TRAIN_TEST_SPLIT_RATIO = 0.8
 
 # If True, skip running LLM and load hidden states+labels from disk
-USE_PRECOMPUTED_DATA = True
+USE_PRECOMPUTED_DATA = False
 CACHED_DATA_PATH = "./output/precomputed_data.npz"
