@@ -24,6 +24,7 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
         "factual_string_match": 0,
         "factual_api": 0,
         "hallucinations": 0,
+        "evaluation_errors": 0,
         "runtime_per_datapoint": [],
     }
 
@@ -51,17 +52,19 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
                 eval_result = evaluate_with_openai_api(
                     question, local_answer, correct_answers
                 )
-                is_factual = eval_result["is_factual"]
-                explanation = eval_result.get("explanation", "")
-                evaluation_method = "openai_api"
-                if is_factual:
-                    summary_stats["factual_api"] += 1
-                else:
-                    summary_stats["hallucinations"] += 1
             except Exception as e:
-                is_factual = False
-                explanation = f"Evaluation error: {e}"
-                evaluation_method = "evaluation_error"
+                # Record the evaluation error and skip this sample.
+                error_message = f"Error during OpenAI API evaluation: {e}"
+                error_log.append({"question": question, "error": error_message})
+                summary_stats["evaluation_errors"] += 1
+                continue
+
+            is_factual = eval_result["is_factual"]
+            explanation = eval_result.get("explanation", "")
+            evaluation_method = "openai_api"
+            if is_factual:
+                summary_stats["factual_api"] += 1
+            else:
                 summary_stats["hallucinations"] += 1
 
         try:
