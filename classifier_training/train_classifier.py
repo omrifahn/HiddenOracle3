@@ -10,6 +10,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 
 from config import DATASET_PATH, OUTPUT_DIR, TRAIN_TEST_SPLIT_RATIO
 
+
 def main():
     seed = 42
     np.random.seed(seed)
@@ -28,7 +29,12 @@ def main():
     labels_np = np.array(labels)
 
     train_features, test_features, train_labels, test_labels = train_test_split(
-        features_np, labels_np, test_size=1 - TRAIN_TEST_SPLIT_RATIO, random_state=seed, shuffle=True
+        features_np,
+        labels_np,
+        test_size=1 - TRAIN_TEST_SPLIT_RATIO,
+        random_state=seed,
+        shuffle=True,
+        stratify=labels_np,
     )
 
     train_factual_count = int((train_labels == 0).sum())
@@ -90,6 +96,7 @@ def main():
     with open(report_file_path, "w", encoding="utf-8") as f:
         json.dump(run_report, f, indent=4)
     print(f"Run report saved to '{report_file_path}'.")
+
 
 if __name__ == "__main__":
     main()
