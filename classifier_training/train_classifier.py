@@ -6,7 +6,14 @@ import json
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import (
+    accuracy_score,
+    confusion_matrix,
+    precision_score,
+    recall_score,
+    f1_score,
+    classification_report,
+)
 
 from config import DATASET_PATH, OUTPUT_DIR, TRAIN_TEST_SPLIT_RATIO
 
@@ -68,6 +75,30 @@ def main():
     print(f"  Bad Red (Factual & Red): {bad_red}")
     print(f"  Good Red (Hallucinating & Red): {good_red}")
 
+    # Calculate additional metrics:
+    precision_macro = precision_score(test_labels, predictions, average="macro")
+    recall_macro = recall_score(test_labels, predictions, average="macro")
+    f1_macro = f1_score(test_labels, predictions, average="macro")
+
+    precision_weighted = precision_score(test_labels, predictions, average="weighted")
+    recall_weighted = recall_score(test_labels, predictions, average="weighted")
+    f1_weighted = f1_score(test_labels, predictions, average="weighted")
+
+    # Get a detailed classification report:
+    class_report = classification_report(test_labels, predictions, output_dict=True)
+
+    print("\nAdditional Metrics:")
+    print(f"  Precision (Macro): {precision_macro:.2f}")
+    print(f"  Recall (Macro): {recall_macro:.2f}")
+    print(f"  F1 Score (Macro): {f1_macro:.2f}")
+    print(f"  Precision (Weighted): {precision_weighted:.2f}")
+    print(f"  Recall (Weighted): {recall_weighted:.2f}")
+    print(f"  F1 Score (Weighted): {f1_weighted:.2f}")
+
+    print("\nClassification Report:")
+    print(classification_report(test_labels, predictions))
+
+    # Build run report with a single "metrics" section for all evaluation metrics
     run_report = {
         "parameters": {
             "TRAIN_TEST_SPLIT_RATIO": TRAIN_TEST_SPLIT_RATIO,
@@ -80,7 +111,7 @@ def main():
             "test_factual_count": test_factual_count,
             "test_halluc_count": test_halluc_count,
         },
-        "evaluation": {
+        "metrics": {
             "accuracy": accuracy,
             "confusion_matrix": {
                 "good_green": good_green,
@@ -88,6 +119,13 @@ def main():
                 "bad_red": bad_red,
                 "good_red": good_red,
             },
+            "precision_macro": precision_macro,
+            "recall_macro": recall_macro,
+            "f1_macro": f1_macro,
+            "precision_weighted": precision_weighted,
+            "recall_weighted": recall_weighted,
+            "f1_weighted": f1_weighted,
+            "classification_report": class_report,
         },
     }
 
@@ -95,7 +133,7 @@ def main():
     report_file_path = os.path.join(OUTPUT_DIR, "run_report_part_3.json")
     with open(report_file_path, "w", encoding="utf-8") as f:
         json.dump(run_report, f, indent=4)
-    print(f"Run report saved to '{report_file_path}'.")
+    print(f"\nRun report saved to '{report_file_path}'.")
 
 
 if __name__ == "__main__":
