@@ -29,7 +29,8 @@ USE_LOCAL_MODEL_STORAGE = True
 # Process all samples (set to an integer to limit)
 DEFAULT_DATA_LIMIT = None
 
-LAYER_INDEX = 20
+# Set LAYER_INDEX to None to extract all layers.
+LAYER_INDEX = None
 TRAIN_TEST_SPLIT_RATIO = 0.8  # (not used in enrichment)
 
 USE_PRECOMPUTED_DATA = False

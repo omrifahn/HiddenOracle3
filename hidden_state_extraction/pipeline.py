@@ -3,7 +3,7 @@ import torch
 import time
 from typing import List, Dict, Any
 from .evaluator import evaluate_with_openai_api
-from .local_llm import get_local_llm_answer, get_local_llm_hidden_states
+from .local_llm import get_local_llm_answer, get_hidden_states_array
 from .config import ENABLE_DETAILED_LOGS
 
 
@@ -18,7 +18,6 @@ def load_dataset(dataset_path: str, data_limit: int = None) -> List[Dict[str, An
 def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=20):
     updated_data = []
     error_log = []
-    # Initialize counters and list for runtimes.
     summary_stats = {
         "total_samples": len(samples),
         "factual_string_match": 0,
@@ -53,7 +52,6 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
                     question, local_answer, correct_answers
                 )
             except Exception as e:
-                # Record the evaluation error and skip this sample.
                 error_message = f"Error during OpenAI API evaluation: {e}"
                 error_log.append({"question": question, "error": error_message})
                 summary_stats["evaluation_errors"] += 1
@@ -68,14 +66,17 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
                 summary_stats["hallucinations"] += 1
 
         try:
-            with torch.no_grad():
-                hidden_state = get_local_llm_hidden_states(
-                    question, tokenizer, model, layer_index
-                )
-            hidden_vector = hidden_state[:, -1, :].squeeze(0).tolist()
+            # Now always get a list of hidden states.
+            hidden_states = get_hidden_states_array(
+                question, tokenizer, model, layer_index
+            )
+            all_hidden_vectors = {}
+            for i, hs in enumerate(hidden_states):
+                # Extract the hidden vector for the last token from each layer.
+                all_hidden_vectors[i] = hs[:, -1, :].squeeze(0).tolist()
         except Exception as e:
             error_log.append(
-                {"question": question, "error": f"Error extracting hidden state: {e}"}
+                {"question": question, "error": f"Error extracting hidden states: {e}"}
             )
             continue
 
@@ -88,7 +89,7 @@ def precompute_hidden_states_and_labels(samples, model, tokenizer, layer_index=2
                 "llama_answer": local_answer,
                 "is_factual": is_factual,
                 "explanation": explanation,
-                "hidden_vector": hidden_vector,
+                "hidden_vectors": all_hidden_vectors,  # Contains vectors for one or all layers.
                 "label": label,
                 "processing_time": runtime,
                 "evaluation_method": evaluation_method,

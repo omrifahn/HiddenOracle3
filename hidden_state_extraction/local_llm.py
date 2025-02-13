@@ -81,6 +81,23 @@ def load_local_model(local_model_name: str):
     return generation_pipeline, model, tokenizer
 
 
+def get_hidden_states_array(question: str, tokenizer, model, layer_index: int):
+    """
+    Returns a list of hidden state tensors for the given question.
+    If layer_index is None, returns a list of all layers' hidden states.
+    Otherwise, returns a list containing only the hidden state for the specified layer.
+    """
+    inputs = tokenizer(question, return_tensors="pt")
+    device = next(model.parameters()).device
+    inputs = {key: value.to(device) for key, value in inputs.items()}
+    with torch.no_grad():
+        outputs = model(**inputs)
+    if layer_index is None:
+        return list(outputs.hidden_states)
+    else:
+        return [outputs.hidden_states[layer_index]]
+
+
 def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
     system_prompt = (
         "You are a helpful assistant. Provide a single short factual answer. "
@@ -104,13 +121,3 @@ def get_local_llm_answer(question: str, model, tokenizer, max_new_tokens=80):
     if "[INST]" in text:
         text = text.split("[/INST]")[-1]
     return text.strip()
-
-
-def get_local_llm_hidden_states(question: str, tokenizer, model, layer_index=20):
-    inputs = tokenizer(question, return_tensors="pt")
-    device = next(model.parameters()).device
-    inputs = {key: value.to(device) for key, value in inputs.items()}
-    with torch.no_grad():
-        outputs = model(**inputs)
-    hidden_states = outputs.hidden_states[layer_index]
-    return hidden_states
