@@ -72,6 +72,3 @@ The project follows an end-to-end pipeline that spans multiple research componen
 
 For further details on methodology and results, please refer to the associated research publications and supplementary materials.
 
----
-
-*This project is intended for research purposes and is not designed as a turnkey application.*
